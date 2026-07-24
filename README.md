@@ -1,0 +1,100 @@
+# Swift Cycle
+
+[简体中文](README.zh-CN.md)
+
+Swift Cycle is a manually invoked Agent Skill for maintaining personal and small software projects with a lightweight documentation framework and short verification loops.
+
+It follows one practical rhythm:
+
+> Scan quickly → make the smallest useful change → verify immediately → continue or revert.
+
+## What it maintains
+
+- A user-facing `README.md`.
+- A concise `DESIGN.md` as the design entry point.
+- Repository instructions such as `AGENTS.md`.
+- Local, ignored `TODO.md` and `DEVLOG.md`.
+- Shared detailed documentation under `docs/`.
+- Candidate experiments, evaluation evidence, and important ADRs.
+- End-of-project review and methodology extraction.
+
+Small, local changes stay lightweight. Swift Cycle does not require an RFC, ADR, or design document for every edit.
+
+## Install
+
+GitHub CLI 2.90 or later can install the same skill for multiple agent hosts.
+
+### Codex
+
+```powershell
+gh skill install Solismuchengxue/swift-cycle swift-cycle --agent codex --scope user
+```
+
+Invoke it with:
+
+```text
+$swift-cycle
+```
+
+### Claude Code
+
+```powershell
+gh skill install Solismuchengxue/swift-cycle swift-cycle --agent claude-code --scope user
+```
+
+Invoke it with:
+
+```text
+/swift-cycle
+```
+
+### GitHub Copilot
+
+```powershell
+gh skill install Solismuchengxue/swift-cycle swift-cycle --agent github-copilot --scope user
+```
+
+Invoke it with:
+
+```text
+/swift-cycle
+```
+
+For project-only installation, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
+
+## Example requests
+
+```text
+$swift-cycle Initialize a lightweight maintenance framework for this repository.
+```
+
+```text
+$swift-cycle Review the current documentation boundaries and fix only meaningful drift.
+```
+
+```text
+$swift-cycle Close out this project, reconcile the docs, and extract reusable methodology.
+```
+
+Use the invocation syntax supported by your agent host.
+
+## Language support
+
+The skill responds and creates project documents in the user's language while preserving the repository's established terminology. English is the canonical instruction language; Simplified Chinese terminology and document conventions are included in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md).
+
+## Repository layout
+
+```text
+swift-cycle/
+├─ skills/swift-cycle/
+│  ├─ SKILL.md
+│  ├─ agents/openai.yaml
+│  └─ references/zh-CN.md
+├─ docs/compatibility.md
+├─ README.md
+├─ README.zh-CN.md
+├─ DESIGN.md
+└─ AGENTS.md
+```
+
+The skill follows the open [Agent Skills specification](https://agentskills.io/specification).

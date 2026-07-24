@@ -1,0 +1,14 @@
+# Local project notes
+/DEVLOG.md
+/TODO.md
+/METHODOLOGY.md
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.tmp
+*.bak
+*~
