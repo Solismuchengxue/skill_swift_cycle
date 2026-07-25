@@ -16,9 +16,9 @@ The package follows the open [Agent Skills specification](https://agentskills.io
 
 | Host | User-scope installation | Manual invocation | Notes |
 | --- | --- | --- | --- |
-| Codex | `gh skill install Solismuchengxue/swift-cycle swift-cycle --agent codex --scope user` | `$swift-cycle` | `agents/openai.yaml` disables implicit invocation. |
-| Claude Code | `gh skill install Solismuchengxue/swift-cycle swift-cycle --agent claude-code --scope user` | `/swift-cycle` | Claude Code supports filesystem-based Agent Skills. |
-| GitHub Copilot | `gh skill install Solismuchengxue/swift-cycle swift-cycle --agent github-copilot --scope user` | `/swift-cycle` | Copilot supports the Agent Skills format and GitHub CLI installation. |
+| Codex | `gh skill install Solismuchengxue/swift_cycle swift-cycle --agent codex --scope user` | `$swift-cycle` | `agents/openai.yaml` disables implicit invocation. |
+| Claude Code | `gh skill install Solismuchengxue/swift_cycle swift-cycle --agent claude-code --scope user` | `/swift-cycle` | Claude Code supports filesystem-based Agent Skills. |
+| GitHub Copilot | `gh skill install Solismuchengxue/swift_cycle swift-cycle --agent github-copilot --scope user` | `/swift-cycle` | Copilot supports the Agent Skills format and GitHub CLI installation. |
 
 GitHub CLI supports additional agent hosts. Run `gh skill install --help` to inspect the currently supported `--agent` values rather than relying on a static list.
 

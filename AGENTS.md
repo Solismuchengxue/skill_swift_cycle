@@ -1,12 +1,18 @@
 # AGENTS.md
 
-These instructions apply to the `swift-cycle` repository.
+These instructions apply to the `swift_cycle` repository.
 
 ## Repository purpose
 
 - Maintain one portable Agent Skill for lightweight project governance.
 - Keep the canonical package under `skills/swift-cycle/`.
 - Do not add scripts, dependencies, generated assets, or vendor-specific copies unless a verified compatibility requirement justifies them.
+
+## Naming
+
+- Use lowercase `snake_case` for the project, repository, and project root directory.
+- Keep the standards-defined Skill identifier, package directory, and invocation as `swift-cycle`; Agent Skills names do not permit underscores.
+- Treat external syntax constraints as explicit exceptions rather than changing the repository naming rule.
 
 ## Change rules
 

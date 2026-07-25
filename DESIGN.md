@@ -16,7 +16,7 @@
 ## Structure
 
 ```text
-swift-cycle/
+swift_cycle/
 ├─ skills/
 │  └─ swift-cycle/
 │     ├─ SKILL.md               # Canonical cross-agent workflow
@@ -31,6 +31,7 @@ swift-cycle/
 
 ## Key boundaries
 
+- The project, repository, and root directory use `snake_case`; the standards-defined Skill identifier remains `swift-cycle` because underscores are not valid in Agent Skill names.
 - `SKILL.md` contains the portable workflow and uses only standard required frontmatter fields.
 - `agents/openai.yaml` contains Codex-specific interface metadata and disables implicit invocation for Codex.
 - Other hosts use the same standard Skill package and their own installation conventions.

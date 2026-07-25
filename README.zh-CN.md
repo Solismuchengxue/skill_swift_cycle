@@ -27,7 +27,7 @@ GitHub CLI 2.90 或更高版本可以把同一份 Skill 安装给多个 Agent。
 ### Codex
 
 ```powershell
-gh skill install Solismuchengxue/swift-cycle swift-cycle --agent codex --scope user
+gh skill install Solismuchengxue/swift_cycle swift-cycle --agent codex --scope user
 ```
 
 调用方式：
@@ -39,7 +39,7 @@ $swift-cycle
 ### Claude Code
 
 ```powershell
-gh skill install Solismuchengxue/swift-cycle swift-cycle --agent claude-code --scope user
+gh skill install Solismuchengxue/swift_cycle swift-cycle --agent claude-code --scope user
 ```
 
 调用方式：
@@ -51,7 +51,7 @@ gh skill install Solismuchengxue/swift-cycle swift-cycle --agent claude-code --s
 ### GitHub Copilot
 
 ```powershell
-gh skill install Solismuchengxue/swift-cycle swift-cycle --agent github-copilot --scope user
+gh skill install Solismuchengxue/swift_cycle swift-cycle --agent github-copilot --scope user
 ```
 
 调用方式：
@@ -85,7 +85,7 @@ Skill 会使用用户当前语言回答和创建项目文档，同时保留仓�
 ## 仓库结构
 
 ```text
-swift-cycle/
+swift_cycle/
 ├─ skills/swift-cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
@@ -98,3 +98,5 @@ swift-cycle/
 ```
 
 本 Skill 遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
+
+仓库名使用 `snake_case`。Skill 包名和调用名继续使用 `swift-cycle`，因为 Agent Skills 规范只允许 Skill 名包含小写字母、数字和连字符。
