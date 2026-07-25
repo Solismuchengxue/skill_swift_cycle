@@ -99,4 +99,4 @@ swift_cycle/
 
 The skill follows the open [Agent Skills specification](https://agentskills.io/specification).
 
-The repository uses `snake_case`. The Skill package and invocation keep `swift-cycle` because the Agent Skills specification permits only lowercase letters, digits, and hyphens in Skill names.
+Words in the repository name are separated with `_`. The Skill package and invocation keep `swift-cycle` because the Agent Skills specification permits only lowercase letters, digits, and hyphens in Skill names.

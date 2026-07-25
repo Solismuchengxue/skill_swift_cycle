@@ -10,7 +10,7 @@ These instructions apply to the `swift_cycle` repository.
 
 ## Naming
 
-- Use lowercase `snake_case` for the project, repository, and project root directory.
+- Separate words in project, repository, and project-root names with `_`; do not impose a letter-case rule beyond the chosen project name.
 - Keep the standards-defined Skill identifier, package directory, and invocation as `swift-cycle`; Agent Skills names do not permit underscores.
 - Treat external syntax constraints as explicit exceptions rather than changing the repository naming rule.
 

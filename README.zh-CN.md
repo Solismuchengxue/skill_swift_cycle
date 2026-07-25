@@ -99,4 +99,4 @@ swift_cycle/
 
 本 Skill 遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
 
-仓库名使用 `snake_case`。Skill 包名和调用名继续使用 `swift-cycle`，因为 Agent Skills 规范只允许 Skill 名包含小写字母、数字和连字符。
+仓库名中的多个单词使用 `_` 连接。Skill 包名和调用名继续使用 `swift-cycle`，因为 Agent Skills 规范只允许 Skill 名包含小写字母、数字和连字符。
