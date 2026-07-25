@@ -94,9 +94,14 @@ skill_swift_cycle/
 ├─ README.md
 ├─ README.zh-CN.md
 ├─ DESIGN.md
-└─ AGENTS.md
+├─ AGENTS.md
+└─ LICENSE
 ```
 
 本 Skill 遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
 
 仓库名中的多个单词使用 `_` 连接。Skill 包名和调用名继续使用 `swift-cycle`，因为 Agent Skills 规范只允许 Skill 名包含小写字母、数字和连字符。
+
+## 许可证
+
+Swift Cycle 使用 [MIT License](LICENSE) 发布。

@@ -94,9 +94,14 @@ skill_swift_cycle/
 ├─ README.md
 ├─ README.zh-CN.md
 ├─ DESIGN.md
-└─ AGENTS.md
+├─ AGENTS.md
+└─ LICENSE
 ```
 
 The skill follows the open [Agent Skills specification](https://agentskills.io/specification).
 
 Words in the repository name are separated with `_`. The Skill package and invocation keep `swift-cycle` because the Agent Skills specification permits only lowercase letters, digits, and hyphens in Skill names.
+
+## License
+
+Swift Cycle is released under the [MIT License](LICENSE).

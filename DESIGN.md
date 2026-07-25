@@ -26,13 +26,14 @@ skill_swift_cycle/
 │  └─ compatibility.md          # Host support and installation boundaries
 ├─ README.md                    # English user documentation
 ├─ README.zh-CN.md              # Simplified Chinese user documentation
-└─ AGENTS.md                    # Repository maintenance rules
+├─ AGENTS.md                    # Repository maintenance rules
+└─ LICENSE                      # MIT license
 ```
 
 ## Key boundaries
 
 - Words in the project, repository, and root-directory names are separated with `_`; letter case follows the chosen project name. The standards-defined Skill identifier remains `swift-cycle` because underscores are not valid in Agent Skill names.
-- `SKILL.md` contains the portable workflow and uses only standard required frontmatter fields.
+- `SKILL.md` contains the portable workflow and uses standard portable frontmatter fields, including the MIT license identifier.
 - `agents/openai.yaml` contains Codex-specific interface metadata and disables implicit invocation for Codex.
 - Other hosts use the same standard Skill package and their own installation conventions.
 - Language behavior belongs in the canonical workflow; localized references clarify terminology without copying the whole workflow.

@@ -1,6 +1,7 @@
 ---
 name: swift-cycle
 description: Manual-invocation workflow for lightweight governance of personal and small software projects. Use only when the user explicitly invokes swift-cycle to initialize or review README, DESIGN, AGENTS, local TODO and DEVLOG, shared docs, candidate evaluations, ADR decisions, documentation drift, or project closeout. Keep small local changes fast and avoid heavyweight process.
+license: MIT
 ---
 
 # Swift Cycle
