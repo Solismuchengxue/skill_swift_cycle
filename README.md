@@ -27,7 +27,7 @@ GitHub CLI 2.90 or later can install the same skill for multiple agent hosts.
 ### Codex
 
 ```powershell
-gh skill install Solismuchengxue/swift_cycle swift-cycle --agent codex --scope user
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user
 ```
 
 Invoke it with:
@@ -39,7 +39,7 @@ $swift-cycle
 ### Claude Code
 
 ```powershell
-gh skill install Solismuchengxue/swift_cycle swift-cycle --agent claude-code --scope user
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user
 ```
 
 Invoke it with:
@@ -51,7 +51,7 @@ Invoke it with:
 ### GitHub Copilot
 
 ```powershell
-gh skill install Solismuchengxue/swift_cycle swift-cycle --agent github-copilot --scope user
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user
 ```
 
 Invoke it with:
@@ -85,7 +85,7 @@ The skill responds and creates project documents in the user's language while pr
 ## Repository layout
 
 ```text
-swift_cycle/
+skill_swift_cycle/
 ├─ skills/swift-cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml

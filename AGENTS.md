@@ -1,6 +1,6 @@
 # AGENTS.md
 
-These instructions apply to the `swift_cycle` repository.
+These instructions apply to the `skill_swift_cycle` repository.
 
 ## Repository purpose
 

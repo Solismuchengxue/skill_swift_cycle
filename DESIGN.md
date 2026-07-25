@@ -16,7 +16,7 @@
 ## Structure
 
 ```text
-swift_cycle/
+skill_swift_cycle/
 ├─ skills/
 │  └─ swift-cycle/
 │     ├─ SKILL.md               # Canonical cross-agent workflow
