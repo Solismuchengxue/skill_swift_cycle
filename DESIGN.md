@@ -38,6 +38,9 @@ skill_swift_cycle/
 - Other hosts use the same standard Skill package and their own installation conventions.
 - Language behavior belongs in the canonical workflow; localized references clarify terminology without copying the whole workflow.
 - Repository maintenance details do not belong in the Skill package.
+- Host-installed Skill copies and installer-added source metadata are deployment
+  artifacts, not repository source. Moving or renaming this checkout does not
+  authorize reinstalling, updating, or relinking an installed copy.
 - No scripts, runtime dependencies, MCP servers, or external services are required.
 
 ## Language strategy
