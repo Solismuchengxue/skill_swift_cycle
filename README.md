@@ -13,12 +13,16 @@ It follows one practical rhythm:
 - A user-facing `README.md`.
 - A concise `DESIGN.md` as the design entry point.
 - Repository instructions such as `AGENTS.md`.
-- Local, ignored `TODO.md` and `DEVLOG.md`.
+- Local, ignored `TODO.md` and `DEVLOG.md`; simple work keeps a normal TODO,
+  while explicitly multi-PR or milestone-based work uses a current milestone
+  and dependency-ordered PR queue.
 - Shared detailed documentation under `docs/`.
 - Candidate experiments, evaluation evidence, and important ADRs.
 - End-of-project review and methodology extraction.
 
 Small, local changes stay lightweight. Swift Cycle does not require an RFC, ADR, or design document for every edit.
+Long-lived plans remain in committable shared documentation or the project's
+issue tracker rather than relying on the local TODO as their only source.
 
 ## Install
 
@@ -70,6 +74,10 @@ $swift-cycle Initialize a lightweight maintenance framework for this repository.
 
 ```text
 $swift-cycle Review the current documentation boundaries and fix only meaningful drift.
+```
+
+```text
+$swift-cycle Maintain this three-PR migration as a current milestone and dependency-ordered PR queue.
 ```
 
 ```text

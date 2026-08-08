@@ -79,6 +79,9 @@ At project start, establish these responsibilities. Reuse equivalent existing fi
 - Keep entries short, executable, and current.
 - Keep it local at the repository root and ignore it in Git.
 - Do not use it as the only store for cross-machine or long-term commitments.
+- Keep a normal checklist for simple work. Use milestone and PR structure only
+  when the task explicitly requires multiple PRs or the user requests
+  milestone-based execution.
 
 ### `docs/`
 
@@ -104,9 +107,26 @@ Treat `METHODOLOGY.md` as an explicit exception: create it only near project clo
 
 ### Long-term plans
 
-- Store cross-machine, cross-session commitments in `docs/roadmap.md` or the project's shared issue tracker.
+- Store cross-machine, cross-session commitments in a committable feasibility
+  report, `docs/roadmap.md`, or the project's shared issue tracker.
 - A roadmap may begin as a status-marked draft, but do not describe planned work as completed.
-- Keep local `TODO.md` focused on immediate actions and blockers.
+- Treat that shared artifact as the durable plan. Keep local `TODO.md` focused
+  on the current execution slice, actions, and blockers.
+
+### Milestones and PR queues
+
+When a task explicitly requires multiple PRs or the user requests milestone-based execution:
+
+1. Structure local `TODO.md` with a current milestone and a dependency-ordered PR queue.
+2. Give every PR item these fields: ID, milestone, deliverable, scope,
+   dependencies, verification, status, and PR link. Use an honest placeholder
+   such as `pending` until a PR exists; do not invent a link.
+3. Make every PR an independently reviewable, verifiable, and reversible
+   increment. Execute the queue in dependency order.
+4. When a milestone or PR status changes, update both local `TODO.md` and the
+   corresponding durable shared plan.
+
+For simple work, continue using the normal TODO checklist; do not introduce a PR queue.
 
 ### Candidate lifecycle
 
@@ -135,6 +155,8 @@ Do not list a candidate tool as an adopted dependency before validation. Preserv
 
 - Architecture, tool responsibility, or data boundary changes: update `DESIGN.md` and affected shared docs.
 - Experiment, blocker, or next-action changes: update local `TODO.md`.
+- Milestone or PR status changes: update local `TODO.md` and the corresponding
+  durable shared plan.
 - Failure, rejected attempt, maintenance evidence, or important internal judgment: update local `DEVLOG.md`.
 - Long-lived and significant formal decision: complete an ADR after validation.
 - User-visible behavior, installation, or usage changes: update `README.md`.

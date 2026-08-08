@@ -37,6 +37,15 @@ skill_swift_cycle/
 - `agents/openai.yaml` contains Codex-specific interface metadata and disables implicit invocation for Codex.
 - Other hosts use the same standard Skill package and their own installation conventions.
 - Language behavior belongs in the canonical workflow; localized references clarify terminology without copying the whole workflow.
+- Local `TODO.md` is the current execution view, not the durable source for
+  cross-machine plans. Durable plans belong in a committable feasibility
+  report, roadmap, or shared issue tracker.
+- A normal TODO checklist remains the default. The current milestone and PR
+  queue structure activates only for explicitly multi-PR or milestone-based
+  work; each PR is an independently reviewable, verifiable, reversible
+  increment executed in dependency order.
+- Swift Cycle defines this portable PR-sized increment contract directly. It
+  does not depend on Superpowers or reproduce plugin-specific mechanisms.
 - Repository maintenance details do not belong in the Skill package.
 - Host-installed Skill copies and installer-added source metadata are deployment
   artifacts, not repository source. Moving or renaming this checkout does not
