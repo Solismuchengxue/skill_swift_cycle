@@ -38,22 +38,14 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
 - Report checks that were not run and do not claim unsupported compatibility.
 
-## Migration boundaries
+## Source and deployment boundaries
 
-- `F:\Solis_Migration_Control` controls the currently approved source-path
-  migration. This repository does not authorize later copy, cutover, task,
-  installation, or retirement gates by itself.
-- The approved target candidate is
-  `F:\30_Product_and_Engineering\skill_swift_cycle`; the old path remains the
-  write source until a separately approved cutover.
-- Keep the Git repository, canonical Skill package, and ignored local
-  maintenance notes together when a migration payload is approved.
+- Treat `F:\30_Product_and_Engineering\skill_swift_cycle` as the canonical
+  source checkout. The previous source-path migration is complete, and retired
+  migration-control paths are not current authority for this repository.
 - Treat host-installed Skill copies and `gh skill` source metadata as external
-  deployment state. Do not reinstall, update, relink, or delete them as part of
-  a source-directory copy.
-- `deep-research-report.md` is an existing untracked research artifact with a
-  separate ownership decision. Do not track, edit, move, delete, or include it
-  in a migration payload without explicit approval.
+  deployment state. Source changes do not authorize reinstalling, updating,
+  relinking, or deleting an installed copy.
 
 ## Publishing
 
