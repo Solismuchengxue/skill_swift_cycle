@@ -47,6 +47,11 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | Capability | What Swift Cycle does |
 | --- | --- |
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
+| **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
+| **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
+| **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, without imposing a fixed schema. |
+| **Commit Boundary Planning** | Defines coherent, independently reviewable commit scopes before staging mixed, ordered, or multi-commit changes. |
+| **Source/Runtime Boundary** | Keeps source, artifact, runtime, and consumer claims independently evidenced and authorized. |
 | **Adaptive execution** | Keeps simple work as a normal TODO; activates a milestone and dependency-ordered PR queue only when the work needs it. |
 | **Evidence-backed delivery** | Keeps each increment reviewable, verifiable, and reversible, then continues or corrects based on fresh evidence. |
 | **Portable orchestration** | Ships one standards-aligned Skill with localized guidance and host-specific metadata—without scripts, MCP servers, or external services. |
@@ -106,6 +111,18 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 | Local `DEVLOG.md` | Failures, rejected approaches, maintenance evidence, and evolution history. |
 
 The local TODO is an execution view, not the only long-term plan. Cross-machine commitments stay in a committable feasibility report, `docs/roadmap.md`, or a shared issue tracker.
+
+### Governance boundaries
+
+Swift Cycle activates governance only when repository evidence requires it:
+
+- **Governance Baseline:** record the observed state before non-trivial governance, migration, replacement, or cross-boundary work; keep it separate from the intended outcome.
+- **Knowledge Promotion:** promote durable commitments, decisions, constraints, and verified evidence into shared assets; keep short-term actions and one-off failures local.
+- **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence.
+- **Commit Boundary Planning:** plan coherent commit scopes before staging when changes have mixed purposes, ordered dependencies, or multiple reviewable increments.
+- **Source/Runtime Boundary:** verify source, artifact, runtime, and active-consumer claims at their own layers; evidence and authorization do not transfer between them.
+
+These capabilities are trigger-based. Simple, local, explicit changes continue to use the short loop without extra governance artifacts.
 
 ### Proportional delivery
 
