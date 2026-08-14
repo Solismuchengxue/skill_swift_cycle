@@ -39,6 +39,17 @@ skill_swift_cycle/
 - Language behavior belongs in the canonical workflow; localized references clarify terminology without copying the whole workflow.
 - Knowledge promotion keeps short-lived capture local and moves durable commitments, decisions, constraints, and reusable evidence into responsibility-appropriate shared assets. After promotion, the shared asset is authoritative and the local record retains only a concise pointer.
 - State separation identifies labels that combine independent lifecycle questions and splits only the concerns a project actually tracks. It defines no mandatory fields or status schema, and any overall status remains a derived summary.
+- Governance baselines activate only for non-trivial work that crosses authority
+  boundaries, changes source/runtime relationships, or needs reliable
+  before/after comparison. A baseline separates observed and target state, uses
+  no mandatory file or schema, and becomes shared evidence only when later work
+  depends on it.
+- Commit-boundary planning activates for multiple commits, mixed-purpose hunks,
+  ordered dependencies, or independently reviewable history. Prefer one atomic
+  commit when a split cannot preserve a coherent intermediate state.
+- Source, artifact, runtime, and consumer state are optional independent layers.
+  Evidence and authorization do not transfer between them, and projects track
+  only the layers they actually have.
 - Local `TODO.md` is the current execution view, not the durable source for
   cross-machine plans. Durable plans belong in a committable feasibility
   report, roadmap, or shared issue tracker.

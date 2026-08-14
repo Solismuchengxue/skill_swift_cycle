@@ -1,6 +1,6 @@
 ---
 name: swift-cycle
-description: Manual-invocation workflow for lightweight governance of personal and small software projects. Use only when the user explicitly invokes swift-cycle to initialize or review README, DESIGN, AGENTS, local TODO and DEVLOG, shared docs, candidate evaluations, ADR decisions, lifecycle states, documentation drift, or project closeout. Keep small local changes fast and avoid heavyweight process.
+description: Manual-invocation workflow for lightweight governance of personal and small software projects. Use only when the user explicitly invokes swift-cycle to initialize or review README, DESIGN, AGENTS, local TODO and DEVLOG, shared docs, governance baselines, commit boundaries, source/runtime transitions, candidate evaluations, lifecycle states, documentation drift, or project closeout. Keep small local changes fast and avoid heavyweight process.
 license: MIT
 ---
 
@@ -23,6 +23,25 @@ Maintain design consistency, execution continuity, and traceability with the sma
 2. Inspect the Git branch, status, and relevant diff. Separate pre-existing user changes from the current task.
 3. Distinguish confirmed facts, assumptions, and inferences. Do not invent repository structure, tests, tools, decisions, or validation results.
 4. Preserve existing user work. Do not remove data, discard changes, or perform unrelated cleanup.
+
+## Establish a governance baseline when needed
+
+Establish a baseline before non-trivial governance work that spans authority
+boundaries, changes a source/runtime relationship, migrates or reorganizes
+state, replaces or removes assets, or requires a reliable before/after
+comparison. Do not create one for a simple, local, explicit change.
+
+1. Capture only the comparison facts the task needs: scope, current authority,
+   relevant identities, preserved items, known unknowns, and the evidence source
+   and time.
+2. Keep the observed current state separate from the intended target state. Do
+   not rewrite the baseline to match the outcome.
+3. Use an existing task record, report, or evidence location; do not require a
+   new file or fixed schema. Keep short-lived baselines in the current execution
+   context, and promote them only when later sessions, irreversible work, or
+   acceptance depends on them.
+4. Refresh the baseline or mark it stale when its scope, identity, or authority
+   changes.
 
 ## Reuse before building
 
@@ -108,6 +127,23 @@ Treat a status as composite when one label answers more than one independent lif
 4. Treat any overall status as a derived summary, not the authority for its component concerns.
 5. Do not prescribe fixed fields, field names, or a status schema.
 
+## Separate source and runtime claims
+
+Apply this boundary only when the project has more than one relevant delivery
+layer.
+
+1. Identify only the layers that exist, such as source, a built or published
+   artifact, deployed runtime, and an active consumer.
+2. Treat each layer as an independent fact with its own authority and closure
+   evidence. Closing one layer must not silently close another.
+3. A source change does not authorize building, publishing, deploying, or
+   switching a consumer. Authorization does not transfer across layers.
+4. Source verification does not prove artifact or runtime behavior. Deployment
+   does not prove that an active consumer uses the new state.
+5. Use fresh evidence from the claimed layer and record the exact identity being
+   verified. Keep uninspected layers explicitly unverified.
+6. Do not prescribe mandatory layers, fixed state fields, or a status schema.
+
 ## Initialize honest drafts
 
 Except for the user-facing `README.md`, an initial document may be marked `planned` or `draft`, but it must not be blank. Record:
@@ -131,6 +167,25 @@ Treat `METHODOLOGY.md` as an explicit exception: create it only near project clo
 - A roadmap may begin as a status-marked draft, but do not describe planned work as completed.
 - Treat that shared artifact as the durable plan. Keep local `TODO.md` focused
   on the current execution slice, actions, and blockers.
+
+### Commit boundaries
+
+Plan commit boundaries before staging when a task will create multiple commits,
+contains mixed-purpose hunks, depends on ordered commits, or requires an
+individually reviewable history.
+
+1. Assign each proposed commit one intent, its exact paths or hunks, its
+   dependencies, its verification, and its expected intermediate state.
+2. Keep pre-existing user changes and ignored local execution records outside
+   the planned boundary unless the user explicitly includes them.
+3. Make each intermediate commit coherent, reviewable, and safely reversible.
+   If no meaningful intermediate state exists, use one atomic commit instead of
+   forcing an artificial split.
+4. Review the staged diff for each boundary and verify the completed sequence as
+   a whole.
+
+For a simple single-commit change, verify only the staged scope; do not create a
+separate commit plan.
 
 ### Milestones and PR queues
 
@@ -172,7 +227,10 @@ Do not list a candidate tool as an adopted dependency before validation. Preserv
 
 ## Synchronize on real triggers
 
+- Baseline scope, identity, or authority changes: refresh it or mark it stale.
 - Architecture, tool responsibility, or data boundary changes: update `DESIGN.md` and affected shared docs.
+- Source, artifact, runtime, or consumer transitions: update only the affected
+  layer and attach evidence from that layer.
 - Experiment, blocker, or next-action changes: update local `TODO.md`.
 - Milestone or PR status changes: update local `TODO.md` and the corresponding
   durable shared plan.
@@ -199,7 +257,11 @@ Scale verification to the task and at minimum:
 3. Check Markdown links when entry points or paths change.
 4. Run `git check-ignore` when local-file rules change.
 5. Confirm local maintenance files are neither tracked nor staged.
-6. Report any check not run, why it was skipped, and what remains unverified.
+6. When multiple commits are planned, inspect the staged scope and relevant
+   intermediate state at every boundary.
+7. For source or runtime claims, verify the claimed layer directly and report
+   every uninspected layer as unverified.
+8. Report any check not run, why it was skipped, and what remains unverified.
 
 Claim completion only after verification.
 
