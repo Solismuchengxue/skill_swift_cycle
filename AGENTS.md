@@ -20,6 +20,7 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Preserve user changes and keep each modification traceable to the current request.
 - Prefer a small shared-core change over duplicated agent-specific implementations.
 - Keep the Skill body concise, imperative, and below 500 lines.
+- Keep knowledge-promotion and state-separation guidance project-agnostic and lightweight; do not encode project-specific workflows, mandatory state fields, or fixed status schemas.
 - Do not add unsupported host claims; verify current behavior against first-party documentation.
 
 ## Language synchronization

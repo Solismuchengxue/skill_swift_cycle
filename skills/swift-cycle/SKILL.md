@@ -1,6 +1,6 @@
 ---
 name: swift-cycle
-description: Manual-invocation workflow for lightweight governance of personal and small software projects. Use only when the user explicitly invokes swift-cycle to initialize or review README, DESIGN, AGENTS, local TODO and DEVLOG, shared docs, candidate evaluations, ADR decisions, documentation drift, or project closeout. Keep small local changes fast and avoid heavyweight process.
+description: Manual-invocation workflow for lightweight governance of personal and small software projects. Use only when the user explicitly invokes swift-cycle to initialize or review README, DESIGN, AGENTS, local TODO and DEVLOG, shared docs, candidate evaluations, ADR decisions, lifecycle states, documentation drift, or project closeout. Keep small local changes fast and avoid heavyweight process.
 license: MIT
 ---
 
@@ -88,6 +88,25 @@ At project start, establish these responsibilities. Reuse equivalent existing fi
 - Store long-lived shared requirements, architecture, runbooks, roadmaps, evaluations, and ADRs.
 - Commit it to Git and index detailed documents from `DESIGN.md`.
 - If no detailed document exists yet, create a meaningful status-bearing entry so the directory is not an empty placeholder.
+
+## Promote local knowledge
+
+Treat ignored local maintenance records as capture surfaces, not durable shared authority.
+
+1. Do not promote short-term actions, one-off failures, or current-session information.
+2. Promote a record when it becomes a cross-session or cross-machine commitment, a durable decision or constraint, or evidence that later work must review or verify.
+3. Choose the shared asset by responsibility: plans and commitments go to a roadmap, issue, milestone, or shared plan; architecture and trade-offs go to `DESIGN.md`, an ADR, or a decision document; verified facts go to evidence documentation; migration outcomes go to migration documentation; user-visible facts go to `README.md` or user documentation.
+4. After promotion, treat the shared asset as authoritative. Keep only a short status or link in the local record instead of copying the complete fact.
+
+## Separate composite states
+
+Treat a status as composite when one label answers more than one independent lifecycle question.
+
+1. Identify the independent concerns represented by the label, such as implementation, experiment, quality, or release concerns.
+2. Split only the concerns the project actually tracks. Give each concern its own meaning, transitions, and closure evidence.
+3. Keep concerns independent unless repository evidence defines a real dependency. Closing one concern must not silently close another.
+4. Treat any overall status as a derived summary, not the authority for its component concerns.
+5. Do not prescribe fixed fields, field names, or a status schema.
 
 ## Initialize honest drafts
 
