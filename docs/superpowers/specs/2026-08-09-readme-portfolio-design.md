@@ -2,7 +2,9 @@
 
 ## Status
 
-Approved for implementation planning on 2026-08-09.
+Implemented and committed on 2026-08-09. The resulting bilingual README
+refresh is tracked in commit `59ffa53`; this document remains the design
+record for that completed change.
 
 ## Objective
 
