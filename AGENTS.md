@@ -41,7 +41,7 @@ These instructions apply to the `skill_swift_cycle` repository.
 
 ## Source and deployment boundaries
 
-- Treat `F:\30_Product_and_Engineering\skill_swift_cycle` as the canonical
+- Treat `F:\70_Infrastructure_and_Operations\prompt_engineering\skill_swift_cycle` as the canonical
   source checkout. The previous source-path migration is complete, and retired
   migration-control paths are not current authority for this repository.
 - Treat host-installed Skill copies and `gh skill` source metadata as external
