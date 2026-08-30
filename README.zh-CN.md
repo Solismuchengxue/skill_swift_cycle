@@ -47,11 +47,15 @@ flowchart LR
 | 能力 | Swift Cycle 的做法 |
 | --- | --- |
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
+| **场景路由** | 为 bootstrap/adopt、小改动、功能、bugfix、研究、运行集成、收尾或文档退役选择最小有效路径。 |
+| **文档配置** | 在 `minimal`、`standard` 与 `runtime_integration` 中按需选择，不强制固定文档树。 |
+| **语言自动适配** | 分开解析交流语言与文件语言，保留既有文件主语言和双语边界。 |
 | **治理基线（Governance Baseline）** | 非简单治理需要跨权威或交付边界可靠比较时，记录与任务规模相称的变更前状态。 |
 | **知识晋升（Knowledge Promotion）** | 把长期承诺、决策、约束和可复用证据从本地记录晋升到职责匹配的共享资产。 |
 | **状态拆分（State Separation）** | 只拆分项目实际跟踪的独立生命周期问题，不引入固定状态 Schema。 |
 | **提交边界规划（Commit Boundary Planning）** | 在暂存混合目的、有顺序依赖或多提交修改前，定义一致且可独立审查的提交范围。 |
 | **源码/运行态边界（Source/Runtime Boundary）** | 让源码、制品、运行态和消费者结论分别拥有自己的证据与授权。 |
+| **新鲜度与学习闭环** | 识别过期状态，冻结审查快照，安全退役旧文档，并晋升已确认的失败防线。 |
 | **自适应执行** | 简单任务保留普通 TODO；只有工作真正需要时，才启用里程碑与按依赖排序的 PR 队列。 |
 | **证据驱动交付** | 让每个增量都可审查、可验证、可回退，再根据最新证据继续或修正。 |
 | **可移植编排** | 以一份符合标准的 Skill 配合本地化指引和宿主元数据，不依赖脚本、MCP Server 或外部服务。 |
@@ -112,6 +116,14 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 本地 TODO 是当前执行视图，不是唯一长期计划。跨机器承诺继续放在可提交的可行性报告、`docs/roadmap.md` 或共享 Issue Tracker 中。
 
+Swift Cycle 在确定任务场景后选择文档配置：
+
+- **`minimal`：**沿用核心入口、本地执行记录和确有需要的共享文档。
+- **`standard`：**只在存在对应长期事实时增加 architecture、roadmap、evaluation 或 ADR。
+- **`runtime_integration`：**只为项目真实存在的交付层增加 operations、contracts、security、storage、integration 和身份层证据。
+
+配置是起点，不是强制目录树。`templates/` 中的可选模板会按解析后的文件语言生成。
+
 ### 治理边界
 
 Swift Cycle 只在仓库证据要求时启用相应治理能力：
@@ -121,6 +133,7 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 - **状态拆分：**只有一个状态同时代表多个关闭证据不同的生命周期问题时，才拆分独立状态。
 - **提交边界规划：**修改包含混合目的、顺序依赖或多个可审查增量时，在暂存前规划一致的提交范围。
 - **源码/运行态边界：**分别验证源码、制品、运行态和活动消费者；证据与授权不能跨层传递。
+- **文档新鲜度：**真实里程碑或边界变化时，对齐状态、决策、计划、身份和冻结的 Review Packet。
 
 这些能力均由实际触发条件启用。简单、局部且明确的修改仍使用短循环，不增加额外治理产物。
 
@@ -156,7 +169,7 @@ $swift-cycle 收敛项目文档，并从真实工作中提炼可复用方法论�
 
 - Swift Cycle 由用户主动调用，不代表它会在后台自主运行。
 - Codex、Claude Code 与 GitHub Copilot 使用同一份规范包；宿主差异见[兼容性说明](docs/compatibility.md)。
-- 英文是规范指令语言，简体中文术语位于 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md)。
+- 规范流程会分别解析交流语言和文件语言。当前仓库维护英文 Skill 正文、双语用户入口，以及 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md) 中的简体中文操作术语。
 - 该包遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
 - 不需要脚本、运行时依赖、MCP Server 或外部服务。
 
@@ -167,7 +180,10 @@ skill_swift_cycle/
 ├─ skills/swift-cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
-│  └─ references/zh-CN.md
+│  ├─ references/
+│  │  ├─ zh-CN.md
+│  │  └─ document-profiles.md
+│  └─ templates/                 # 按需使用的文档配置起点
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md

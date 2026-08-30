@@ -47,11 +47,15 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | Capability | What Swift Cycle does |
 | --- | --- |
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
+| **Scenario routing** | Selects the smallest useful route for bootstrap/adopt, small changes, features, bug fixes, research, runtime integration, closeout, or document retirement. |
+| **Document profiles** | Starts from `minimal`, `standard`, or `runtime_integration` without forcing a fixed document tree. |
+| **Language adaptation** | Resolves conversation and file language separately, preserving existing file language and bilingual boundaries. |
 | **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
 | **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
 | **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, without imposing a fixed schema. |
 | **Commit Boundary Planning** | Defines coherent, independently reviewable commit scopes before staging mixed, ordered, or multi-commit changes. |
 | **Source/Runtime Boundary** | Keeps source, artifact, runtime, and consumer claims independently evidenced and authorized. |
+| **Freshness and learning** | Detects stale status, freezes review snapshots, retires obsolete documents safely, and promotes confirmed failure guards. |
 | **Adaptive execution** | Keeps simple work as a normal TODO; activates a milestone and dependency-ordered PR queue only when the work needs it. |
 | **Evidence-backed delivery** | Keeps each increment reviewable, verifiable, and reversible, then continues or corrects based on fresh evidence. |
 | **Portable orchestration** | Ships one standards-aligned Skill with localized guidance and host-specific metadata—without scripts, MCP servers, or external services. |
@@ -112,6 +116,14 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 
 The local TODO is an execution view, not the only long-term plan. Cross-machine commitments stay in a committable feasibility report, `docs/roadmap.md`, or a shared issue tracker.
 
+Swift Cycle selects a document profile after it selects the task scenario:
+
+- **`minimal`:** existing core entry points plus local execution records and only necessary shared docs.
+- **`standard`:** adds architecture, roadmap, evaluation, or ADR authorities only when corresponding durable facts exist.
+- **`runtime_integration`:** adds operations, contracts, security, storage, integration, and identity evidence only for delivery layers the project actually has.
+
+Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/` and are adapted to the resolved file language.
+
 ### Governance boundaries
 
 Swift Cycle activates governance only when repository evidence requires it:
@@ -121,6 +133,7 @@ Swift Cycle activates governance only when repository evidence requires it:
 - **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence.
 - **Commit Boundary Planning:** plan coherent commit scopes before staging when changes have mixed purposes, ordered dependencies, or multiple reviewable increments.
 - **Source/Runtime Boundary:** verify source, artifact, runtime, and active-consumer claims at their own layers; evidence and authorization do not transfer between them.
+- **Documentation freshness:** reconcile status, decisions, plans, identities, and frozen Review Packets when real milestones or boundaries change.
 
 These capabilities are trigger-based. Simple, local, explicit changes continue to use the short loop without extra governance artifacts.
 
@@ -156,7 +169,7 @@ Use the invocation syntax supported by your agent host.
 
 - Swift Cycle is deliberately invoked by the user; it does not imply autonomous background execution.
 - Codex, Claude Code, and GitHub Copilot use the same canonical package with host-specific behavior documented in [agent compatibility](docs/compatibility.md).
-- English is the canonical instruction language. Simplified Chinese terminology lives in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md).
+- The canonical workflow resolves conversation and file language separately. This repository currently maintains an English Skill body, bilingual user entry points, and Simplified Chinese operational terminology in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md).
 - The package follows the open [Agent Skills specification](https://agentskills.io/specification).
 - No scripts, runtime dependencies, MCP servers, or external services are required.
 
@@ -167,7 +180,10 @@ skill_swift_cycle/
 ├─ skills/swift-cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
-│  └─ references/zh-CN.md
+│  ├─ references/
+│  │  ├─ zh-CN.md
+│  │  └─ document-profiles.md
+│  └─ templates/                 # Optional profile-aligned starting points
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md
