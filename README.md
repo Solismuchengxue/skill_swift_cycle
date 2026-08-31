@@ -47,8 +47,10 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | Capability | What Swift Cycle does |
 | --- | --- |
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
-| **Scenario routing** | Selects the smallest useful route for bootstrap/adopt, small changes, features, bug fixes, research, runtime integration, closeout, or document retirement. |
-| **Document profiles** | Starts from `minimal`, `standard`, or `runtime_integration` without forcing a fixed document tree. |
+| **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
+| **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
+| **Document profiles** | Selects the smallest `minimal`, `standard`, or `runtime_integration` profile and records responsibility conformance without forcing a fixed document tree. |
+| **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
 | **Language adaptation** | Resolves conversation and file language separately, preserving existing file language and bilingual boundaries. |
 | **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
 | **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
@@ -71,6 +73,8 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --s
 ```
 
 Invoke with `$swift-cycle`.
+
+Invoke it once to adopt or take over a project. After adoption, Swift Cycle records a persistent binding in the project's `AGENTS.md`; later project tasks load the Skill through that repository contract and do not require repeated mode selection or repeated `$swift-cycle` input.
 
 ### Claude Code
 
@@ -116,13 +120,17 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 
 The local TODO is an execution view, not the only long-term plan. Cross-machine commitments stay in a committable feasibility report, `docs/roadmap.md`, or a shared issue tracker.
 
-Swift Cycle selects a document profile after it selects the task scenario:
+After one explicit adoption, Swift Cycle detects the current phase and selects a document profile in the background:
 
 - **`minimal`:** existing core entry points plus local execution records and only necessary shared docs.
 - **`standard`:** adds architecture, roadmap, evaluation, or ADR authorities only when corresponding durable facts exist.
-- **`runtime_integration`:** adds operations, contracts, security, storage, integration, and identity evidence only for delivery layers the project actually has.
+- **`runtime_integration`:** activates when the current task must establish, change, or verify multiple operations, contract, security, storage, integration, or identity layers.
 
 Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/` and are adapted to the resolved file language.
+
+When document volume, audience differences, or a flat layout harm discoverability, Swift Cycle keeps `DESIGN.md` as the concise architecture entry and conditionally adds `docs/README.md` as the broader docs home. Responsibility-based directories are created only for groups that need them; Diátaxis categories stay index metadata for purpose and audience rather than becoming a parallel directory tree.
+
+For adoption, material structural changes, and milestone closeout, the internal work package records `profile_conformance`: each responsibility is mapped to reuse existing, create, or not applicable, together with its single authority, reason, and update trigger. This record stays backstage unless it explains a risk or blocker.
 
 ### Governance boundaries
 
@@ -139,37 +147,31 @@ These capabilities are trigger-based. Simple, local, explicit changes continue t
 
 ### Proportional delivery
 
-- **Simple task:** use a normal TODO checklist and the short verification loop.
-- **Multi-PR or milestone task:** maintain a current milestone and dependency-ordered PR queue.
+- **Simple task:** the Agent keeps a normal TODO checklist and the short verification loop.
+- **Multi-PR or milestone task:** the Agent activates a current milestone and dependency-ordered PR queue only when repository evidence requires it.
 - **Every PR-sized increment:** record its ID, milestone, deliverable, scope, dependencies, verification, status, and PR link; keep it independently reviewable, verifiable, and reversible.
+
+At milestone closeout, the Agent reconciles affected README, DESIGN, docs, TODO, DEVLOG, and active packets—or records why there is no documentation impact—without asking the user to choose a closeout mode.
 
 Small, local changes stay lightweight. Swift Cycle does not require an RFC, ADR, design document, or PR queue for every edit.
 
 ## Example delivery loops
 
-```text
-$swift-cycle Initialize a lightweight maintenance framework for this repository.
-```
+Adopt once:
 
 ```text
-$swift-cycle Review the current documentation boundaries and fix only meaningful drift.
+$swift-cycle Adopt this repository and bind lightweight ongoing maintenance in AGENTS.md.
 ```
 
-```text
-$swift-cycle Maintain this three-PR migration as a current milestone and dependency-ordered PR queue.
-```
-
-```text
-$swift-cycle Close out this project, reconcile the docs, and extract reusable methodology.
-```
+After adoption, send normal project requests. The Agent detects the phase, profile, affected authorities, and closeout work in the background; there are no bootstrap, milestone, or closeout subcommands.
 
 Use the invocation syntax supported by your agent host.
 
 ## Compatibility and boundaries
 
-- Swift Cycle is deliberately invoked by the user; it does not imply autonomous background execution.
+- Swift Cycle remains explicit-only at the Skill-system layer. A project uses one explicit adoption, then its committed `AGENTS.md` binding requires the Skill for later project tasks.
 - Codex, Claude Code, and GitHub Copilot use the same canonical package with host-specific behavior documented in [agent compatibility](docs/compatibility.md).
-- The canonical workflow resolves conversation and file language separately. This repository currently maintains an English Skill body, bilingual user entry points, and Simplified Chinese operational terminology in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md).
+- The canonical Skill body and default prompt are Simplified Chinese. The repository keeps bilingual product entry points and a concise terminology reference in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md); target project files still preserve their established language.
 - The package follows the open [Agent Skills specification](https://agentskills.io/specification).
 - No scripts, runtime dependencies, MCP servers, or external services are required.
 
@@ -181,8 +183,12 @@ skill_swift_cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
 │  ├─ references/
-│  │  ├─ zh-CN.md
-│  │  └─ document-profiles.md
+│  │  ├─ adoption-and-routing.md
+│  │  ├─ document-information-architecture.md
+│  │  ├─ document-profiles.md
+│  │  ├─ governance-boundaries.md
+│  │  ├─ lifecycle-and-closeout.md
+│  │  └─ zh-CN.md
 │  └─ templates/                 # Optional profile-aligned starting points
 ├─ docs/compatibility.md
 ├─ README.md

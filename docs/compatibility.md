@@ -8,7 +8,7 @@
 
 ## Package format
 
-The canonical package is `skills/swift-cycle/`. It contains a required `SKILL.md`, an optional localized reference, and Codex-specific UI metadata.
+The canonical package is `skills/swift-cycle/`. It contains a concise Simplified Chinese `SKILL.md`, references loaded only when their conditions apply, conditional document templates, and Codex-specific UI metadata.
 
 The package follows the open [Agent Skills specification](https://agentskills.io/specification).
 
@@ -24,11 +24,13 @@ GitHub CLI supports additional agent hosts. Run `gh skill install --help` to ins
 
 ## Invocation policy
 
-Swift Cycle is designed for deliberate, manual use.
+Swift Cycle uses two explicit layers rather than semantic implicit invocation:
 
-- Codex enforces manual invocation through `agents/openai.yaml`.
-- The canonical description tells other agents to use the Skill only after explicit user invocation.
-- Claude Code and GitHub Copilot also support `disable-model-invocation: true` in their local Skill frontmatter when a user needs host-enforced manual-only behavior. This host-specific field is not included in the canonical package because the OpenAI validator intentionally accepts a narrower portable frontmatter set.
+- **Host or system selection remains deliberate and explicit.** An unadopted project must not load Swift Cycle merely because a request resembles its workflow. Codex enforces this boundary with `allow_implicit_invocation: false` in `agents/openai.yaml`.
+- **Project adoption is one explicit action.** After adoption, the project's `AGENTS.md` may persistently require later project tasks to load `$swift-cycle`. This is an explicit repository instruction, not host-level semantic auto-selection, and it does not require the user to repeat `$swift-cycle` for every task.
+- Claude Code and GitHub Copilot support manual Skill invocation and may provide host-specific controls such as `disable-model-invocation: true`. Their project-instruction and persistent-binding behavior remains host-specific; this document does not claim that it is identical to Codex.
+
+The host-specific field above is not included in the canonical package because the OpenAI validator intentionally accepts a narrower portable frontmatter set.
 
 ## Manual installation
 

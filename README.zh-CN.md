@@ -47,8 +47,10 @@ flowchart LR
 | 能力 | Swift Cycle 的做法 |
 | --- | --- |
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
-| **场景路由** | 为 bootstrap/adopt、小改动、功能、bugfix、研究、运行集成、收尾或文档退役选择最小有效路径。 |
-| **文档配置** | 在 `minimal`、`standard` 与 `runtime_integration` 中按需选择，不强制固定文档树。 |
+| **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
+| **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
+| **文档档位** | 自动选择最小的 `minimal`、`standard` 或 `runtime_integration`，并记录职责一致性，不强制固定文档树。 |
+| **文档信息架构** | 保持 DESIGN 简洁，只在可发现性确有需要时增加 docs home，并按真实职责而非固定树组织长期文档。 |
 | **语言自动适配** | 分开解析交流语言与文件语言，保留既有文件主语言和双语边界。 |
 | **治理基线（Governance Baseline）** | 非简单治理需要跨权威或交付边界可靠比较时，记录与任务规模相称的变更前状态。 |
 | **知识晋升（Knowledge Promotion）** | 把长期承诺、决策、约束和可复用证据从本地记录晋升到职责匹配的共享资产。 |
@@ -71,6 +73,8 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --s
 ```
 
 使用 `$swift-cycle` 调用。
+
+首次初始化或接管项目时调用一次。采用后，Swift Cycle 会在项目 `AGENTS.md` 写入持久绑定；后续项目任务通过该仓库合同加载 Skill，不要求用户重复选择模式或重复输入 `$swift-cycle`。
 
 ### Claude Code
 
@@ -116,13 +120,17 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 本地 TODO 是当前执行视图，不是唯一长期计划。跨机器承诺继续放在可提交的可行性报告、`docs/roadmap.md` 或共享 Issue Tracker 中。
 
-Swift Cycle 在确定任务场景后选择文档配置：
+一次显式采用后，Swift Cycle 在后台识别当前阶段并选择文档档位：
 
 - **`minimal`：**沿用核心入口、本地执行记录和确有需要的共享文档。
 - **`standard`：**只在存在对应长期事实时增加 architecture、roadmap、evaluation 或 ADR。
-- **`runtime_integration`：**只为项目真实存在的交付层增加 operations、contracts、security、storage、integration 和身份层证据。
+- **`runtime_integration`：**只有当前任务需要建立、改变或验证多个运维、合同、安全、存储、集成或身份层时才启用。
 
 配置是起点，不是强制目录树。`templates/` 中的可选模板会按解析后的文件语言生成。
+
+当文档数量、受众差异或平铺结构影响可发现性时，Swift Cycle 让 `DESIGN.md` 继续承担简洁架构入口，并按需增加 `docs/README.md` 作为完整 docs home。只有真正需要分组的职责才建立子目录；Diátaxis 分类只作为用途与受众索引元数据，不复制成第二套目录树。
+
+在采用、重大结构变化和里程碑关闭时，内部工作包维护 `profile_conformance`：每项职责映射为“复用现有 / 新建 / 不适用”，并记录唯一权威、理由和更新触发。除非它直接解释风险或 blocker，否则不向用户展开。
 
 ### 治理边界
 
@@ -139,37 +147,31 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 
 ### 与任务规模相称的交付方式
 
-- **简单任务：**使用普通 TODO 清单与短验证循环。
-- **多 PR 或里程碑任务：**维护当前里程碑与按依赖排序的 PR 队列。
+- **简单任务：**Agent 使用普通 TODO 清单与短验证循环。
+- **多 PR 或里程碑任务：**只有仓库证据确实需要时，Agent 才启用当前里程碑与按依赖排序的 PR 队列。
 - **每个 PR 大小的增量：**记录 ID、里程碑、交付物、范围、依赖、验证、状态与 PR 链接，并确保它可独立审查、验证和回退。
+
+里程碑关闭时，Agent 自动收敛受影响的 README、DESIGN、docs、TODO、DEVLOG 和活动 Packet；没有文档影响时记录理由，不再要求用户选择 closeout 模式。
 
 简单、局部的修改继续保持轻量。Swift Cycle 不要求每次编辑都创建 RFC、ADR、设计文档或 PR 队列。
 
 ## 交付循环示例
 
-```text
-$swift-cycle 为当前仓库建立轻量级维护框架。
-```
+只需采用一次：
 
 ```text
-$swift-cycle 检查当前文档职责是否漂移，只修正确实有价值的问题。
+$swift-cycle 接管当前仓库，并在 AGENTS.md 中绑定持续的轻量维护。
 ```
 
-```text
-$swift-cycle 把这个三 PR 迁移维护为当前里程碑和按依赖排序的 PR 队列。
-```
-
-```text
-$swift-cycle 收敛项目文档，并从真实工作中提炼可复用方法论。
-```
+采用后直接发送普通项目任务。Agent 在后台判断阶段、档位、受影响权威和收敛工作；不提供 bootstrap、milestone 或 closeout 子命令。
 
 请根据所用 Agent 调整调用语法。
 
 ## 兼容性与边界
 
-- Swift Cycle 由用户主动调用，不代表它会在后台自主运行。
+- Swift Cycle 在系统层保持 explicit-only。项目只需一次显式采用，之后由已提交的 `AGENTS.md` 绑定要求后续项目任务加载该 Skill。
 - Codex、Claude Code 与 GitHub Copilot 使用同一份规范包；宿主差异见[兼容性说明](docs/compatibility.md)。
-- 规范流程会分别解析交流语言和文件语言。当前仓库维护英文 Skill 正文、双语用户入口，以及 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md) 中的简体中文操作术语。
+- canonical Skill 正文和默认提示使用简体中文。仓库继续维护双语产品入口，以及 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md) 中的精简术语；目标项目文件仍沿用其既有语言。
 - 该包遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
 - 不需要脚本、运行时依赖、MCP Server 或外部服务。
 
@@ -181,8 +183,12 @@ skill_swift_cycle/
 │  ├─ SKILL.md
 │  ├─ agents/openai.yaml
 │  ├─ references/
-│  │  ├─ zh-CN.md
-│  │  └─ document-profiles.md
+│  │  ├─ adoption-and-routing.md
+│  │  ├─ document-information-architecture.md
+│  │  ├─ document-profiles.md
+│  │  ├─ governance-boundaries.md
+│  │  ├─ lifecycle-and-closeout.md
+│  │  └─ zh-CN.md
 │  └─ templates/                 # 按需使用的文档配置起点
 ├─ docs/compatibility.md
 ├─ README.md
