@@ -4,7 +4,7 @@
 
 - Status: active.
 - Current conclusion: maintain one standards-based Skill with system-level explicit invocation and project-level persistent adoption. After one explicit adoption, the project `AGENTS.md` binds Swift Cycle so later tasks route, synchronize documentation, and close milestones automatically inside the project boundary.
-- Scope: canonical workflow, document profiles, optional templates, language resolution, host compatibility, and source/deployment boundaries.
+- Scope: canonical workflow, project-intent baseline, document profiles, optional templates, language resolution, host compatibility, and source/deployment boundaries.
 - Update trigger: revise this document when the Skill package, scenario routes, document profiles, language strategy, invocation policy, or supported host boundary changes.
 
 ## Goals
@@ -14,6 +14,7 @@
 - Keep the canonical Skill and default prompt in Simplified Chinese while preserving bilingual product entry points and target-file language.
 - Keep system-level invocation explicit, while allowing an adopted project's committed instructions to require the Skill without repeated user commands.
 - Keep simple work minimal while giving complex project, runtime, and integration work a reusable document shape.
+- Give every new project one tracked intent baseline before substantive implementation while reusing complete brownfield authorities without duplication.
 - Detect documentation drift and promote confirmed failure guards without creating a second project state machine.
 
 ## Structure
@@ -32,6 +33,10 @@ skill_swift_cycle/
 │     │  ├─ lifecycle-and-closeout.md # Candidate, packet, and closeout details
 │     │  └─ zh-CN.md            # Concise terminology and wording guidance
 │     └─ templates/             # Optional profile-aligned starting points
+│        ├─ BLUEPRINT.md        # Renders to docs/blueprint.md
+│        ├─ DESIGN.md
+│        ├─ DEVLOG.md
+│        └─ TODO.md
 ├─ docs/
 │  └─ compatibility.md          # Host support and installation boundaries
 ├─ README.md                    # English user documentation
@@ -62,11 +67,13 @@ The diagram describes project-internal engineering. It does not assign departmen
 
 | Profile | Purpose | Boundary |
 | --- | --- | --- |
-| `minimal` | Core entry points and the shortest useful execution view | Default for small projects and bounded changes |
+| `minimal` | Project intent, core entry points, and the shortest useful execution view | Default for small projects and bounded changes |
 | `standard` | Durable architecture, roadmap, evaluation, and decisions | Add only authorities backed by long-lived facts |
 | `runtime_integration` | Operations, contracts, security, storage, integration, and identity layers | Activate only when the current task establishes, changes, or verifies multiple relevant layers |
 
 Profiles are internal starting configurations, not user-visible modes. Each adoption, material structural change, and milestone closeout records `profile_conformance`: every responsibility is mapped to reuse existing, create, or not applicable, together with one authority, reason, and update trigger. Templates are conditional structures and are never copied as a mandatory tree.
+
+New projects establish `docs/blueprint.md` as the tracked project-intent authority before substantive implementation. Brownfield adoption maps a complete Charter, Product Brief, Project Spec, or other equivalent instead of copying a second source. README, DESIGN, and docs indexes keep only a short summary and link.
 
 `DESIGN.md` remains the concise architecture entry. Small projects may keep their complete necessary document index there; projects whose volume, audiences, or flat layout impair discovery may add `docs/README.md` as the broader docs home. Responsibility directories are created only for actual document groups, while tutorial/how-to/reference/explanation remain purpose and audience metadata rather than a parallel hierarchy.
 
@@ -75,6 +82,7 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 | Concern | Swift Cycle owns | Outside this Skill |
 | --- | --- | --- |
 | Project loop | One-time adoption, background phase/profile routing, finite work package, implementation, synchronization, verification, learning | Portfolio routing, capacity, model assignment, external queues |
+| Project intent | One tracked Blueprint or mapped brownfield equivalent, material-change updates, and explicit supersession | User instructions, architecture, current work, history, detailed scheduling, runtime state, Registry, or acceptance |
 | Documentation | Responsibility, freshness, knowledge promotion, packet freeze and retirement | Organizational registry or acceptance ledger |
 | Delivery layers | Independent source, artifact, runtime, and consumer evidence | Publishing, deployment, or consumer switching without separate authority |
 | Output | Project work package, Review Packet, Closeout Packet | Acceptance, activation, release, or cross-project authorization decisions |
@@ -87,7 +95,8 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 - Detailed phase routing is internal. Adoption, ordinary progress, material structural change, and milestone closeout select the smallest useful route without user-facing modes or subcommands.
 - Document profiles are progressive. `minimal` remains the default, while `standard` and `runtime_integration` activate only for durable facts and delivery layers that exist. `profile_conformance` makes reuse, creation, omission, authority, reason, and update triggers reviewable without creating a fixed schema file.
 - Document information architecture is evidence-triggered rather than count-driven. DESIGN, a conditional docs home, and any subdirectory indexes contain links and short summaries; the durable fact remains in one shared authority. Document moves and link repairs form a bounded documentation-hygiene package, while tracked deletion or a change of authority still requires its own authorization.
-- Optional templates encode one-H1 structure, stable H2 sections, native Mermaid, concise tables, unresolved items, update triggers, and revision records. TODO is a bounded current-work surface, DEVLOG is dated and evidence-oriented, and DESIGN keeps conclusion, relationship diagram, and boundary in that order. They do not impose a prose language or mandatory directory tree.
+- Optional templates encode one-H1 structure, stable H2 sections, native Mermaid where useful, concise tables, unresolved items, update triggers, and revision records. Blueprint is the project-intent baseline, TODO is a bounded current-work surface, DEVLOG is dated and evidence-oriented, and DESIGN keeps conclusion, relationship diagram, and boundary in that order. They do not impose a prose language or mandatory directory tree.
+- New docs paths follow lowercase `snake_case`, with root entry points and docs index `README.md` files as documented exceptions. Existing drift is migrated only through an approved documentation-hygiene work package; the canonical rules and examples live in `document-information-architecture.md`.
 - Knowledge promotion keeps short-lived capture local and moves durable commitments, decisions, constraints, and reusable evidence into responsibility-appropriate shared assets. After promotion, the shared asset is authoritative and the local record retains only a concise pointer.
 - State separation identifies labels that combine independent lifecycle questions and splits only the concerns a project actually tracks. It defines no mandatory fields or status schema, and any overall status remains a derived summary.
 - Governance baselines activate only for non-trivial work that crosses authority
@@ -148,6 +157,7 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 
 | Date | Change |
 | --- | --- |
+| 2026-08-31 | Added a portable project Blueprint baseline at the new-project default `docs/blueprint.md`, brownfield authority reuse, explicit intent lifecycle boundaries, and canonical lowercase snake_case naming for docs paths. |
 | 2026-08-31 | Added portable TODO, DEVLOG, and DESIGN template contracts derived from an approved project practice, with bounded current-work history, evidence-oriented maintenance entries, and explicit local-record boundaries. |
 | 2026-08-31 | Added conditional document information architecture: concise DESIGN entry, optional docs home, responsibility-based grouping, Diátaxis index metadata, and bounded documentation-hygiene work. |
 | 2026-08-31 | Switched to a concise Simplified Chinese canonical entry, one-time explicit adoption with persistent project binding, background routing, automatic milestone documentation closeout, and profile conformance. |

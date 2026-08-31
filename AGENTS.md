@@ -24,6 +24,7 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Keep scenario routes and document profiles progressive: `minimal` must remain usable without `standard` or `runtime_integration` artifacts.
 - Keep Swift Cycle inside one project's engineering loop. Do not add portfolio routing, reviewer creation, capacity management, organizational acceptance, external registries, or cross-project runtime authorization.
 - Treat templates as optional structures whose prose is adapted to the resolved file language. Do not create duplicate language-specific template trees.
+- Keep the Blueprint as one shared tracked project-intent authority: new projects default to `docs/blueprint.md`, root-level Blueprint files are forbidden by default, and complete brownfield equivalents are mapped rather than copied.
 - Keep Review Packets frozen and date- or milestone-bound; they must not become mutable current-truth documents.
 - Do not add unsupported host claims; verify current behavior against first-party documentation.
 
@@ -42,6 +43,8 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Run `gh skill publish --dry-run` before publishing.
 - Check Markdown links and `git diff --check`.
 - Check the canonical Skill remains below 500 lines and each added template has one level-one heading.
+- Check the Blueprint template has the stable required H2 sequence and assert the new-project docs path, brownfield equivalent reuse, tracked-asset boundary, and separation from README, DESIGN, TODO, DEVLOG, roadmap, Packets, runtime state, and Registry.
+- Check new docs Markdown files and multiword directories use lowercase snake_case, the Blueprint default is `docs/blueprint.md`, and legacy renames require an approved documentation-hygiene package.
 - Check scenario/profile coverage, language precedence, document-freshness triggers, Packet lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
 - Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
 - Report checks that were not run and do not claim unsupported compatibility.

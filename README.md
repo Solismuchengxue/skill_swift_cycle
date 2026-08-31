@@ -49,6 +49,7 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
 | **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
 | **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
+| **Project intent baseline** | Creates a tracked `docs/blueprint.md` before substantive implementation in new projects, or maps a complete brownfield equivalent without creating a second authority. |
 | **Document profiles** | Selects the smallest `minimal`, `standard`, or `runtime_integration` profile and records responsibility conformance without forcing a fixed document tree. |
 | **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
 | **Language adaptation** | Resolves conversation and file language separately, preserving existing file language and bilingual boundaries. |
@@ -112,6 +113,7 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 
 | Layer | Responsibility |
 | --- | --- |
+| `docs/blueprint.md` or mapped equivalent | Shared, tracked project intent: why, for whom, observable outcomes, scope, constraints, boundaries, and the next material decision. |
 | `README.md` | User-facing value, installation, usage, and current limitations. |
 | `DESIGN.md` + `docs/` | Durable design, requirements, roadmaps, evaluations, runbooks, and ADRs. |
 | `AGENTS.md` | Repository-specific collaboration, safety, synchronization, and verification rules. |
@@ -122,13 +124,15 @@ The local TODO is an execution view, not the only long-term plan. Cross-machine 
 
 After one explicit adoption, Swift Cycle detects the current phase and selects a document profile in the background:
 
-- **`minimal`:** existing core entry points plus local execution records and only necessary shared docs.
+- **`minimal`:** a project-intent baseline, existing core entry points, local execution records, and only necessary shared docs.
 - **`standard`:** adds architecture, roadmap, evaluation, or ADR authorities only when corresponding durable facts exist.
 - **`runtime_integration`:** activates when the current task must establish, change, or verify multiple operations, contract, security, storage, integration, or identity layers.
 
-Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/`, are adapted to the resolved file language, and now include portable TODO, DEVLOG, and DESIGN starting points.
+Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/`, are adapted to the resolved file language, and include portable Blueprint, TODO, DEVLOG, and DESIGN starting points. Blueprint remains the sole intent authority; README, DESIGN, and docs indexes carry only short summaries and links.
 
 When document volume, audience differences, or a flat layout harm discoverability, Swift Cycle keeps `DESIGN.md` as the concise architecture entry and conditionally adds `docs/README.md` as the broader docs home. Responsibility-based directories are created only for groups that need them; Diátaxis categories stay index metadata for purpose and audience rather than becoming a parallel directory tree.
+
+New Markdown files and multiword directories under `docs/` use lowercase `snake_case`; root entry-point names and docs index `README.md` files retain their established exceptions. Brownfield naming drift is recorded and migrated only through an approved documentation-hygiene work package, never by copying a second authority. The canonical naming rules live in [document information architecture](skills/swift-cycle/references/document-information-architecture.md).
 
 For adoption, material structural changes, and milestone closeout, the internal work package records `profile_conformance`: each responsibility is mapped to reuse existing, create, or not applicable, together with its single authority, reason, and update trigger. This record stays backstage unless it explains a risk or blocker.
 
@@ -190,6 +194,10 @@ skill_swift_cycle/
 │  │  ├─ lifecycle-and-closeout.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # Optional profile-aligned starting points
+│     ├─ BLUEPRINT.md            # Renders to docs/blueprint.md
+│     ├─ DESIGN.md
+│     ├─ DEVLOG.md
+│     └─ TODO.md
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md

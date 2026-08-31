@@ -49,6 +49,7 @@ flowchart LR
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
 | **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
 | **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
+| **项目意图基线** | 新项目在实质实施前创建受跟踪的 `docs/blueprint.md`；旧项目则映射完整等价权威，不制造第二真源。 |
 | **文档档位** | 自动选择最小的 `minimal`、`standard` 或 `runtime_integration`，并记录职责一致性，不强制固定文档树。 |
 | **文档信息架构** | 保持 DESIGN 简洁，只在可发现性确有需要时增加 docs home，并按真实职责而非固定树组织长期文档。 |
 | **语言自动适配** | 分开解析交流语言与文件语言，保留既有文件主语言和双语边界。 |
@@ -112,6 +113,7 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 | 层级 | 职责 |
 | --- | --- |
+| `docs/blueprint.md` 或映射的等价权威 | 共享、受跟踪的项目意图：为什么做、为谁做、可观察结果、范围、约束、边界和下一项关键决定。 |
 | `README.md` | 面向用户的价值、安装、用法与当前限制。 |
 | `DESIGN.md` + `docs/` | 可长期共享的设计、需求、路线图、评估、运行手册与 ADR。 |
 | `AGENTS.md` | 仓库级协作、安全、同步与验证规则。 |
@@ -122,13 +124,15 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 一次显式采用后，Swift Cycle 在后台识别当前阶段并选择文档档位：
 
-- **`minimal`：**沿用核心入口、本地执行记录和确有需要的共享文档。
+- **`minimal`：**覆盖项目意图基线，并沿用核心入口、本地执行记录和确有需要的共享文档。
 - **`standard`：**只在存在对应长期事实时增加 architecture、roadmap、evaluation 或 ADR。
 - **`runtime_integration`：**只有当前任务需要建立、改变或验证多个运维、合同、安全、存储、集成或身份层时才启用。
 
-配置是起点，不是强制目录树。`templates/` 中的可选模板会按解析后的文件语言生成，并提供可移植的 TODO、DEVLOG 与 DESIGN 起点。
+配置是起点，不是强制目录树。`templates/` 中的可选模板会按解析后的文件语言生成，并提供可移植的 Blueprint、TODO、DEVLOG 与 DESIGN 起点。Blueprint 保持唯一意图权威；README、DESIGN 和 docs 索引只放短摘要与链接。
 
 当文档数量、受众差异或平铺结构影响可发现性时，Swift Cycle 让 `DESIGN.md` 继续承担简洁架构入口，并按需增加 `docs/README.md` 作为完整 docs home。只有真正需要分组的职责才建立子目录；Diátaxis 分类只作为用途与受众索引元数据，不复制成第二套目录树。
+
+`docs/` 下新建 Markdown 文件和多单词目录统一使用小写 `snake_case`；根目录约定入口和 docs 索引 `README.md` 保留生态例外。旧项目命名偏差先记录，只有获准的 documentation-hygiene 工作包才迁移，绝不复制第二权威。完整命名规则以[文档信息架构](skills/swift-cycle/references/document-information-architecture.md)为准。
 
 在采用、重大结构变化和里程碑关闭时，内部工作包维护 `profile_conformance`：每项职责映射为“复用现有 / 新建 / 不适用”，并记录唯一权威、理由和更新触发。除非它直接解释风险或 blocker，否则不向用户展开。
 
@@ -190,6 +194,10 @@ skill_swift_cycle/
 │  │  ├─ lifecycle-and-closeout.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # 按需使用的文档配置起点
+│     ├─ BLUEPRINT.md            # 应用为 docs/blueprint.md
+│     ├─ DESIGN.md
+│     ├─ DEVLOG.md
+│     └─ TODO.md
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md
