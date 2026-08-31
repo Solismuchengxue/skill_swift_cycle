@@ -77,10 +77,18 @@
 
 - 模板只提供结构，按项目语言改写并删除不适用章节。
 - TODO 默认普通清单；只有多阶段或多提交工作才启用里程碑区块。
+- TODO 只保留当前工作面和最近完成项；达到模板阈值时，把较早证据迁移到本地 DEVLOG，把长期承诺或事实晋升到 roadmap、共享 Issue 或对应共享权威。
+- DEVLOG 使用按日期、按证据的条目，不记录逐命令流水账、聊天转录、秘密值，也不成为计划、授权或共享事实的第二权威。
 - architecture 每次只选择能表达当前关系的一类 Mermaid，不复制全部示例。
 - operations 只保留真实存在的交付层。
 - evaluation 只在候选判断需要长期共享时创建。
 - 不因模板存在就创建目录或文档。
 - 文档入口、用途分类、子目录和移动边界见 [document-information-architecture.md](document-information-architecture.md)。
+
+## 可移植模板来源与本地记录边界
+
+`templates/TODO.md`、`templates/DEVLOG.md` 和 `templates/DESIGN.md` 提炼自用户批准的 Solis_TTS_Runtime 文档实践，但已经去除项目事实并改写为 Swift Cycle 的可移植 canonical 模板。Skill 的执行不依赖该参考项目、NAS 或 UNC 路径；其他项目只采用经裁剪的结构，不复制参考项目的内容、身份、环境或运行结论。
+
+TODO 和 DEVLOG 的默认策略是在目标项目允许时作为本地 Git-ignore 记录。应用前必须先检查目标项目规则、跟踪状态和既有权威：若文件已被跟踪，不得自动删除、取消跟踪或仅为套用默认策略把该路径加入忽略规则；若项目要求共享或采用其他位置，则沿用项目规则或请求决定。
 
 里程碑关闭时重新核对本表；若没有文档影响，在内部记录理由，不制造无意义改动。

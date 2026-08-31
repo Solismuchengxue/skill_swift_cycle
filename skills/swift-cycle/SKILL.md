@@ -67,6 +67,8 @@ Swift Cycle 只负责一个项目内部的工程循环。它不负责上层协�
 
 一个事实只保留一个共享权威；其他位置使用链接或短摘要。模板只是条件式结构，必须按现场删减，禁止机械创建完整文档集。
 
+需要创建或重整 TODO、DEVLOG 或 DESIGN 时，读取 [document-profiles.md](references/document-profiles.md) 并按需裁剪对应模板，不复制参考项目事实或建立第二权威。
+
 当文档数量、受众差异或平铺结构已经影响可发现性，读取 [document-information-architecture.md](references/document-information-architecture.md)。小项目由 DESIGN 提供必要索引；只有完整 docs 导航确有价值时才增加 `docs/README.md`，并把移动与链接修复纳入一个有界 documentation-hygiene 工作包。
 
 ## 自动同步与收敛

@@ -87,7 +87,7 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 - Detailed phase routing is internal. Adoption, ordinary progress, material structural change, and milestone closeout select the smallest useful route without user-facing modes or subcommands.
 - Document profiles are progressive. `minimal` remains the default, while `standard` and `runtime_integration` activate only for durable facts and delivery layers that exist. `profile_conformance` makes reuse, creation, omission, authority, reason, and update triggers reviewable without creating a fixed schema file.
 - Document information architecture is evidence-triggered rather than count-driven. DESIGN, a conditional docs home, and any subdirectory indexes contain links and short summaries; the durable fact remains in one shared authority. Document moves and link repairs form a bounded documentation-hygiene package, while tracked deletion or a change of authority still requires its own authorization.
-- Optional templates encode one-H1 structure, stable H2 sections, native Mermaid, concise tables, unresolved items, update triggers, and revision records. They do not impose a prose language or mandatory directory tree.
+- Optional templates encode one-H1 structure, stable H2 sections, native Mermaid, concise tables, unresolved items, update triggers, and revision records. TODO is a bounded current-work surface, DEVLOG is dated and evidence-oriented, and DESIGN keeps conclusion, relationship diagram, and boundary in that order. They do not impose a prose language or mandatory directory tree.
 - Knowledge promotion keeps short-lived capture local and moves durable commitments, decisions, constraints, and reusable evidence into responsibility-appropriate shared assets. After promotion, the shared asset is authoritative and the local record retains only a concise pointer.
 - State separation identifies labels that combine independent lifecycle questions and splits only the concerns a project actually tracks. It defines no mandatory fields or status schema, and any overall status remains a derived summary.
 - Governance baselines activate only for non-trivial work that crosses authority
@@ -105,6 +105,8 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 - Local `TODO.md` is the current execution view, not the durable source for
   cross-machine plans. Durable plans belong in a committable feasibility
   report, roadmap, or shared issue tracker.
+- Local `DEVLOG.md` keeps dated maintenance evidence and reusable failure guards;
+  it is not a command transcript or a second authority for shared facts.
 - A normal TODO checklist remains the default. The Agent activates milestone
   structure only when the task actually has multiple stages or commits; the
   user does not choose a mode.
@@ -146,6 +148,7 @@ Profiles are internal starting configurations, not user-visible modes. Each adop
 
 | Date | Change |
 | --- | --- |
+| 2026-08-31 | Added portable TODO, DEVLOG, and DESIGN template contracts derived from an approved project practice, with bounded current-work history, evidence-oriented maintenance entries, and explicit local-record boundaries. |
 | 2026-08-31 | Added conditional document information architecture: concise DESIGN entry, optional docs home, responsibility-based grouping, Diátaxis index metadata, and bounded documentation-hygiene work. |
 | 2026-08-31 | Switched to a concise Simplified Chinese canonical entry, one-time explicit adoption with persistent project binding, background routing, automatic milestone documentation closeout, and profile conformance. |
 | 2026-08-30 | Added project-internal scenario routing, progressive document profiles, language resolution, freshness and packet lifecycle, proportional verification, and reusable learning boundaries. |

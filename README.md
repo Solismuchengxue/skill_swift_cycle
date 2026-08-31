@@ -115,8 +115,8 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 | `README.md` | User-facing value, installation, usage, and current limitations. |
 | `DESIGN.md` + `docs/` | Durable design, requirements, roadmaps, evaluations, runbooks, and ADRs. |
 | `AGENTS.md` | Repository-specific collaboration, safety, synchronization, and verification rules. |
-| Local `TODO.md` | Current actions and blockers; only larger work adds an active milestone and PR queue. |
-| Local `DEVLOG.md` | Failures, rejected approaches, maintenance evidence, and evolution history. |
+| Local `TODO.md` | The current work surface; only larger work adds an active milestone, and older completion history moves out after the bounded recent window. |
+| Local `DEVLOG.md` | Dated, evidence-oriented failures, corrections, reusable guards, decisions, and next gates—not a command transcript or second source of truth. |
 
 The local TODO is an execution view, not the only long-term plan. Cross-machine commitments stay in a committable feasibility report, `docs/roadmap.md`, or a shared issue tracker.
 
@@ -126,7 +126,7 @@ After one explicit adoption, Swift Cycle detects the current phase and selects a
 - **`standard`:** adds architecture, roadmap, evaluation, or ADR authorities only when corresponding durable facts exist.
 - **`runtime_integration`:** activates when the current task must establish, change, or verify multiple operations, contract, security, storage, integration, or identity layers.
 
-Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/` and are adapted to the resolved file language.
+Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/`, are adapted to the resolved file language, and now include portable TODO, DEVLOG, and DESIGN starting points.
 
 When document volume, audience differences, or a flat layout harm discoverability, Swift Cycle keeps `DESIGN.md` as the concise architecture entry and conditionally adds `docs/README.md` as the broader docs home. Responsibility-based directories are created only for groups that need them; Diátaxis categories stay index metadata for purpose and audience rather than becoming a parallel directory tree.
 
