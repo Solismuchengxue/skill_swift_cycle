@@ -52,7 +52,8 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | **Project intent baseline** | Creates a tracked `docs/blueprint.md` before substantive implementation in new projects, or maps a complete brownfield equivalent without creating a second authority. |
 | **Document profiles** | Selects the smallest `minimal`, `standard`, or `runtime_integration` profile and records responsibility conformance without forcing a fixed document tree. |
 | **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
-| **Language adaptation** | Resolves conversation and file language separately, preserving existing file language and bilingual boundaries. |
+| **Language adaptation** | Uses the caller, project, and file language for ordinary prose while preserving exact technical identifiers, standard statuses, and brand names. |
+| **Semantic visualization** | Visualizes only when it clarifies the reader's real question, selects the diagram from project facts, and reviews meaning, language, readability, permissions, and boundaries. |
 | **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
 | **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
 | **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, without imposing a fixed schema. |

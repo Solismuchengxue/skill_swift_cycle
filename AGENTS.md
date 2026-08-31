@@ -45,7 +45,7 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Check the canonical Skill remains below 500 lines and each added template has one level-one heading.
 - Check the Blueprint template has the stable required H2 sequence and assert the new-project docs path, brownfield equivalent reuse, tracked-asset boundary, and separation from README, DESIGN, TODO, DEVLOG, roadmap, Packets, runtime state, and Registry.
 - Check new docs Markdown files and multiword directories use lowercase snake_case, the Blueprint default is `docs/blueprint.md`, and legacy renames require an approved documentation-hygiene package.
-- Check scenario/profile coverage, language precedence, document-freshness triggers, Packet lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
+- Check scenario/profile coverage, ordinary-content language precedence, exact technical-identifier preservation, semantic visualization choice and review, document-freshness triggers, Packet lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
 - Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
 - Report checks that were not run and do not claim unsupported compatibility.
 
