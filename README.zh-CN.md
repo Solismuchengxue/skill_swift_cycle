@@ -74,9 +74,9 @@ GitHub CLI 2.90 或更高版本可以把同一份 Skill 安装给多个 Agent。
 gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user
 ```
 
-使用 `$swift-cycle` 调用。
+在 ChatGPT 桌面端，输入 `@` 并选择 **Swift Cycle / 快速螺旋**；在 Codex CLI 或 IDE 扩展中，使用 `$swift-cycle` 调用。
 
-首次初始化或接管项目时调用一次。采用后，Swift Cycle 会在项目 `AGENTS.md` 写入持久绑定；后续项目任务通过该仓库合同加载 Skill，不要求用户重复选择模式或重复输入 `$swift-cycle`。
+首次初始化或接管项目时调用一次。采用后，Swift Cycle 会在项目 `AGENTS.md` 写入持久绑定；后续项目任务通过该仓库合同加载 Skill，不要求用户重复选择模式或重复显式选择/输入 Skill。
 
 ### Claude Code
 
@@ -162,7 +162,7 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 
 ## 交付循环示例
 
-只需采用一次：
+Codex CLI / IDE 示例：
 
 ```text
 $swift-cycle 接管当前仓库，并在 AGENTS.md 中绑定持续的轻量维护。

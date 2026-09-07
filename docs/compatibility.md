@@ -24,7 +24,7 @@ GitHub CLI supports additional agent hosts. Run `gh skill install --help` to ins
 
 Invocation syntax is surface-specific. The installation commands install from the same canonical source package for each host; they do not imply byte-identical installed artifacts or one command syntax across every UI.
 
-The `gh skill install` command form, agent values, and `--scope user` flag above are documented by the first-party manual and matched local GitHub CLI 2.96.0 help output on 2026-09-02. A real remote install was not authorized or run, so remote-install verification remains **NOT_VERIFIED**; `gh auth status --active --hostname github.com` separately reported the active token invalid.
+The `gh skill install` command form, agent values, and `--scope user` flag above are documented by the first-party manual and matched local GitHub CLI 2.96.0 help output on 2026-09-07. A real remote install was not authorized or run, so remote-install verification remains **NOT_VERIFIED**. Local authentication state is environment-specific and is not compatibility evidence.
 
 ## Invocation policy
 

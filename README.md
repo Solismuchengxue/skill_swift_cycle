@@ -74,9 +74,9 @@ GitHub CLI 2.90 or later can install the same Skill for multiple agent hosts.
 gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user
 ```
 
-Invoke with `$swift-cycle`.
+In ChatGPT desktop, type `@` and select **Swift Cycle / 快速螺旋**. In Codex CLI or the IDE extension, invoke it with `$swift-cycle`.
 
-Invoke it once to adopt or take over a project. After adoption, Swift Cycle records a persistent binding in the project's `AGENTS.md`; later project tasks load the Skill through that repository contract and do not require repeated mode selection or repeated `$swift-cycle` input.
+Invoke it once to adopt or take over a project. After adoption, Swift Cycle records a persistent binding in the project's `AGENTS.md`; later project tasks load the Skill through that repository contract and do not require repeated mode selection or repeated explicit Skill selection/input.
 
 ### Claude Code
 
@@ -162,7 +162,7 @@ Small, local changes stay lightweight. Swift Cycle does not require an RFC, ADR,
 
 ## Example delivery loops
 
-Adopt once:
+Codex CLI / IDE example:
 
 ```text
 $swift-cycle Adopt this repository and bind lightweight ongoing maintenance in AGENTS.md.
