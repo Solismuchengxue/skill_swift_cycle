@@ -56,7 +56,7 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | **Semantic visualization** | Visualizes only when it clarifies the reader's real question, selects the diagram from project facts, and reviews meaning, language, readability, permissions, and boundaries. |
 | **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
 | **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
-| **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, without imposing a fixed schema. |
+| **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, checks local-record existence and Git-ignore state before treating them as private, and does not impose a fixed schema. |
 | **Commit Boundary Planning** | Defines coherent, independently reviewable commit scopes before staging mixed, ordered, or multi-commit changes. |
 | **Source/Runtime Boundary** | Keeps source, artifact, runtime, and consumer claims independently evidenced and authorized. |
 | **Freshness and learning** | Detects stale status, freezes review snapshots, retires obsolete documents safely, and promotes confirmed failure guards. |
@@ -143,7 +143,7 @@ Swift Cycle activates governance only when repository evidence requires it:
 
 - **Governance Baseline:** record the observed state before non-trivial governance, migration, replacement, or cross-boundary work; keep it separate from the intended outcome.
 - **Knowledge Promotion:** promote durable commitments, decisions, constraints, and verified evidence into shared assets; keep short-term actions and one-off failures local.
-- **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence.
+- **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence; check local records for existence and Git-ignore status before treating them as private.
 - **Commit Boundary Planning:** plan coherent commit scopes before staging when changes have mixed purposes, ordered dependencies, or multiple reviewable increments.
 - **Source/Runtime Boundary:** verify source, artifact, runtime, and active-consumer claims at their own layers; evidence and authorization do not transfer between them.
 - **Documentation freshness:** reconcile status, decisions, plans, identities, and frozen Review Packets when real milestones or boundaries change.
