@@ -28,6 +28,12 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Keep Review Packets frozen and date- or milestone-bound; they must not become mutable current-truth documents.
 - Do not add unsupported host claims; verify current behavior against first-party documentation.
 
+## Project governance
+
+- Keep one project owner (`L1`) for this project; the former fixed reviewer is retired.
+- Establish an independent reviewer only when the user, the department lead, or current project rules explicitly require one.
+- This role adjustment does not grant Git push, publishing, deployment, runtime, credential, cost, or deletion authority.
+
 ## Language synchronization
 
 - `README.md` is the English user entry point.
@@ -43,7 +49,8 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Run `gh skill publish --dry-run` before publishing.
 - Check Markdown links and `git diff --check`.
 - Check the canonical Skill remains below 500 lines and each added template has one level-one heading.
-- Check the Blueprint template has the stable required H2 sequence and assert the new-project docs path, brownfield equivalent reuse, tracked-asset boundary, and separation from README, DESIGN, TODO, DEVLOG, roadmap, Packets, runtime state, and Registry.
+- Check all ten core templates against the approved H2 sequences in `docs/engineering_standard.md`; professional outlines remain candidates. Assert vision/confirmed-requirements separation, the new-project Blueprint path, brownfield reuse, tracked-asset boundary, and separation from current plans, runtime state, Packets, and Registry.
+- Check requirements-change routing, one numbered formal milestone plan, TODO scope, per-package convergence, and Figma editable-source/export/layout conditions with proportional scenario tests; distinguish static assertions, simulations, helper execution, and real adoption.
 - Check new docs Markdown files and multiword directories use lowercase snake_case, the Blueprint default is `docs/blueprint.md`, and legacy renames require an approved documentation-hygiene package.
 - Check scenario/profile coverage, ordinary-content language precedence, exact technical-identifier preservation, semantic visualization choice and review, document-freshness triggers, Packet lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
 - Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
@@ -51,7 +58,7 @@ These instructions apply to the `skill_swift_cycle` repository.
 
 ## Source and deployment boundaries
 
-- Treat `F:\70_Infrastructure_and_Operations\02_Skills\skill_swift_cycle` as the canonical
+- Treat `F:\60_Infrastructure_and_Operations\02_Skills\skill_swift_cycle` as the canonical
   source checkout. The previous source-path migration is complete, and retired
   migration-control paths are not current authority for this repository.
 - Treat host-installed Skill copies and `gh skill` source metadata as external

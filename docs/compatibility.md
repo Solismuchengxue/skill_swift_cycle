@@ -48,3 +48,24 @@ If `gh skill` is unavailable, copy the complete `skills/swift-cycle/` directory 
 - [Add agent skills for GitHub Copilot](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)
 - [GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
 - [GitHub CLI `gh skill install` manual](https://cli.github.com/manual/gh_skill_install)
+
+## Local source and optional helper checks (2026-10-13)
+
+The approved [r29 source standard](engineering_standard.md) is implemented and passed D60 local-source acceptance. Publication and installation are tracked separately below. Architecture diagrams conditionally require Figma editable sources and PNG/SVG exports; package validation does not verify Figma access, drawing quality or actual project adoption. No new host support is inferred.
+
+Installed Superpowers **6.4.2** was inspected without editing it. An ignored local fixture used Git Bash on Windows to exercise the real task-brief, task-start, sdd-workspace and task-done helpers:
+
+- Four helpers passed Bash syntax checks; this is not Linux target compatibility.
+- Task 1 and Task 10 were extracted independently; headings inside a code fence did not change task boundaries.
+- A W-only table and a missing task returned exit 3 (negative controls).
+- The first brief omitted global constraints; the final brief retained subsequent overall verification/risk/status sections. Execution must read the formal plan and its source requirements, not the brief alone.
+- task-start reported the unchanged HEAD as BASE. A failing check (exit 7) did not record completion; a successful extraction check appended the fixture task result in the ignored workspace. This proves helper handoff only, not a business task or milestone result.
+- Git Bash was blocked by sandbox MSYS initialization, then ran through the approved host channel. A test-harness POSIX-to-Windows path error was corrected; the third-party plugin was not changed.
+
+The sole formal plan remains the numbered milestone plan. `Task N` technical headings can coexist with Chinese H2 sections, but an ordinary W table is not directly compatible with this parser. See [integration conditions](../skills/swift-cycle/references/superpowers-bridge.md).
+
+**NOT_VERIFIED:** full writing-plans/SDD/native execution workflows, worktree and review lifecycle, commit-based completion, resumability across sessions, Figma drawing/export, real cross-project adoption and target-host use. Those optional helper checks did not publish or install the Skill.
+
+## Fixed-version delivery
+
+The separately authorized r29 delivery targets `v1.4.0`. Release, installation identity, discovery and rollback verification are pending at this source-commit boundary; successful source checks alone do not establish those results. Existing `v1.3.2` tags and installation remain preserved until the replacement has a verified rollback copy.

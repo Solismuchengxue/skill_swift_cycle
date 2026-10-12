@@ -49,20 +49,20 @@ flowchart LR
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
 | **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
 | **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
-| **项目意图基线** | 新项目在实质实施前创建受跟踪的 `docs/blueprint.md`；旧项目则映射完整等价权威，不制造第二真源。 |
-| **文档档位** | 自动选择最小的 `minimal`、`standard` 或 `runtime_integration`，并记录职责一致性，不强制固定文档树。 |
+| **愿景与确认需求** | 蓝图说明长期愿景，需求说明承载有效行为与验收；按所选确认需求设计和安排，不把全部设想变成承诺。 |
+| **按需文档** | 先复用现有权威，再选择最小职责；十份固定核心模板不意味着生成整套文档或裁剪账本。 |
 | **文档信息架构** | 保持 DESIGN 简洁，只在可发现性确有需要时增加 docs home，并按真实职责而非固定树组织长期文档。 |
 | **语言自动适配** | 普通内容服从调用者、项目和文件语言，同时保持技术标识、标准状态和品牌名的准确原文。 |
-| **语义化可视表达** | 只在有助于回答真实读者问题时可视化，依据项目事实选择图型，并审查语义、语言、可读性、权限与边界。 |
+| **语义化图示** | 架构图使用 Figma 可编辑原稿及 PNG/SVG，其他图按关系语义选型；布局由项目决定，不强制容器层级。 |
 | **治理基线（Governance Baseline）** | 非简单治理需要跨权威或交付边界可靠比较时，记录与任务规模相称的变更前状态。 |
 | **知识晋升（Knowledge Promotion）** | 把长期承诺、决策、约束和可复用证据从本地记录晋升到职责匹配的共享资产。 |
 | **状态拆分（State Separation）** | 只拆分项目实际跟踪的独立生命周期问题，在把本地记录视为私有状态前核对存在与忽略状态，不引入固定状态 Schema。 |
 | **提交边界规划（Commit Boundary Planning）** | 在暂存混合目的、有顺序依赖或多提交修改前，定义一致且可独立审查的提交范围。 |
 | **源码/运行态边界（Source/Runtime Boundary）** | 让源码、制品、运行态和消费者结论分别拥有自己的证据与授权。 |
 | **新鲜度与学习闭环** | 识别过期状态，冻结审查快照，安全退役旧文档，并晋升已确认的失败防线。 |
-| **自适应执行** | 简单任务保留普通 TODO；只有工作真正需要时，才启用里程碑与按依赖排序的 PR 队列。 |
+| **自适应执行** | 小任务使用 TODO，复杂阶段才用编号计划；新确认需求按影响前瞻调整，不无故推翻已完成阶段。 |
 | **证据驱动交付** | 让每个增量都可审查、可验证、可回退，再根据最新证据继续或修正。 |
-| **可移植编排** | 以一份符合标准的 Skill 配合本地化指引和宿主元数据，不依赖脚本、MCP Server 或外部服务。 |
+| **可移植包** | 一份共享 Skill 不新增运行脚本或依赖；需要架构图时使用 Figma，Superpowers 只按已核对条件衔接。 |
 
 ## 快速开始
 
@@ -96,6 +96,8 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-co
 
 如果只希望当前项目使用，把 `--scope user` 改为 `--scope project`。不同平台的行为和手动安装路径见[兼容性说明](docs/compatibility.md)。
 
+固定版本的 Codex 安装在上述命令后加 `--pin v1.4.0`。更新已有安装前，先把这一份技能目录备份到发现入口之外，再使用同一命令加 `--force`；回退只恢复该目录，或重新安装旧固定标签。安装元数据不得写入源码仓库。
+
 ## 项目体现的工程能力
 
 Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如何把紧凑的 AI 能力塑形、产品化、划定边界，并用真实验证支持交付。
@@ -112,30 +114,21 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 ### 共享事实与本地执行
 
-| 层级 | 职责 |
+| 权威 | 职责 |
 | --- | --- |
-| `docs/blueprint.md` 或映射的等价权威 | 共享、受跟踪的项目意图：为什么做、为谁做、可观察结果、范围、约束、边界和下一项关键决定。 |
-| `README.md` | 面向用户的价值、安装、用法与当前限制。 |
-| `DESIGN.md` + `docs/` | 可长期共享的设计、需求、路线图、评估、运行手册与 ADR。 |
-| `AGENTS.md` | 仓库级协作、安全、同步与验证规则。 |
-| 本地 `TODO.md` | 当前工作面；只有较大工作才加入当前里程碑，较早完成历史会在有界近期窗口后迁出。 |
-| 本地 `DEVLOG.md` | 按日期、按证据记录失败、修正、可复用防线、决定和下一门槛；不是命令转录或第二事实源。 |
+| `docs/blueprint.md` 或完整等价来源 | 长期愿景、用户、场景与产品边界，不承诺实现全部设想。 |
+| `docs/requirements.md` 或等价来源 | 已确认有效行为、约束与验收；已实现且仍有效的需求继续保留。 |
+| `README.md` / `AGENTS.md` | 用户上手与求助 / 项目执行和授权规则。 |
+| `DESIGN.md` 与按需的 `docs/architecture.md` | 总体办法及详细文档导读 / 简洁设计不足以承载时才独立架构。 |
+| 按需的 `docs/roadmap.md` | 需要独立维护的阶段结果、依赖和退出判断。 |
+| `docs/milestones/milestone_N_plan.md` | 一个复杂里程碑的一份现行正式实施计划及有限工作包。 |
+| 本地 `TODO.md` / `DEVLOG.md` | 当前行动与下一步 / 有效维护结论与理由，不复制完成历史。 |
 
-本地 TODO 是当前执行视图，不是唯一长期计划。跨机器承诺继续放在可提交的可行性报告、`docs/roadmap.md` 或共享 Issue Tracker 中。
+一事一处，其他位置摘要并链接。跨会话或跨机器本身不要求路线图。TODO 指向当前包，不复制整份计划。
 
-一次显式采用后，Swift Cycle 在后台识别当前阶段并选择文档档位：
+文档档位（`minimal`、`standard`、`runtime_integration`）只是内部起点，不要求文档树或裁剪表。[文档职责](skills/swift-cycle/references/document-profiles.md) 中的十份核心模板保留已确认中文栏目顺序；新建或获准整体重整时使用，小改动保留有效等价结构和文件语言。专业提纲仍是按需候选。
 
-- **`minimal`：**覆盖项目意图基线，并沿用核心入口、本地执行记录和确有需要的共享文档。
-- **`standard`：**只在存在对应长期事实时增加 architecture、roadmap、evaluation 或 ADR。
-- **`runtime_integration`：**只有当前任务需要建立、改变或验证多个运维、合同、安全、存储、集成或身份层时才启用。
-
-配置是起点，不是强制目录树。`templates/` 中的可选模板会按解析后的文件语言生成，并提供可移植的 Blueprint、TODO、DEVLOG 与 DESIGN 起点。Blueprint 保持唯一意图权威；README、DESIGN 和 docs 索引只放短摘要与链接。
-
-当文档数量、受众差异或平铺结构影响可发现性时，Swift Cycle 让 `DESIGN.md` 继续承担简洁架构入口，并按需增加 `docs/README.md` 作为完整 docs home。只有真正需要分组的职责才建立子目录；Diátaxis 分类只作为用途与受众索引元数据，不复制成第二套目录树。
-
-`docs/` 下新建 Markdown 文件和多单词目录统一使用小写 `snake_case`；根目录约定入口和 docs 索引 `README.md` 保留生态例外。旧项目命名偏差先记录，只有获准的 documentation-hygiene 工作包才迁移，绝不复制第二权威。完整命名规则以[文档信息架构](skills/swift-cycle/references/document-information-architecture.md)为准。
-
-在采用、重大结构变化和里程碑关闭时，内部工作包维护 `profile_conformance`：每项职责映射为“复用现有 / 新建 / 不适用”，并记录唯一权威、理由和更新触发。除非它直接解释风险或 blocker，否则不向用户展开。
+新普通 docs 路径用小写 `snake_case`，生态入口和索引保留例外。已有稳定路径不自动改名，迁移须在获准整理范围内进行；查找困难时才加 docs 首页。详见[文档组织](skills/swift-cycle/references/document-information-architecture.md)。
 
 ### 治理边界
 
@@ -152,13 +145,13 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 
 ### 与任务规模相称的交付方式
 
-- **简单任务：**Agent 使用普通 TODO 清单与短验证循环。
-- **多 PR 或里程碑任务：**只有仓库证据确实需要时，Agent 才启用当前里程碑与按依赖排序的 PR 队列。
-- **每个 PR 大小的增量：**记录 ID、里程碑、交付物、范围、依赖、验证、状态与 PR 链接，并确保它可独立审查、验证和回退。
+小改动保持简单。复杂阶段按依赖分包，每包包含实现、必要验证和受影响说明同步。每包都收敛，不等项目末尾；TODO 不设固定历史条数，旧完成项不整批搬入 DEVLOG。
 
-里程碑关闭时，Agent 自动收敛受影响的 README、DESIGN、docs、TODO、DEVLOG 和活动 Packet；没有文档影响时记录理由，不再要求用户选择 closeout 模式。
+新需求先明确问题、验收和影响，再决定加入、替换或后移。先更新确认需求，再同步相关设计、阶段安排和行动。已完成阶段之后的新需求安排后续工作，不无故把原阶段改成未完成。
 
-简单、局部的修改继续保持轻量。Swift Cycle 不要求每次编辑都创建 RFC、ADR、设计文档或 PR 队列。
+里程碑须满足总体结果与必要人工确认，不以任务全勾选代替。发布、安装、部署及真实采用仍是不同授权与证据层。
+
+源码按已批准的 [r29 工程规约](docs/engineering_standard.md) 实现，D60 部长已验收本地源码；发布和安装在[交付状态](docs/compatibility.md#fixed-version-delivery)分别核对。[Superpowers 衔接条件](skills/swift-cycle/references/superpowers-bridge.md) 仅说明已核对的最小接口；完整执行、Figma 实际绘制导出与真实项目采用仍未验证。
 
 ## 交付循环示例
 
@@ -178,7 +171,7 @@ $swift-cycle 接管当前仓库，并在 AGENTS.md 中绑定持续的轻量维�
 - Codex、Claude Code 与 GitHub Copilot 使用同一份规范包；宿主差异见[兼容性说明](docs/compatibility.md)。
 - canonical Skill 正文和默认提示使用简体中文。仓库继续维护双语产品入口，以及 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md) 中的精简术语；目标项目文件仍沿用其既有语言。
 - 该包遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
-- 不需要脚本、运行时依赖、MCP Server 或外部服务。
+- 核心包不新增脚本或运行时依赖。Figma 是架构图指定工具，按需衔接依赖实际可用工具及相应权限。
 
 ## 仓库结构
 
@@ -193,12 +186,16 @@ skill_swift_cycle/
 │  │  ├─ document-profiles.md
 │  │  ├─ governance-boundaries.md
 │  │  ├─ lifecycle-and-closeout.md
+│  │  ├─ superpowers-bridge.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # 按需使用的文档配置起点
+│     ├─ README.md / AGENTS.md
 │     ├─ BLUEPRINT.md            # 应用为 docs/blueprint.md
+│     ├─ docs/                   # 需求、架构、路线图、编号计划和可选说明
 │     ├─ DESIGN.md
 │     ├─ DEVLOG.md
 │     └─ TODO.md
+├─ docs/engineering_standard.md # 已批准源码规格，不随 Skill 安装
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md

@@ -49,20 +49,20 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
 | **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
 | **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
-| **Project intent baseline** | Creates a tracked `docs/blueprint.md` before substantive implementation in new projects, or maps a complete brownfield equivalent without creating a second authority. |
-| **Document profiles** | Selects the smallest `minimal`, `standard`, or `runtime_integration` profile and records responsibility conformance without forcing a fixed document tree. |
+| **Vision and confirmed requirements** | Separates long-term Blueprint intent from effective requirements and acceptance criteria; designs and schedules selected confirmed needs, not every idea. |
+| **Conditional documents** | Reuses existing authorities and selects the smallest useful profile; ten fixed core templates do not become a mandatory document tree or conformance ledger. |
 | **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
 | **Language adaptation** | Uses the caller, project, and file language for ordinary prose while preserving exact technical identifiers, standard statuses, and brand names. |
-| **Semantic visualization** | Visualizes only when it clarifies the reader's real question, selects the diagram from project facts, and reviews meaning, language, readability, permissions, and boundaries. |
+| **Semantic visualization** | Uses Figma editable sources plus PNG/SVG exports for architecture diagrams; other diagram types follow their semantics. Layout is project-driven, not a fixed container hierarchy. |
 | **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
 | **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
 | **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, checks local-record existence and Git-ignore state before treating them as private, and does not impose a fixed schema. |
 | **Commit Boundary Planning** | Defines coherent, independently reviewable commit scopes before staging mixed, ordered, or multi-commit changes. |
 | **Source/Runtime Boundary** | Keeps source, artifact, runtime, and consumer claims independently evidenced and authorized. |
 | **Freshness and learning** | Detects stale status, freezes review snapshots, retires obsolete documents safely, and promotes confirmed failure guards. |
-| **Adaptive execution** | Keeps simple work as a normal TODO; activates a milestone and dependency-ordered PR queue only when the work needs it. |
+| **Adaptive execution** | Keeps small work in TODO, uses numbered milestone plans only when needed, and handles confirmed new requirements by adjusting future work. |
 | **Evidence-backed delivery** | Keeps each increment reviewable, verifiable, and reversible, then continues or corrects based on fresh evidence. |
-| **Portable orchestration** | Ships one standards-aligned Skill with localized guidance and host-specific metadata—without scripts, MCP servers, or external services. |
+| **Portable package** | Ships one shared Skill without runtime scripts or dependencies; Figma is required when an architecture diagram is needed. Superpowers integration is conditional. |
 
 ## Quick Start
 
@@ -96,6 +96,8 @@ Invoke with `/swift-cycle`.
 
 For project-only installation, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
 
+For a reproducible Codex installation, use `--pin v1.4.0`. Before replacing an existing installation, preserve that Skill directory outside discovered Skill roots; then use the same command with `--force`. Restore only that directory to roll back, or reinstall the previous fixed tag. Installation metadata must never be written into the source checkout.
+
 ## What this project demonstrates
 
 Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI capability can be shaped, packaged, bounded, and verified for real delivery work.
@@ -112,30 +114,21 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 
 ### Shared truth and local execution
 
-| Layer | Responsibility |
+| Authority | Responsibility |
 | --- | --- |
-| `docs/blueprint.md` or mapped equivalent | Shared, tracked project intent: why, for whom, observable outcomes, scope, constraints, boundaries, and the next material decision. |
-| `README.md` | User-facing value, installation, usage, and current limitations. |
-| `DESIGN.md` + `docs/` | Durable design, requirements, roadmaps, evaluations, runbooks, and ADRs. |
-| `AGENTS.md` | Repository-specific collaboration, safety, synchronization, and verification rules. |
-| Local `TODO.md` | The current work surface; only larger work adds an active milestone, and older completion history moves out after the bounded recent window. |
-| Local `DEVLOG.md` | Dated, evidence-oriented failures, corrections, reusable guards, decisions, and next gates—not a command transcript or second source of truth. |
+| `docs/blueprint.md` or complete equivalent | Long-term vision, users, scenarios and product boundaries; not a promise to implement every idea. |
+| `docs/requirements.md` or equivalent | Confirmed effective behavior, constraints and acceptance; implemented requirements remain effective. |
+| `README.md` / `AGENTS.md` | User onboarding and help / project execution and authorization rules. |
+| `DESIGN.md` and conditional `docs/architecture.md` | Overall solution and explanatory document guide / detailed architecture only when necessary. |
+| Conditional `docs/roadmap.md` | Stage outcomes, dependencies and exit judgments that need independent maintenance. |
+| `docs/milestones/milestone_N_plan.md` | One current formal implementation plan per complex milestone, with finite work packages. |
+| Local `TODO.md` / `DEVLOG.md` | Current actions and next step / useful maintenance conclusions and reasons, not a copied completion history. |
 
-The local TODO is an execution view, not the only long-term plan. Cross-machine commitments stay in a committable feasibility report, `docs/roadmap.md`, or a shared issue tracker.
+Use one maintained body per fact; summaries link to it. Cross-session or cross-machine work alone does not justify a roadmap. TODO points to the active package rather than duplicating the plan.
 
-After one explicit adoption, Swift Cycle detects the current phase and selects a document profile in the background:
+Profiles (`minimal`, `standard`, `runtime_integration`) are internal starting points, not required trees or conformance tables. The ten core templates in [document responsibilities](skills/swift-cycle/references/document-profiles.md) preserve the approved Chinese heading order for new or approved whole-document restructuring, while ordinary edits preserve effective existing structure and prose language. Professional outlines remain optional candidates.
 
-- **`minimal`:** a project-intent baseline, existing core entry points, local execution records, and only necessary shared docs.
-- **`standard`:** adds architecture, roadmap, evaluation, or ADR authorities only when corresponding durable facts exist.
-- **`runtime_integration`:** activates when the current task must establish, change, or verify multiple operations, contract, security, storage, integration, or identity layers.
-
-Profiles are starting configurations, not mandatory trees. Optional templates live under `templates/`, are adapted to the resolved file language, and include portable Blueprint, TODO, DEVLOG, and DESIGN starting points. Blueprint remains the sole intent authority; README, DESIGN, and docs indexes carry only short summaries and links.
-
-When document volume, audience differences, or a flat layout harm discoverability, Swift Cycle keeps `DESIGN.md` as the concise architecture entry and conditionally adds `docs/README.md` as the broader docs home. Responsibility-based directories are created only for groups that need them; Diátaxis categories stay index metadata for purpose and audience rather than becoming a parallel directory tree.
-
-New Markdown files and multiword directories under `docs/` use lowercase `snake_case`; root entry-point names and docs index `README.md` files retain their established exceptions. Brownfield naming drift is recorded and migrated only through an approved documentation-hygiene work package, never by copying a second authority. The canonical naming rules live in [document information architecture](skills/swift-cycle/references/document-information-architecture.md).
-
-For adoption, material structural changes, and milestone closeout, the internal work package records `profile_conformance`: each responsibility is mapped to reuse existing, create, or not applicable, together with its single authority, reason, and update trigger. This record stays backstage unless it explains a risk or blocker.
+New ordinary docs paths use lowercase `snake_case`, with standard entry and index exceptions. Keep stable brownfield paths; rename only within an approved hygiene scope. Add a docs home only when discovery requires it. See [document organization](skills/swift-cycle/references/document-information-architecture.md).
 
 ### Governance boundaries
 
@@ -152,13 +145,13 @@ These capabilities are trigger-based. Simple, local, explicit changes continue t
 
 ### Proportional delivery
 
-- **Simple task:** the Agent keeps a normal TODO checklist and the short verification loop.
-- **Multi-PR or milestone task:** the Agent activates a current milestone and dependency-ordered PR queue only when repository evidence requires it.
-- **Every PR-sized increment:** record its ID, milestone, deliverable, scope, dependencies, verification, status, and PR link; keep it independently reviewable, verifiable, and reversible.
+Small edits stay small. More complex stages use dependency-ordered packages, each containing implementation, necessary verification and affected documentation updates. Synchronize and converge after every package, not only at the end of the project. There are no fixed TODO history counts and no bulk transfer into DEVLOG.
 
-At milestone closeout, the Agent reconciles affected README, DESIGN, docs, TODO, DEVLOG, and active packets—or records why there is no documentation impact—without asking the user to choose a closeout mode.
+New requirements are clarified and checked for impact before they enter current work. Update confirmed requirements first, then affected design, stage arrangements and actions. A new requirement after a completed stage belongs to future work; it does not automatically invalidate that stage's original completion.
 
-Small, local changes stay lightweight. Swift Cycle does not require an RFC, ADR, design document, or PR queue for every edit.
+A milestone must satisfy its overall outcome and necessary human confirmation, not merely checked tasks. Publishing, installation, deployment and real adoption remain separate permissions and evidence layers.
+
+The source implements the approved [r29 engineering standard](docs/engineering_standard.md) and has passed D60 department-lead local-source acceptance. Publication and installation are separately verified in [delivery status](docs/compatibility.md#fixed-version-delivery). [Superpowers handoff conditions](skills/swift-cycle/references/superpowers-bridge.md) document the narrow optional integration; full execution, actual Figma drawing/export and real project adoption remain unverified.
 
 ## Example delivery loops
 
@@ -178,7 +171,7 @@ Use the invocation syntax supported by your agent host.
 - Codex, Claude Code, and GitHub Copilot use the same canonical package with host-specific behavior documented in [agent compatibility](docs/compatibility.md).
 - The canonical Skill body and default prompt are Simplified Chinese. The repository keeps bilingual product entry points and a concise terminology reference in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md); target project files still preserve their established language.
 - The package follows the open [Agent Skills specification](https://agentskills.io/specification).
-- No scripts, runtime dependencies, MCP servers, or external services are required.
+- The core package adds no scripts or runtime dependencies. Figma is the designated tool for architecture diagrams; optional integrations require their own available tools and permissions.
 
 ## Repository layout
 
@@ -193,12 +186,16 @@ skill_swift_cycle/
 │  │  ├─ document-profiles.md
 │  │  ├─ governance-boundaries.md
 │  │  ├─ lifecycle-and-closeout.md
+│  │  ├─ superpowers-bridge.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # Optional profile-aligned starting points
+│     ├─ README.md / AGENTS.md
 │     ├─ BLUEPRINT.md            # Renders to docs/blueprint.md
+│     ├─ docs/                   # requirements, architecture, roadmap, numbered plan and optional references
 │     ├─ DESIGN.md
 │     ├─ DEVLOG.md
 │     └─ TODO.md
+├─ docs/engineering_standard.md # Approved source specification; not part of the Skill
 ├─ docs/compatibility.md
 ├─ README.md
 ├─ README.zh-CN.md
