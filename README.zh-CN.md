@@ -71,7 +71,7 @@ GitHub CLI 2.90 或更高版本可以把同一份 Skill 安装给多个 Agent。
 ### Codex
 
 ```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
 ```
 
 在 ChatGPT 桌面端，输入 `@` 并选择 **Swift Cycle / 快速螺旋**；在 Codex CLI 或 IDE 扩展中，使用 `$swift-cycle` 调用。
@@ -94,9 +94,9 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-co
 
 使用 `/swift-cycle` 调用。
 
-如果只希望当前项目使用，把 `--scope user` 改为 `--scope project`。不同平台的行为和手动安装路径见[兼容性说明](docs/compatibility.md)。
+Codex 仅在当前项目安装时，把 `--dir "$env:USERPROFILE\.agents\skills"` 替换为 `--agent codex --scope project`；上述其他宿主则把 `--scope user` 改为 `--scope project`。不同平台的行为和手动安装路径见[兼容性说明](docs/compatibility.md)。
 
-固定版本的 Codex 安装在上述命令后加 `--pin v1.4.0`。更新已有安装前，先把这一份技能目录备份到发现入口之外，再使用同一命令加 `--force`；回退只恢复该目录，或重新安装旧固定标签。安装元数据不得写入源码仓库。
+上述 Codex 命令将固定 `v1.4.0` 显式安装到用户级 `.agents/skills/swift-cycle`。只保留一份独立真实目录，不保留旧 `.codex/skills/swift-cycle` 重复入口或指向源码的 Junction。更新已有安装前，先把这一份技能目录备份到发现入口之外，再使用同一命令加 `--force`；回退只恢复该目录到同一 `.agents` 目标，或保留相同 `--dir` 重新安装旧固定标签。安装元数据不得写入源码仓库。
 
 ## 项目体现的工程能力
 

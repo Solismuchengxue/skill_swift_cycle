@@ -16,7 +16,7 @@ The package follows the open [Agent Skills specification](https://agentskills.io
 
 | Host | User-scope installation | First-party documented explicit invocation | Notes |
 | --- | --- | --- | --- |
-| Codex | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user` | ChatGPT desktop: select the Skill with `@`; Codex CLI / IDE extension: `$swift-cycle` | Package-relative `agents/openai.yaml` (repository path `skills/swift-cycle/agents/openai.yaml`) disables implicit invocation. |
+| Codex | PowerShell: `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0` | ChatGPT desktop: select the Skill with `@`; Codex CLI / IDE extension: `$swift-cycle` | Explicit user destination; package-relative `agents/openai.yaml` (repository path `skills/swift-cycle/agents/openai.yaml`) disables implicit invocation. |
 | Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user` | `/swift-cycle` | Claude Code supports filesystem-based Agent Skills. |
 | GitHub Copilot | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user` | Copilot CLI: `/swift-cycle`; no shared slash syntax is claimed for other surfaces | Copilot supports Agent Skills across multiple surfaces, but `/swift-cycle` is documented only for Copilot CLI. |
 
@@ -24,7 +24,7 @@ GitHub CLI supports additional agent hosts. Run `gh skill install --help` to ins
 
 Invocation syntax is surface-specific. The installation commands install from the same canonical source package for each host; they do not imply byte-identical installed artifacts or one command syntax across every UI.
 
-The `gh skill install` command form, agent values, and `--scope user` flag above are documented by the first-party manual and matched local GitHub CLI 2.96.0 help output on 2026-09-07. The later Codex remote-install check is recorded below; Claude Code and Copilot installations remain **NOT_VERIFIED**. Local authentication state is environment-specific and is not compatibility evidence.
+The `gh skill install` command form, agent values, and `--scope user` flag were documented by the first-party manual and matched local GitHub CLI 2.96.0 help output on 2026-09-07. On 2026-10-17, local help also confirmed that `--dir` overrides `--agent` and `--scope`; the current Codex command explicitly selects the documented user `.agents/skills` root. For project-only Codex installation, replace that `--dir` argument with `--agent codex --scope project`. The later Codex remote-install check is recorded below; Claude Code and Copilot installations remain **NOT_VERIFIED**. Local authentication state is environment-specific and is not compatibility evidence.
 
 ## Invocation policy
 
@@ -39,6 +39,8 @@ The host-specific field above is not included in the canonical package because t
 ## Manual installation
 
 If `gh skill` is unavailable, copy the complete `skills/swift-cycle/` directory into the host's supported project or user Skill directory. Do not copy only `SKILL.md`; keep referenced files and metadata together.
+
+For Codex user scope, use one independent real directory at `$HOME/.agents/skills/swift-cycle`, as documented in [Build skills with Codex](https://learn.chatgpt.com/docs/build-skills). An authorized migration of an existing fixed installation copies that installed directory, including its installer metadata, rather than rebuilding it from current source. Validate the new copy before recoverably removing the exact legacy `.codex/skills/swift-cycle` entry; do not leave a duplicate or source Junction, and preserve unrelated backups.
 
 ## First-party references
 
@@ -80,3 +82,17 @@ The 2026-10-13 desktop explicit-entry and actual read-only invocation trial pass
 Desktop selection evidence is the user's confirmation, not an automated screenshot or full UI automation test. Read-only app/window enumeration had identified the target as ChatGPT, so the Computer Use automation prohibition remained respected. The agent performed no automated window capture, activation, click or input, and made no restart, reinstall or configuration repair. External links were not individually checked; cross-project adoption, full Superpowers/Figma execution, other hosts and long-term behavior remain **NOT_VERIFIED**. The completed invocation trial wrote no files; subsequent, separately scoped record maintenance updates existing status documents and must not be described as having no writes.
 
 D60 independent acceptance of the earlier bounded release, installation and rollback delivery passed on 2026-10-13, with no blocking corrections. That earlier acceptance alone did not establish desktop selection or actual invocation; the later limited trial above has its own evidence and acceptance. Neither result establishes real-project or organization-wide adoption, Figma drawing/export, full Superpowers execution, long-term use or other-host installation. Newly installed skills are available on the next turn; if the selector does not refresh, follow the [official Skill guidance](https://learn.chatgpt.com/docs/build-skills) and restart Codex when convenient.
+
+## Current Codex installation entry (2026-10-17)
+
+The existing fixed v1.4.0 installation was copied unchanged from the legacy user root into `$HOME/.agents/skills/swift-cycle`: all 26 files / 58,587 bytes matched by per-file SHA-256, including installer metadata. The package ID, display name, disabled implicit-invocation policy and absent dependency declaration were preserved. OpenAI quick_validate and YAML checks passed. This was an installation-path migration, not a functional upgrade or a new Release.
+
+Before cleanup, a temporary native Codex `0.163.0-alpha.10.2` stdio process found the new enabled path. After the exact legacy directory was sent to the Windows Recycle Bin, read-only `skills/list` with `forceReload` found exactly one enabled `swift-cycle` at the new path in each of two local project contexts, with no discovery errors. No extra discovery roots or configuration overrides were supplied; both temporary processes closed normally. Other rollback material was retained. The source repository and package were not moved or renamed, and no global configuration was changed. This does not verify a full desktop restart, selector refresh, actual task invocation at the new path, other hosts or long-term behavior.
+
+The dated 2026-10-13 commands above describe that original delivery, not the current installation destination. For a current remote rollback, first preserve the active directory outside discovered roots and verify that the destination is an independent real directory, then use PowerShell:
+
+```powershell
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.3.2 --force
+```
+
+Alternatively restore only a verified backup into `.agents/skills/swift-cycle`; do not recreate the legacy discovery entry. Neither rollback alternative was executed during this path migration.

@@ -71,7 +71,7 @@ GitHub CLI 2.90 or later can install the same Skill for multiple agent hosts.
 ### Codex
 
 ```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
 ```
 
 In ChatGPT desktop, type `@` and select **Swift Cycle / 快速螺旋**. In Codex CLI or the IDE extension, invoke it with `$swift-cycle`.
@@ -94,9 +94,9 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-co
 
 Invoke with `/swift-cycle`.
 
-For project-only installation, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
+For Codex project-only installation, replace `--dir "$env:USERPROFILE\.agents\skills"` with `--agent codex --scope project`. For the other hosts above, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
 
-For a reproducible Codex installation, use `--pin v1.4.0`. Before replacing an existing installation, preserve that Skill directory outside discovered Skill roots; then use the same command with `--force`. Restore only that directory to roll back, or reinstall the previous fixed tag. Installation metadata must never be written into the source checkout.
+The Codex command explicitly installs fixed `v1.4.0` into the user `.agents/skills/swift-cycle` directory. Keep one independent real directory, not a duplicate legacy `.codex/skills/swift-cycle` entry or a Junction to the source. Before replacing an existing installation, preserve that Skill directory outside discovered Skill roots; then use the same command with `--force`. Restore only that directory to the same `.agents` destination to roll back, or reinstall the previous fixed tag with the same `--dir`. Installation metadata must never be written into the source checkout.
 
 ## What this project demonstrates
 
