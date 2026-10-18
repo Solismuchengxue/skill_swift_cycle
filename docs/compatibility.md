@@ -96,3 +96,47 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERP
 ```
 
 Alternatively restore only a verified backup into `.agents/skills/swift-cycle`; do not recreate the legacy discovery entry. Neither rollback alternative was executed during this path migration.
+
+## Source-only initialization and structure revision (2026-10-18)
+
+The approved increment makes valid root TODO.md and DEVLOG.md an initialization completion condition, separates initialization from mere adoption/maintenance, and adds bounded reuse, responsibility/dependency, capability navigation and behavior-preserving refactor guidance. At the 2026-10-18 source-only closeout, this was an uncommitted source revision on the r29 baseline, not an installed or published update. Historical r29 acceptance and v1.4.0 delivery above remain historical; the separately approved local installation is recorded below.
+
+The pre-edit missing-record negative fixture was rejected as expected; this checks the artifact oracle, not an independently replayed old-agent failure. The existing seven static check groups and OpenAI quick_validate passed; the ten core template H2 sequences are unchanged. The checks covered 31 Markdown files and 60 local Markdown links; local anchors were additionally checked. These are static results, not behavior or host compatibility claims.
+
+The current agent read the revised source instructions, made case-specific decisions, authored missing records directly and read back the resulting artifacts in 13 owned temporary subscenarios:
+
+| Subscenarios | Observed result |
+| --- | --- |
+| A: new Git record initialization; B: existing/repeated initialization | Valid root records; A had actual exact ignore and untracked checks. A/B each had two repeat readbacks with identical artifact bytes and no duplicate ignore or date copies. |
+| C: only TODO missing; only DEVLOG missing | Only the missing file was added; the other file's SHA-256 was unchanged. |
+| D: empty file; teaching placeholder | Both were rejected as incomplete; existing bytes were preserved, not overwritten. |
+| E: non-Git record initialization | Valid root records; no `.git` or `.gitignore` was created; Git checks were not applicable. |
+| F: read-only; ordinary maintenance; adoption only | No record creation or ignore changes. Maintenance changed only its intended README text; adoption changed only its binding. |
+| G: confirmed-policy conflict; safe I/O substitute | Both remained incomplete without policy, permission or existing-content changes. The I/O substitute used a directory at the TODO path, not a real ACL modification. |
+| H: bounded fictional structural change | Located the existing parser, caller and tests; added a thin second entry by reuse, documented responsibility/dependency/placement and capability links. Three normal/failure/cross-entry regression tests passed; the original parser and caller behavior were retained. |
+
+All 13 subscenarios met their expected outcomes, including four expected incomplete cases; no unresolved validation failure or skipped subscenario remained. The missing-record and missing-entry negative controls detected their intended absence. Artifact scripts only inspected results; no template-copy initializer or new persistent helper was added to the package. These results cover isolated local-record initialization and bounded structural guidance, not complete product initialization. They are not independent fresh-agent pressure repetitions or actual Skill invocation through a host.
+
+Only the owned temporary Git fixture had a successful `git init`; the source repository had no Git writes, staging or commits. The installed 26-file copy was read-only compared before/after and remained unchanged. No host discovery/invocation, install, publish or publish dry-run, global configuration, business service or consumer-project operation was performed. Historical release/installation results above do not validate this unpublished increment.
+
+## Local accepted-source installation and fresh initialization (2026-10-19)
+
+The current increment received independent D60 source-only acceptance (`PASS`, no issues), distinct from historical r29 acceptance. A later explicit user authorization covered updating only the existing local Skill and testing a new isolated project; no Git commit, publication or consumer-project change was included.
+
+The existing real directory at `$HOME/.agents/skills/swift-cycle` had 26 files / 58,587 bytes with v1.4.0 metadata and no additional files or local configuration differences. Its exact original bytes were backed up outside discovered roots. A local-only `gh skill install --from-local` probe supplied the normal local-path metadata; the active directory was then updated in place from that verified payload, without deleting or moving the entry. Nine files changed and seventeen, including `agents/openai.yaml`, retained their original bytes. The package remains explicit-only, with no dependency declaration or global configuration change. The retired `.codex` entry was not recreated; historical backups were not cleaned.
+
+The result contains 26 files / 64,401 bytes. All 25 non-manifest files match the accepted canonical package byte-for-byte. SKILL.md has the same body and portable frontmatter, plus installer-local `metadata.local-path`; GitHub pinned/ref/tree/repository fields were removed rather than misrepresenting this unpublished content as v1.4.0. `gh skill list --dir` reports the local source, `pinned=false`, and an empty version. This is a mutable local-source installation, not a new commit, tag or Release.
+
+Content SHA-256 digests of the saved per-file manifest sequences (relative name, byte count, lowercase file SHA-256, tab-delimited with LF; entry order retained in the verification manifests):
+
+| Object | Digest |
+| --- | --- |
+| Original installation and exact backup | `c843a11faebfa6edadc77cad6bb43ab3ad658531940a7c55731b5f75a3adb314` |
+| Accepted canonical package | `6e5bd6275dce94ed923e2e7b22b080ae94709ef8d5e073bfc698c742f7fda7c2` |
+| Updated installation, including local metadata | `f36e79a3b55bd8d3bb0ead99c766c4da5dbec415b9c2123230b40523970378df` |
+
+The agent explicitly loaded the updated installed manifest, relevant references and minimal templates, then authored a fresh, initially empty, non-Git fictional card-ordering documentation project. It created seven actual documents: README, AGENTS, DESIGN, docs/blueprint, docs/requirements, root TODO and DEVLOG. TODO contains the project's real current goal, executable card-check actions, no-blocker statement and next step; DEVLOG records the actual non-Git/manual-first decision and its reason. No old A–H records or template-copy initializer were used. Two repeat readbacks preserved all seven file hashes without resets, appended entries or date copies. Git checks were not applicable and no Git repository was created.
+
+Source and installed OpenAI package validation both passed. Seven existing source-check groups passed (31 Markdown files / 62 local links). Twelve read-only installation/project/boundary tests passed with zero failures or skips, checking the 26-file backup/payload, provenance, preserved configuration, 25 installed Markdown files / 30 local links, seven project Markdown files / 14 local links, headings, meaningful record content, binding and repeat preservation. The temporary PowerShell control script passed the syntax/encoding gate; optional PSScriptAnalyzer was not run in fast mode. An initial temporary installer probe hit sandbox directory access restrictions; the precisely approved host channel completed it without ACL changes.
+
+This demonstrates actual initialization by the existing agent using the updated installed files, plus separate artifact assertions. It does not establish independent fresh-agent behavior, automatic host discovery/selection/invocation, application runtime, actual ACL-failure handling, production or long-term reliability. The exact backup, per-file manifests, guarded restore entry and new project were retained in the owned temporary workspace; actual rollback was not executed. Source instructions/templates, source HEAD and empty staging were preserved. No source Git write, publishing/dry-run, Podcast, browser, service or global-setting operation was performed. Future turns can use the updated files; selector refresh was not tested.

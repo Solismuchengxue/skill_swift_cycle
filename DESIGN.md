@@ -5,7 +5,7 @@
 - Status: active.
 - Current conclusion: maintain one standards-based Skill with system-level explicit invocation and project-level persistent adoption. After one explicit adoption, the project `AGENTS.md` binds Swift Cycle so later tasks route, synchronize documentation, and close milestones automatically inside the project boundary.
 - Scope: one-project workflow, vision versus confirmed requirements, conditional fixed templates, per-package convergence, language and visual delivery, optional helper integration, and source/deployment boundaries.
-- Current source revision: implements the approved [r29 standard](docs/engineering_standard.md) and has passed D60 department-lead local-source acceptance; release and installation evidence is maintained separately in [delivery status](docs/compatibility.md#fixed-version-delivery). Real project adoption, actual Figma drawing/export and full Superpowers execution remain unverified.
+- Current source revision: r29 passed historical D60 local-source acceptance; the separately approved 2026-10-18 initialization/structure increment is source-only and does not inherit that acceptance. See the [source standard](docs/engineering_standard.md) and [current validation](docs/compatibility.md#source-only-initialization-and-structure-revision-2026-10-18). Release and installed v1.4.0 remain separate in [delivery status](docs/compatibility.md#fixed-version-delivery). Real project adoption, actual Figma drawing/export and full Superpowers execution remain unverified.
 - Update trigger: revise this document when the Skill package, scenario routes, document profiles, language strategy, invocation policy, or supported host boundary changes.
 
 ## Goals
@@ -77,6 +77,10 @@ The diagram describes project-internal engineering. It does not assign departmen
 | `runtime_integration` | Operations, contracts, security, storage, integration, and identity layers | Activate only when the current task establishes, changes, or verifies multiple relevant layers |
 
 Profiles are internal starting points, not required conformance ledgers or directory trees. Reuse existing complete authorities, adding only responsibilities the project actually needs.
+
+Authorized project creation or formal initialization requires valid root TODO.md and DEVLOG.md even in `minimal` and non-Git projects. The main Skill states the completion gate; document-profiles owns creation, preservation, ignore-policy and conflict details; adoption-and-routing owns completion readback. Existing valid records remain byte-preserved, only missing files are added, and mere adoption/read-only/ordinary maintenance does not trigger initialization.
+
+Important capability, responsibility/dependency changes or refactors activate bounded structural checks in document-information-architecture: search existing implementations/callers/tests, justify reuse/extension/new placement, state ownership and allowed dependencies, and link the affected capability to implementation, entry, tests and existing evidence. Refactors preserve specified behavior through relevant regressions, without a parallel capability ledger or automatic cleanup. The AGENTS/DESIGN templates carry only entry conditions and the affected navigation, not a second workflow.
 
 Blueprint describes vision, users and product boundaries. Effective confirmed requirements live in `docs/requirements.md` or an equivalent source; design and stage arrangements follow selected requirements, not every Blueprint idea. New requirements are assessed and scheduled prospectively, while original completed-stage scope remains accurate.
 
@@ -163,6 +167,7 @@ Numbered milestone plans are the sole formal execution plans when complexity war
 
 | Date | Change |
 | --- | --- |
+| 2026-10-18 | Source-only approved increment: valid root TODO/DEVLOG as an initialization completion gate, preserved existing records, explicit non-Git and non-initialization routes, bounded reuse/dependency/capability navigation and behavior-preserving refactor checks. Validation layers are tracked separately; no installation or publication. |
 | 2026-10-13 | Implemented approved r29 responsibilities and ten core templates; separated confirmed requirements from vision, introduced per-package convergence, Figma architecture conditions and narrow optional helper integration. D60 department-lead local-source acceptance passed; publication and installation have independent delivery evidence, real adoption remains unverified. |
 | 2026-08-31 | Clarified ordinary-content language resolution and semantic visualization selection, review, and non-prescriptive topology boundaries. |
 | 2026-08-31 | Added a portable project Blueprint baseline at the new-project default `docs/blueprint.md`, brownfield authority reuse, explicit intent lifecycle boundaries, and canonical lowercase snake_case naming for docs paths. |

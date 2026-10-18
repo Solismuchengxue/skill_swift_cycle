@@ -47,6 +47,8 @@ flowchart LR
 | 能力 | Swift Cycle 的做法 |
 | --- | --- |
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
+| **初始化双文件必需** | 获准创建项目或正式初始化必须有效交付根级 TODO.md、DEVLOG.md；已有有效文件保留，仅采用或普通维护不自动补建。 |
+| **轻量结构治理** | 新增重要能力、职责/依赖变化或重构时，有界核对复用、职责依赖、落点与能力定位，并用相关回归保护保留行为。 |
 | **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
 | **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
 | **愿景与确认需求** | 蓝图说明长期愿景，需求说明承载有效行为与验收；按所选确认需求设计和安排，不把全部设想变成承诺。 |
@@ -97,6 +99,8 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-co
 Codex 仅在当前项目安装时，把 `--dir "$env:USERPROFILE\.agents\skills"` 替换为 `--agent codex --scope project`；上述其他宿主则把 `--scope user` 改为 `--scope project`。不同平台的行为和手动安装路径见[兼容性说明](docs/compatibility.md)。
 
 上述 Codex 命令将固定 `v1.4.0` 显式安装到用户级 `.agents/skills/swift-cycle`。只保留一份独立真实目录，不保留旧 `.codex/skills/swift-cycle` 重复入口或指向源码的 Junction。更新已有安装前，先把这一份技能目录备份到发现入口之外，再使用同一命令加 `--force`；回退只恢复该目录到同一 `.agents` 目标，或保留相同 `--dir` 重新安装旧固定标签。安装元数据不得写入源码仓库。
+
+2026-10-19 另获授权的本机验证安装使用已验收、未发布的本地源码，不是上述固定标签；元数据如实标记可变本地路径，不再自称 v1.4.0。实际结果见[本地安装与全新初始化证据](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19)。上述远程命令仍用于可复现的已发布版本安装。
 
 ## 项目体现的工程能力
 
@@ -151,7 +155,7 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 
 里程碑须满足总体结果与必要人工确认，不以任务全勾选代替。发布、安装、部署及真实采用仍是不同授权与证据层。
 
-源码按已批准的 [r29 工程规约](docs/engineering_standard.md) 实现，D60 部长已验收本地源码；发布和安装在[交付状态](docs/compatibility.md#fixed-version-delivery)分别核对。[Superpowers 衔接条件](skills/swift-cycle/references/superpowers-bridge.md) 仅说明已核对的最小接口；完整执行、Figma 实际绘制导出与真实项目采用仍未验证。
+r29 基线曾由 D60 部长验收本地源码。[工程规约](docs/engineering_standard.md) 现另纳入已批准的 2026-10-18 双文件/结构治理源码增量，实际证据与限制见[本轮源码验证](docs/compatibility.md#source-only-initialization-and-structure-revision-2026-10-18)，不继承历史验收；上述固定 v1.4.0 安装不含该未发布增量。发布和安装在[交付状态](docs/compatibility.md#fixed-version-delivery)分别核对。[Superpowers 衔接条件](skills/swift-cycle/references/superpowers-bridge.md) 仅说明已核对的最小接口；完整执行、Figma 实际绘制导出与真实项目采用仍未验证。
 
 ## 交付循环示例
 

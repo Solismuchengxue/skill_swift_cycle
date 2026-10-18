@@ -54,6 +54,8 @@ These instructions apply to the `skill_swift_cycle` repository.
 - Check new docs Markdown files and multiword directories use lowercase snake_case, the Blueprint default is `docs/blueprint.md`, and legacy renames require an approved documentation-hygiene package.
 - Check scenario/profile coverage, ordinary-content language precedence, exact technical-identifier preservation, semantic visualization choice and review, document-freshness triggers, Packet lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
 - Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
+- For initialization-rule changes, check valid root TODO/DEVLOG delivery, exact new-Git ignore, repeat/partial preservation, empty/placeholder rejection, non-Git and non-initialization routes, and safe policy/I/O conflicts in owned isolated fixtures. Artifact checks do not replace actual agent execution; report those layers separately.
+- For structure-governance changes, use bounded fictional reuse, responsibility/dependency/placement and behavior-preservation scenarios; do not refactor a consumer project or create a parallel capability ledger.
 - Report checks that were not run and do not claim unsupported compatibility.
 
 ## Source and deployment boundaries

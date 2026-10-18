@@ -47,6 +47,8 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | Capability | What Swift Cycle does |
 | --- | --- |
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
+| **Required initialization records** | Authorized project creation or formal initialization requires valid root TODO.md and DEVLOG.md; existing valid files are preserved, while adoption alone or ordinary maintenance does not trigger creation. |
+| **Lightweight structure governance** | Important capability or responsibility/dependency changes and refactors trigger bounded reuse checks, explicit ownership/dependencies, capability navigation and behavior-preserving regression checks. |
 | **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
 | **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
 | **Vision and confirmed requirements** | Separates long-term Blueprint intent from effective requirements and acceptance criteria; designs and schedules selected confirmed needs, not every idea. |
@@ -97,6 +99,8 @@ Invoke with `/swift-cycle`.
 For Codex project-only installation, replace `--dir "$env:USERPROFILE\.agents\skills"` with `--agent codex --scope project`. For the other hosts above, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
 
 The Codex command explicitly installs fixed `v1.4.0` into the user `.agents/skills/swift-cycle` directory. Keep one independent real directory, not a duplicate legacy `.codex/skills/swift-cycle` entry or a Junction to the source. Before replacing an existing installation, preserve that Skill directory outside discovered Skill roots; then use the same command with `--force`. Restore only that directory to the same `.agents` destination to roll back, or reinstall the previous fixed tag with the same `--dir`. Installation metadata must never be written into the source checkout.
+
+The separately authorized local validation installation on 2026-10-19 uses the accepted, unpublished local source instead of that fixed tag. Its metadata reports a mutable local path, not v1.4.0; see [local installation and fresh initialization evidence](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19). The remote command above remains the reproducible released-version option.
 
 ## What this project demonstrates
 
@@ -151,7 +155,7 @@ New requirements are clarified and checked for impact before they enter current 
 
 A milestone must satisfy its overall outcome and necessary human confirmation, not merely checked tasks. Publishing, installation, deployment and real adoption remain separate permissions and evidence layers.
 
-The source implements the approved [r29 engineering standard](docs/engineering_standard.md) and has passed D60 department-lead local-source acceptance. Publication and installation are separately verified in [delivery status](docs/compatibility.md#fixed-version-delivery). [Superpowers handoff conditions](skills/swift-cycle/references/superpowers-bridge.md) document the narrow optional integration; full execution, actual Figma drawing/export and real project adoption remain unverified.
+The r29 baseline passed D60 department-lead local-source acceptance. The [source standard](docs/engineering_standard.md) now also includes the separately approved 2026-10-18 initialization/structure revision; its evidence and limits are recorded in [source-only validation](docs/compatibility.md#source-only-initialization-and-structure-revision-2026-10-18), not inherited from the historical acceptance. The fixed v1.4.0 installation above does not include that unpublished revision. Publication and installation remain separate in [delivery status](docs/compatibility.md#fixed-version-delivery). [Superpowers handoff conditions](skills/swift-cycle/references/superpowers-bridge.md) document the narrow optional integration; full execution, actual Figma drawing/export and real project adoption remain unverified.
 
 ## Example delivery loops
 

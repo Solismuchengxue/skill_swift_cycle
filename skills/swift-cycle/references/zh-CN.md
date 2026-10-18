@@ -14,6 +14,7 @@
 | roadmap / milestone | 路线图 / 里程碑：阶段结果、依赖和完成判断 |
 | work package | 工作包：实现、必要验证和说明同步组成的小结果 |
 | adoption / document profile | 采用 / 文档档位 |
+| initialization / local records | 初始化 / 本地记录：获准创建或正式初始化须有效交付根级 TODO.md、DEVLOG.md；仅采用不推定初始化，操作边界见文档职责 |
 | knowledge promotion / state separation | 知识晋升 / 状态拆分 |
 | Review Packet / Closeout Packet | 审查包 / 收尾包：有界快照，不是现行正文 |
 
