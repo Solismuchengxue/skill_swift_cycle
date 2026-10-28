@@ -1,195 +1,206 @@
-# Swift Cycle Design
+<a id="swift-cycle-design"></a>
 
-## Status
+# Swift Cycle 设计
 
-- Status: active.
-- Current conclusion: maintain one standards-based Skill with system-level explicit invocation and project-level persistent adoption. After one explicit adoption, the project `AGENTS.md` binds Swift Cycle so later tasks route, synchronize documentation, and close milestones automatically inside the project boundary.
-- Scope: one-project workflow, vision versus confirmed requirements, conditional fixed templates, per-package convergence, language and visual delivery, optional helper integration, and source/deployment boundaries.
-- Current source revision: the 2026-10-28 templates, unified references and document-name revisions follow the 2026-10-18 initialization/structure increment and remain unpublished as a release. Root tmp/ is required for writable tasks, with project-local temporary output and bounded system-path exceptions. The latest revision retires the docs-home and ADR-index templates while retaining conditional navigation and standalone ADR records. See the [source standard](docs/engineering_standard.md) and [current source validation](docs/compatibility.md#navigation-template-retirement-2026-10-28). Later revisions use their own evidence rather than inheriting historical r29 acceptance.
-- Release: fixed v1.4.0 is recorded separately in [delivery status](docs/compatibility.md#fixed-version-delivery); it does not include these later source revisions.
-- Installed copy: the accepted 2026-10-19 local source uses mutable local-path metadata rather than a v1.4.0 pin; the 2026-10-28 source edits are not installed. See [local installation and fresh initialization](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19).
-- Evidence limits: current template/reference checks are static source evidence. New agent adoption, actual UML drawing/export, visual rendering and full Superpowers execution are not established by them; historical initialization evidence retains its separate scope.
-- Update trigger: revise this document when the Skill package, scenario routes, document profiles, language strategy, invocation policy, or supported host boundary changes.
+<a id="status"></a>
 
-## Goals
+## 状态
 
-- Keep personal and small projects coherent without importing heavyweight organizational process.
-- Preserve one portable workflow across Agent Skills-compatible hosts.
-- Keep the canonical Skill and default prompt in Simplified Chinese while preserving bilingual product entry points and target-file language.
-- Keep system-level invocation explicit, while allowing an adopted project's committed instructions to require the Skill without repeated user commands.
-- Keep simple work minimal while giving complex project, runtime, and integration work a reusable document shape.
-- Give every new project one tracked intent baseline before substantive implementation while reusing complete brownfield authorities without duplication.
-- Detect documentation drift and promote confirmed failure guards without creating a second project state machine.
+- 状态：持续维护。
+- 当前结论：维护一个基于标准的 Skill，系统层面明确调用，项目层面持久采用。明确采用一次后，由项目`AGENTS.md`绑定 Swift Cycle，后续任务在项目边界内自动路由、同步文档并收口里程碑。
+- 范围：单项目工作流、愿景与已确认需求分离、按条件使用固定模板、逐包收敛、语言与可视化交付、可选辅助集成，以及源码/部署边界。
+- 当前源码修订：2026-10-28 的模板、统一参考和文档命名修订承接 2026-10-18 的初始化/结构增量，尚未作为 Release 发布。可写任务仍必须使用根级 tmp/；文档首页与 ADR 索引模板保持退役。本轮编辑对参考内容分组，并澄清 DESIGN 必需 UML 与普通按需图示的区别。用户也已退役仓库旧 Superpowers 工作目录，其中的旧辅助程序和快照不再是当前校验路径。见[源规约](docs/engineering_standard.md)、[参考修订校验](docs/compatibility.md#reference-readability-revision-2026-10-28)和[目录退役记录](docs/compatibility.md#legacy-work-directory-retirement-2026-10-28)。后续修订各自使用对应证据，不继承历史 r29 验收结论。
+- Release：固定 v1.4.0 单独记录在[交付状态](docs/compatibility.md#fixed-version-delivery)，不包含后续源码修订。
+- 安装副本：2026-10-19 已接受的本地源码使用可变 local-path 元数据，并非固定到 v1.4.0；2026-10-28 源码修改尚未安装。见[本地安装与全新初始化](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19)。
+- 证据限制：当前模板/参考检查属于静态源码证据，不能证明新 Agent 采用、真实 UML 绘制/导出、可视化渲染或完整 Superpowers 执行；历史初始化证据保留自身的独立范围。
+- 更新触发：Skill 包、场景路由、文档档位、语言策略、调用策略或支持宿主边界变化时，更新本文。
 
-## Structure
+<a id="goals"></a>
+
+## 目标
+
+- 让个人和小型项目保持一致，不引入繁重的组织流程。
+- 在兼容 Agent Skills 的宿主之间保留同一套可移植工作流。
+- 规范 Skill 与默认提示词使用简体中文，同时保留双语产品入口和目标文件语言。
+- 系统层面保持明确调用；已采用项目可通过受版本控制的规则要求后续任务使用 Skill，无需用户反复输入命令。
+- 简单工作保持最小范围，复杂项目、运行及集成工作可复用文档结构。
+- 每个新项目在实质实施前建立唯一受跟踪的意图基线，已有项目复用完整依据，不重复创建。
+- 发现文档漂移，沉淀已确认的失败防线，不创建第二套项目状态机。
+
+<a id="structure"></a>
+
+## 目录结构
 
 ```text
 skill_swift_cycle/
 ├─ skills/
 │  └─ swift-cycle/
-│     ├─ SKILL.md               # Concise Simplified Chinese canonical entry
-│     ├─ agents/openai.yaml     # Codex interface and explicit-only policy
+│     ├─ SKILL.md               # 精简的简体中文规范入口
+│     ├─ agents/openai.yaml     # Codex 界面元数据及仅明确调用策略
 │     ├─ references/
-│     │  ├─ adoption-and-routing.md # One-time adoption and background phase routing
-│     │  ├─ document-profiles.md # Unified document roles/templates, naming/navigation, reuse, local records and cleanup
-│     │  ├─ governance-boundaries.md # Triggered governance and evidence boundaries
-│     │  ├─ lifecycle-and-closeout.md # Requirements, convergence, review evidence and retirement
-│     │  ├─ superpowers-bridge.md # Optional, tested helper boundary
-│     │  └─ zh-CN.md            # Concise terminology and wording guidance
-│     └─ templates/             # Optional profile-aligned starting points
+│     │  ├─ adoption-and-routing.md # 一次采用与后台阶段路由
+│     │  ├─ document-profiles.md # 统一文档职责/模板、命名/导航、复用、本地记录与清理
+│     │  ├─ governance-boundaries.md # 按触发采用的治理与证据边界
+│     │  ├─ lifecycle-and-closeout.md # 需求、收敛、审查证据与退役
+│     │  ├─ superpowers-bridge.md # 可选且经过测试的辅助边界
+│     │  └─ zh-CN.md            # 精简术语与表述指引
+│     └─ templates/             # 按文档档位组织的可选起点
 │        ├─ README.md / AGENTS.md
-│        ├─ docs/               # BLUEPRINT, PRD, SAD, ROADMAP, MANUAL, numbered plans and optional references
+│        ├─ docs/               # BLUEPRINT、PRD、SAD、ROADMAP、MANUAL、编号计划与可选参考
 │        ├─ DESIGN.md
 │        ├─ DEVLOG.md
 │        └─ TODO.md
 ├─ docs/
-│  ├─ engineering_standard.md  # Approved source spec, outside the installable package
-│  └─ compatibility.md          # Host support and installation boundaries
-├─ tmp/                         # Required local temporary workspace; ignored, not shipped
-├─ README.md                    # English user documentation
-├─ README.zh-CN.md              # Simplified Chinese user documentation
-├─ AGENTS.md                    # Repository maintenance rules
-└─ LICENSE                      # MIT license
+│  ├─ engineering_standard.md  # 已批准的源规约，不属于可安装包
+│  └─ compatibility.md          # 宿主支持与安装边界
+├─ tmp/                         # 必需的本地临时工作区；已忽略，不交付
+├─ README.md                    # 英文用户文档
+├─ README.zh-CN.md              # 简体中文用户文档
+├─ AGENTS.md                    # 仓库维护规则
+└─ LICENSE                      # MIT 许可证
 ```
 
-## System shape
+<a id="system-shape"></a>
 
-Swift Cycle uses one explicit adoption to establish a persistent project contract, then routes later tasks through a short engineering loop:
+## 系统形态
+
+Swift Cycle 通过一次明确采用建立持久项目约定，随后让后续任务进入简短的工程循环：
 
 ```mermaid
 flowchart LR
-    Adopt[Explicit adoption] --> Binding[AGENTS persistent binding]
-    Binding --> Request[Normal project request]
-    Request --> Inspect[Inspect real state]
-    Inspect --> Route[Detect phase and smallest profile]
-    Route --> Change[Implement and synchronize]
-    Change --> Verify[Verify proportionally]
-    Verify --> Close[Continue or close milestone]
-    Close --> Result[Result or exact blocker]
+    Adopt[明确采用] --> Binding[AGENTS 持久绑定]
+    Binding --> Request[普通项目请求]
+    Request --> Inspect[检查真实状态]
+    Inspect --> Route[识别阶段与最小适用档位]
+    Route --> Change[实施并同步]
+    Change --> Verify[适度验证]
+    Verify --> Close[继续或收口里程碑]
+    Close --> Result[结果或明确阻塞]
 ```
 
-The diagram describes project-internal engineering. It does not assign departments, create reviewers, grant runtime authority, accept work, or operate an external registry.
+该图只描述项目内部工程过程，不分配部门、创建审查者、授予运行权限、执行验收或操作外部注册表。
 
-## Document profiles
+<a id="document-profiles"></a>
 
-| Profile | Purpose | Boundary |
+## 文档档位
+
+| 档位 | 用途 | 边界 |
 | --- | --- | --- |
-| `minimal` | Project intent, core entry points, and the shortest useful execution view | Default for small projects and bounded changes |
-| `standard` | Detailed architecture, ROADMAP and decisions | Add only authorities backed by long-lived facts |
-| `runtime_integration` | Operations, contracts, security, storage, integration, and identity layers | Activate only when the current task establishes, changes, or verifies multiple relevant layers |
+| `minimal` | 项目意图、核心入口和最短有效执行视图 | 小项目与有界修改的默认选择 |
+| `standard` | 详细架构、ROADMAP 与决策 | 仅为长期事实增加对应依据 |
+| `runtime_integration` | 操作、契约、安全、存储、集成与身份层次 | 仅在当前任务建立、修改或验证多个相关层次时启用 |
 
-Profiles are internal starting points, not required conformance ledgers or directory trees. Reuse existing complete authorities, adding only responsibilities the project actually needs.
+档位是内部起点，不是必填合规台账或目录树。复用已有完整依据，只增加项目实际需要的职责。
 
-Authorized project creation or formal initialization requires valid root TODO.md and DEVLOG.md even in `minimal` and non-Git projects. The main Skill states the completion gate; document-profiles owns creation, preservation, ignore-policy and conflict details; adoption-and-routing owns completion readback. Existing valid records remain byte-preserved, only missing files are added, and mere adoption/read-only/ordinary maintenance does not trigger initialization.
+获准创建项目或正式初始化时，根级 TODO.md 与 DEVLOG.md 必须有效交付，`minimal`和非 Git 项目也不例外。主 Skill 声明完成门槛，document-profiles 负责创建、保留、忽略策略和冲突细节，adoption-and-routing 负责完成后的读回。已有有效记录保持原字节，只补缺失文件；仅采用、只读或普通维护不触发初始化。
 
-Root tmp/ is a separate mandatory workspace for writable Swift Cycle tasks, including adoption and maintenance; read-only tasks only inspect it. Git ignores /tmp/ without tracking an empty-directory placeholder. Controllable temporary files go there through tool arguments or child-process-only temporary settings, reducing extra C-drive writes. Existing content, tracked files and path/permission conflicts are preserved and reported; tool-imposed system paths remain explicit exceptions. This does not change global TEMP/TMP, existing caches, runtime data or deletion authority. Initialization/record protection remains scoped to TODO/DEVLOG rather than suppressing this directory rule.
+根级 tmp/ 是可写 Swift Cycle 任务独立必需的工作区，采用和维护也适用；只读任务仅检查。Git 忽略 /tmp/，不跟踪空目录占位文件。可控临时文件通过工具参数或仅对子进程生效的临时设置放入其中，减少额外的 C 盘写入。既有内容、已跟踪文件和路径/权限冲突均保留并报告；工具强制使用的系统路径作为明确例外。这不改变全局 TEMP/TMP、已有缓存、运行数据或删除权限。初始化/记录保护仍只针对 TODO/DEVLOG，不能据此取消目录规则。
 
-Important capability, responsibility/dependency changes or refactors activate the [code organization and reuse section](skills/swift-cycle/references/document-profiles.md#代码组织与能力复用): search existing implementations/callers/tests, justify reuse/extension/new placement, state ownership and allowed dependencies, and link the affected capability to implementation, entry, tests and existing evidence. Refactors preserve specified behavior through relevant regressions, without a parallel capability ledger or automatic cleanup. The AGENTS/DESIGN templates carry only entry conditions and the affected navigation, not a second workflow.
+重要能力、职责/依赖变化或重构会触发[代码组织与能力复用](skills/swift-cycle/references/document-profiles.md#代码组织与能力复用)：检索已有实现、调用者和测试，说明复用、扩展或新建落点的理由，明确归属与允许依赖，并把受影响能力连接到实现、入口、测试和已有证据。重构通过相关回归保留指定行为，不建立平行能力台账，也不自动清理。AGENTS/DESIGN 模板只承载触发条件与受影响导航，不另建流程。
 
-BLUEPRINT describes project goals, vision, users, scenarios, core capabilities and product boundaries. Effective confirmed requirements live in `docs/PRD.md` or an equivalent source; design and stage arrangements follow selected requirements, not every BLUEPRINT idea. New requirements are assessed and scheduled prospectively, while original completed-stage scope remains accurate.
+BLUEPRINT 描述项目目标、愿景、用户、场景、核心能力和产品边界。有效的已确认需求归入`docs/PRD.md`或等价来源；设计与阶段安排跟随选定需求，不跟随 BLUEPRINT 的每个设想。新增需求面向后续评估排期，已完成阶段的原范围保持准确。
 
-The ten core templates preserve approved Chinese H2 sequences for new or authorized whole-document restructuring. Small edits do not initialize the tree. Professional outlines remain candidates. DESIGN explains the solution and when/how to read detailed documents; it is not just a fixed metadata index.
+十份核心模板在新建或获准整篇重构时保留批准的中文 H2 顺序。小修不初始化目录树。专业提纲仍是候选。DESIGN 解释方案及详细文档的阅读时机与方法，不只是固定元数据索引。
 
-The DESIGN template now presents overview design in seven sections: summary, structure/responsibilities, core functional approach, interfaces/data, code organization, delivery/runtime shape and the detailed-document guide. New or authorized whole-document restructuring requires at least one real UML structure diagram, with other views conditional on actual relationships; architecture UML keeps editable Figma sources and PNG/SVG exports. Ordinary edits preserve brownfield structure. Removed fixed process/decision/verification sections do not waive necessary design reasoning, regression checks or evidence boundaries; link existing detail instead of duplicating it. Source checks do not demonstrate drawing, rendering or adoption; see [this revision](docs/compatibility.md#design-overview-source-revision-2026-10-28).
+DESIGN 模板以七节呈现概要设计：设计摘要、结构与职责、核心功能方案、接口与数据、代码组织、交付与运行形态、详细文档导读。新建或获准整篇重构时至少需要一张真实 UML 结构图，其他视图按实际关系决定；架构 UML 保留可编辑 Figma 源稿及 PNG/SVG 导出。普通编辑保留已有项目结构。移除固定流程/取舍/验证章节不免除必要的设计说明、回归检查或证据边界；链接现有细节，避免重复。源码检查不能证明绘图、渲染或采用，见[本次修订](docs/compatibility.md#design-overview-source-revision-2026-10-28)。
 
-The README presentation revision retains six semantic H2 responsibilities with Emoji H2/H3, a centered introduction, explicit navigation anchors, tables and examples. Badges/previews/FAQ are conditional; public-GitHub Star History is optional and last. Contribution/disclaimer sections are omitted without dropping real limitations or licensing. Output URL variables are resolved in the consumer project, not treated as Skill dependencies. This style does not propagate to TODO or the other templates; source checks, static instances and host rendering remain distinct evidence layers. See [current source-only checks](docs/compatibility.md#readme-presentation-source-revision-2026-10-28).
+README 展示修订保留六项语义 H2 职责，使用 Emoji H2/H3、居中简介、显式导航锚点、表格及示例。徽章、预览、FAQ 按条件加入；公开 GitHub 的 Star History 可选并置于末尾。不设贡献/免责声明章节，但保留真实限制与许可说明。输出 URL 变量在消费者项目中解析，不是 Skill 依赖。该风格不扩展到 TODO 或其他模板；源码检查、静态实例与宿主渲染属于不同证据层次。见[当前仅源码检查](docs/compatibility.md#readme-presentation-source-revision-2026-10-28)。
 
-Architecture diagrams use editable Figma sources plus repository PNG/SVG exports and an original-source entry. Layout follows real relationships and user aesthetics, without mandatory containers. Workflow, sequence, state and dependency diagrams may still use Mermaid or established tools. Figma unavailability means the required diagram is unfinished, not silently substituted.
+架构图使用可编辑 Figma 源稿，并向仓库导出 PNG/SVG，提供原始源稿入口。布局遵循真实关系和用户审美，不强制容器。流程、时序、状态与依赖图仍可使用 Mermaid 或已有工具。Figma 不可用时，必需图示应判为未完成，不能静默替换。
 
-Numbered milestone plans are the sole formal execution plans when complexity warrants them; local TODO summarizes progress, milestone position/gaps, current tasks/problems and the next stage, linking the existing plan. Without milestones it states the actual current work and known future direction. DEVLOG uses compact dated list entries for useful conclusions/reasons, with real-milestone grouping only when needed for discovery. Neither template uses Emoji or forces a ROADMAP document. Every package verifies and synchronizes affected content, removes clear duplicates and lightly checks associated entries; TODO is reconciled at work start, substantive progress, issue/blocker changes and completion/cancellation. There is no bulk migration of old TODO history into DEVLOG. The existing initialization trigger, preservation and ignore-policy boundaries are unchanged; see [source-only validation](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28).
+复杂度确有需要时，编号里程碑计划是唯一正式执行计划；本地 TODO 概括项目进度、里程碑位置/缺口、当前任务/问题及下一阶段，并链接既有计划。没有里程碑时，如实写当前工作和已知后续方向。DEVLOG 用紧凑的日期列表条目保留有效结论与理由，仅在有助于查找时按真实里程碑分组。两模板都不用 Emoji，也不强制 ROADMAP。每个工作包验证并同步受影响内容，移除明确重复并轻量检查关联入口；工作开始、实质进展、问题/阻塞变化及完成/取消时同步 TODO。不把旧 TODO 历史批量搬入 DEVLOG。既有初始化触发、保留与忽略策略边界不变，见[仅源码验证](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28)。
 
-## Key boundaries
+<a id="key-boundaries"></a>
 
-| Concern | Swift Cycle owns | Outside this Skill |
+## 关键边界
+
+| 事项 | Swift Cycle 负责 | Skill 范围之外 |
 | --- | --- | --- |
-| Project loop | One-time adoption, background phase/profile routing, finite work package, implementation, synchronization, verification, learning | Portfolio routing, capacity, model assignment, external queues |
-| Project intent | One tracked BLUEPRINT or mapped brownfield equivalent, material-change updates, and explicit supersession | User instructions, architecture, current work, history, detailed scheduling, runtime state, Registry, or acceptance |
-| Documentation | Responsibility, freshness, knowledge promotion, snapshot freeze and retirement | Organizational registry or acceptance ledger |
-| Delivery layers | Independent source, artifact, runtime, and consumer evidence | Publishing, deployment, or consumer switching without separate authority |
-| Output | Project work packages and evidence-linked review/delivery summaries as needed | Acceptance, activation, release, or cross-project authorization decisions |
+| 项目循环 | 一次采用、后台阶段/档位路由、有界工作包、实施、同步、验证、经验沉淀 | 跨项目统筹路由、容量、模型分配、外部队列 |
+| 项目意图 | 唯一受跟踪 BLUEPRINT 或映射的已有项目等价来源、重大变化更新、明确替代关系 | 用户指令、架构、当前工作、历史、详细排期、运行状态、Registry 或验收 |
+| 文档 | 职责、新鲜度、知识沉淀、快照冻结与退役 | 组织注册表或验收台账 |
+| 交付层次 | 独立的源码、产物、运行与消费者证据 | 未经单独授权的发布、部署或消费者切换 |
+| 输出 | 项目工作包，以及按需关联证据的审查/交付摘要 | 验收、激活、发布或跨项目授权决策 |
 
-- Words in the project, repository, and root-directory names are separated with `_`; letter case follows the chosen project name. The standards-defined Skill identifier remains `swift-cycle` because underscores are not valid in Agent Skill names.
-- `SKILL.md` is a short Simplified Chinese canonical entry that contains only shared constraints, adoption detection, background routing, closure behavior, verification, and links to conditional references.
-- `agents/openai.yaml` contains Codex-specific interface metadata and disables implicit invocation for Codex.
-- Other hosts use the same standard Skill package and their own installation conventions.
-- System-level invocation remains explicit-only. A user explicitly adopts Swift Cycle once; the project's committed `AGENTS.md` then requires the Skill for later project tasks. One-off reviews do not create persistent adoption.
-- Detailed phase routing is internal. Adoption, ordinary progress, material structural change, and milestone closeout select the smallest useful route without user-facing modes or subcommands.
-- Document profiles are progressive; no mandatory conformance table, fixed schema, per-package report or automatic full-tree initialization is introduced.
-- Document information architecture is evidence-triggered rather than count-driven. DESIGN, a conditional docs home, and any subdirectory indexes contain links and short summaries; the durable fact remains in one shared authority. Document moves and link repairs form a bounded documentation-hygiene package, while tracked deletion or a change of authority still requires its own authorization.
-- Core templates have one H1 and fixed H2 responsibilities; required content can be brief, conditional content appears only when applicable, and unknown is not not-applicable. No mandatory revision ledger is added. Exact technical identifiers are preserved; existing prose languages and bilingual entry points remain valid.
-- New ordinary docs paths follow lowercase `snake_case`. Fixed BLUEPRINT/PRD/SAD/ROADMAP/MANUAL filenames and stable M-numbered milestone plans are explicit exceptions, alongside root entries and docs index README.md. Existing complete equivalents keep their paths unless migration is authorized; naming, navigation and bounded cleanup share document-profiles.md with document selection and record preflight.
-- Knowledge promotion keeps short-lived capture local and moves durable commitments, decisions, constraints, and reusable evidence into responsibility-appropriate shared assets. After promotion, the shared asset is authoritative and the local record retains only a concise pointer.
-- State separation identifies labels that combine independent lifecycle questions and splits only the concerns a project actually tracks. It defines no mandatory fields or status schema, and any overall status remains a derived summary.
-- Governance baselines activate only for non-trivial work that crosses authority
-  boundaries, changes source/runtime relationships, or needs reliable
-  before/after comparison. A baseline separates observed and target state, uses
-  no mandatory file or schema, and becomes shared evidence only when later work
-  depends on it.
-- Commit-boundary planning activates for multiple commits, mixed-purpose hunks,
-  ordered dependencies, or independently reviewable history. Prefer one atomic
-  commit when a split cannot preserve a coherent intermediate state.
-- Source, artifact, runtime, and consumer state are optional independent layers.
-  Evidence and authorization do not transfer between them, and projects track
-  only the layers they actually have.
-- Transition checks use canonical contracts and independently evidenced identities. Git source mode is not an installed permission, and tests must not share one incorrect derived authority with the manifest they claim to verify.
-- Local `TODO.md` is the current execution view, not the durable source for
-  cross-machine plans. Durable plans belong in a committable feasibility
-  report, ROADMAP, or shared issue tracker.
-- Local `DEVLOG.md` keeps dated maintenance evidence and reusable failure guards;
-  it is not a command transcript or a second authority for shared facts.
-- A normal TODO remains the default. Stage results and dependencies warrant a ROADMAP document only when independently maintained; complex order, impact or review warrants a numbered milestone plan. Cross-session work or multiple commits alone does not initialize a document tree.
-- Swift Cycle defines its finite work-package contract directly. Optional Superpowers helper integration preserves one formal numbered plan, documents parser limitations, and does not claim full plugin execution compatibility.
-- Work may continue through listed, reversible steps under one unchanged authority without repeating internal approval prompts. Ordinary documentation, Mermaid, table, TODO, and DEVLOG maintenance are normal in-package steps. Materially new authority, substantive goal or architecture change, an ambiguous authority location, contradictory evidence, external side effects, or unsafe rollback stop the loop.
-- Each package synchronizes affected requirements, user guidance, design, schedule and local actions. Milestone completion separately checks overall exit conditions; no synthetic audit record is required when no documentation changed.
-- Documentation freshness is event-driven. Milestone, decision, contract, runtime, or consumer changes trigger a focused reconciliation of status, pending work, unknowns, identities, indexes and any affected review/delivery references.
-- Review snapshots and delivery summaries are prepared only for a real recipient need, reusing existing conclusions and evidence without fixed templates or mandatory reports. Delivered snapshots stay frozen and distinct from current truth; neither summary creates organizational acceptance, activation, release, or a second state machine.
-- Confirmed reusable failures follow failure mode, cause, corrective assertion, and reusable gate. Unconfirmed one-off failures remain local.
-- Repository maintenance details do not belong in the Skill package.
-- Host-installed Skill copies and installer-added source metadata are deployment
-  artifacts, not repository source. Moving or renaming this checkout does not
-  authorize reinstalling, updating, or relinking an installed copy.
-- The core package adds no scripts or runtime dependencies. Architecture diagrams conditionally require Figma; tool availability and external permissions are not assumed.
+- 项目名、仓库名及根目录名的单词用`_`分隔，大小写沿用所选项目名。标准规定的 Skill 标识保留`swift-cycle`，因为 Agent Skill 名称不允许下划线。
+- `SKILL.md`是简短的简体中文规范入口，只包含共享约束、采用检测、后台路由、收口行为、校验和条件参考链接。
+- `agents/openai.yaml`包含 Codex 专属界面元数据，并关闭 Codex 隐式调用。
+- 其他宿主使用同一标准 Skill 包及各自安装约定。
+- 系统层面只允许明确调用。用户明确采用 Swift Cycle 一次后，由项目受版本控制的`AGENTS.md`要求后续项目任务使用 Skill。一次性审阅不建立持久采用。
+- 详细阶段路由在内部处理。采用、普通推进、重大结构变更和里程碑收口均选择最小适用路由，不向用户暴露模式或子命令。
+- 文档档位逐步扩展，不引入强制符合性表、固定结构、逐包报告或自动整树初始化。
+- 文档信息架构由证据触发，不由数量驱动。DESIGN、按需文档首页及子目录索引只放链接和简短摘要，长期事实保留在唯一共享依据中。文档移动与链接修复组成有界文档整理包，已跟踪文件删除或依据变更仍需各自授权。
+- 核心模板恰有一个 H1 和固定 H2 职责；必要内容可简写，条件内容仅在适用时出现，未知不能当作不适用。不增加强制修订台账。技术标识原样保留，既有正文语言与双语入口仍有效。
+- 新增普通 docs 路径使用小写`snake_case`。固定 BLUEPRINT/PRD/SAD/ROADMAP/MANUAL 文件名和稳定 M 编号里程碑计划是明确例外，根级入口和 docs 索引 README.md 也属于例外。已有完整等价来源未获迁移授权时保留原路径；命名、导航、有界清理与文档选择、记录预检共同归入 document-profiles.md。
+- 知识沉淀将短期捕获留在本地，把长期承诺、决策、约束和可复用证据提升到职责相符的共享资产。提升后以共享资产为准，本地记录只保留简短指针。
+- 状态分离识别混合独立生命周期问题的标签，只拆分项目实际跟踪的事项。不规定必填字段或固定状态结构；整体状态仍是推导摘要。
+- 治理基线仅在跨越授权边界、改变源码/运行关系或需要可靠前后对比的非简单工作中启用。基线区分已观察状态与目标状态，不强制文件或结构，只有后续工作依赖它时才转为共享证据。
+- 多提交、混合用途差异块、有序依赖或独立可审查历史会触发提交边界规划。无法保留连贯中间状态时，优先一个原子提交。
+- 源码、产物、运行与消费者状态是可选的独立层次。证据和授权不跨层转移，项目只跟踪实际存在的层次。
+- 转换检查使用规范契约及独立证据确认的身份。Git 源码模式不等于安装权限，测试不能与所校验清单共用同一个错误推导出的依据。
+- 本地`TODO.md`是当前执行视图，不是跨机器计划的长期依据。长期计划归入可提交的可行性报告、ROADMAP 或共享 Issue 跟踪器。
+- 本地`DEVLOG.md`保留带日期的维护证据和可复用失败防线，不是命令流水账，也不是共享事实的第二依据。
+- 普通 TODO 仍是默认选择。阶段结果和依赖需要独立维护时才建立 ROADMAP；顺序、影响或审查复杂时才使用编号里程碑计划。仅跨会话或多提交不触发文档树初始化。
+- Swift Cycle 直接定义有界工作包契约。可选 Superpowers 辅助集成保留唯一正式编号计划，说明解析器限制，不宣称完整插件执行兼容性。
+- 在同一授权不变的情况下，可连续执行已列出的可逆步骤，不重复内部确认。普通文档、Mermaid、表格、TODO 和 DEVLOG 维护都是包内常规步骤。出现实质新增权限、重大目标或架构变化、依据位置不明、证据冲突、外部副作用或回退不安全时，停止循环。
+- 每个工作包同步受影响的需求、用户指引、设计、排期与本地行动。里程碑完成时另行核对整体退出条件；没有文档变化时，不要求编造审计记录。
+- 文档新鲜度由事件驱动。里程碑、决策、契约、运行或消费者变化时，针对性核对状态、待办、未知项、身份、索引和受影响的审查/交付引用。
+- 只有真实接收方需要时才准备审查快照与交付摘要，复用已有结论和证据，不设固定模板或强制报告。已交付快照保持冻结，与当前事实分开；摘要不产生组织验收、激活、发布或第二状态机。
+- 已确认的可复用失败按失败模式、原因、纠正断言和可复用门槛记录。未确认的单次失败留在本地。
+- 仓库维护细节不进入 Skill 包。
+- 宿主已安装 Skill 副本及安装器添加的来源元数据属于部署产物，不是仓库源码。移动或重命名本检出目录不授权重新安装、更新或重新链接已安装副本。
+- 核心包不添加脚本或运行依赖。架构图按条件要求 Figma，不预设工具可用性或外部权限。
 
-## Language strategy
+<a id="language-strategy"></a>
 
-- Ordinary conversation and final-report content use the user's explicit request, then the current invocation language.
-- Ordinary content in an existing file uses the user's explicit request, the file's established primary language, the project language, then the invocation language.
-- Ordinary content in a new file uses the user's explicit request, the project language, then the invocation language.
-- A conversation-language change does not authorize bulk translation. Bilingual counterparts exist only when the project already maintains them or the user requests them.
-- Preserve exact filenames, commands, APIs, code identifiers, standard status values, brand names, and repository terminology even when the surrounding ordinary content uses another language. Avoid accidental mixed-language prose.
-- The canonical Skill body and Codex default prompt are maintained in Simplified Chinese. English README content remains an auxiliary product entry point, while target project documents preserve their established language.
+## 语言策略
 
-## Compatibility strategy
+- 普通会话和最终报告内容优先服从用户明确要求，其次采用当前调用语言。
+- 现有文件的普通内容依次采用：用户明确要求、文件既有主语言、项目语言、调用语言。
+- 新文件的普通内容依次采用：用户明确要求、项目语言、调用语言。
+- 会话语言改变不授权批量翻译。仅在项目已有对应双语文件或用户明确要求时维护双语副本。
+- 文件名、命令、API、代码标识、标准状态值、品牌名及仓库术语原样保留，即使周围普通内容采用另一种语言。避免无意的中英混杂。
+- 规范 Skill 正文与 Codex 默认提示词使用简体中文。英文 README 仍是辅助产品入口，目标项目文档保留既有语言。
 
-- Follow the open Agent Skills directory and `SKILL.md` format.
-- Validate the package with both the OpenAI Skill validator and `gh skill publish --dry-run`.
-- Keep strict explicit-only behavior in Codex metadata.
-- Document host-specific manual-invocation controls instead of adding non-standard fields to the canonical frontmatter.
+<a id="compatibility-strategy"></a>
 
-## Unresolved items
+## 兼容性策略
 
-- No script is currently required. Mechanical checks remain a candidate only if stable structure or freshness failures cannot be caught reliably with existing validators and focused review.
-- Installed Skill copies remain separately versioned deployment state and are not updated by source edits.
+- 遵循开放的 Agent Skills 目录与`SKILL.md`格式。
+- 使用 OpenAI Skill 校验器和`gh skill publish --dry-run`双重校验包。
+- 在 Codex 元数据中保持严格的仅明确调用行为。
+- 记录宿主专属的手动调用控制，不向规范 frontmatter 添加非标准字段。
 
-## Revision record
+<a id="unresolved-items"></a>
 
-| Date | Change |
+## 待定事项
+
+- 当前无需脚本。只有既有校验器和针对性审查无法可靠发现稳定的结构或新鲜度问题时，才考虑机械检查。
+- 已安装 Skill 副本作为独立版本的部署状态管理，源码编辑不更新安装副本。
+
+<a id="revision-record"></a>
+
+## 修订记录
+
+| 日期 | 变更 |
 | --- | --- |
-| 2026-10-28 | Retired docs-home and ADR-index templates, removed their active template route, and consolidated necessary navigation and ADR adoption/naming guidance into document-profiles.md. Ten core templates and the standalone ADR decision outline remain; no replacement index template or installed-copy update. |
-| 2026-10-28 | Required root tmp/ for writable tasks, synchronized adoption/binding and template guidance, and limited temporary-path redirection to tool/process scope. Preserved read-only, record, tracking, recovery and installation boundaries. |
-| 2026-10-28 | Synchronized current document identifiers and role descriptions across conditional tables, Skill/reference guidance, templates, bilingual entries and the source standard; clarified DESIGN/SAD/MANUAL navigation and added direct outline/table-order regressions. No installed-copy update or Git delivery. |
-| 2026-10-28 | Retired the two optional review/closeout templates and their active links/routes; retained conditional evidence, snapshot freeze and authorization boundaries without replacement templates. Historical records, other templates and installation remain separate. |
-| 2026-10-28 | Restored docs/BLUEPRINT.md as the project-blueprint default and template title, synchronized active names/references and table ordering; prior VISION naming records remain historical. Packet templates were inspected only and remain optional/unchanged. |
-| 2026-10-28 | Approved source naming: docs/VISION.md, PRD.md, SAD.md, ROADMAP.md, optional MANUAL.md and stable M1_PLAN.md-style plans; independent ADR retained, standalone evaluation template/creation route retired. Prior source work preserved; no consumer migration, installation or Git delivery. |
-| 2026-10-28 | Source-only consolidation into document-profiles.md with six sections; preserved initialization, naming, reuse/refactor and recovery rules, retired the former organization reference and repaired routes/anchors. Templates and installation unchanged. |
-| 2026-10-28 | Source-only approved DESIGN overview template with seven sections and required UML structure diagram for new/authorized restructuring; synchronized rules/checks, preserved prior templates, no installation or Git delivery. |
-| 2026-10-28 | Source-only paired TODO progress/milestone template and compact DEVLOG entries with optional milestone grouping; synchronized event-driven maintenance rules and checks. Existing initialization gate retained; no installation or Git delivery. |
-| 2026-10-28 | Source-only approved README presentation template: Emoji headings, explicit navigation, tables/examples, conditional assets and last Star History; synchronized template rules and local checks. No installed-copy update or publication; TODO redesign remains a separate proposal. |
-| 2026-10-18 | Source-only approved increment: valid root TODO/DEVLOG as an initialization completion gate, preserved existing records, explicit non-Git and non-initialization routes, bounded reuse/dependency/capability navigation and behavior-preserving refactor checks. Validation layers are tracked separately; no installation or publication. |
-| 2026-10-13 | Implemented approved r29 responsibilities and ten core templates; separated confirmed requirements from vision, introduced per-package convergence, Figma architecture conditions and narrow optional helper integration. D60 department-lead local-source acceptance passed; publication and installation have independent delivery evidence, real adoption remains unverified. |
-| 2026-08-31 | Clarified ordinary-content language resolution and semantic visualization selection, review, and non-prescriptive topology boundaries. |
-| 2026-08-31 | Added a portable project Blueprint baseline at the new-project default `docs/blueprint.md`, brownfield authority reuse, explicit intent lifecycle boundaries, and canonical lowercase snake_case naming for docs paths. |
-| 2026-08-31 | Added portable TODO, DEVLOG, and DESIGN template contracts derived from an approved project practice, with bounded current-work history, evidence-oriented maintenance entries, and explicit local-record boundaries. |
-| 2026-08-31 | Added conditional document information architecture: concise DESIGN entry, optional docs home, responsibility-based grouping, Diátaxis index metadata, and bounded documentation-hygiene work. |
-| 2026-08-31 | Switched to a concise Simplified Chinese canonical entry, one-time explicit adoption with persistent project binding, background routing, automatic milestone documentation closeout, and profile conformance. |
-| 2026-08-30 | Added project-internal scenario routing, progressive document profiles, language resolution, freshness and packet lifecycle, proportional verification, and reusable learning boundaries. |
+| 2026-10-28 | 按用户要求退役本地旧 Superpowers 工作目录及已跟踪的历史 README 设计记录；当前检查只使用可用工具与必要 tmp 工作。此前参考修订和可移植包保持，不重建替代历史树，不更新安装副本。 |
+| 2026-10-28 | 通过内容分组、同步矩阵、简明术语和明确图示条件改善六份参考的可读性；保留文件名、文档档位章节/表格、初始化/tmp/回收保护及全部模板。未暂存、Git 交付或安装。 |
+| 2026-10-28 | 退役文档首页与 ADR 索引模板，移除活动模板路由，将必要导航和 ADR 采用/命名指引归入 document-profiles.md。十份核心模板和独立 ADR 决策提纲保留，不新增替代索引模板，不更新安装副本。 |
+| 2026-10-28 | 可写任务强制使用根级 tmp/，同步采用/绑定与模板指引，临时路径重定向限于工具/进程范围。保留只读、记录、跟踪、回收和安装边界。 |
+| 2026-10-28 | 在条件表、Skill/参考指引、模板、双语入口和源规约之间同步当前文档标识与职责描述；澄清 DESIGN/SAD/MANUAL 导航，增加提纲直接比对和表序回归。未更新安装副本或 Git 交付。 |
+| 2026-10-28 | 退役两份可选审查/收口模板及其活动链接/路由；保留按需证据、快照冻结和授权边界，不新增替代模板。历史记录、其他模板和安装分别保持。 |
+| 2026-10-28 | 恢复 docs/BLUEPRINT.md 为项目蓝图默认路径和模板标题，同步活动命名/引用与表序；此前 VISION 命名记录作为历史保留。Packet 模板当时仅检查，仍可选且未改动。 |
+| 2026-10-28 | 批准源码命名：docs/VISION.md、PRD.md、SAD.md、ROADMAP.md、可选 MANUAL.md，以及稳定 M1_PLAN.md 式计划；保留独立 ADR，退役独立 evaluation 模板/创建路由。此前源码工作保持，未迁移消费者、安装或 Git 交付。 |
+| 2026-10-28 | 仅源码合并为六章 document-profiles.md；保留初始化、命名、复用/重构和回收规则，退役原文档组织参考并修复路由/锚点。模板与安装未变。 |
+| 2026-10-28 | 仅源码更新批准的七节 DESIGN 概要模板，新建/获准重构时必需 UML 结构图；同步规则/检查，保留此前模板，未安装或 Git 交付。 |
+| 2026-10-28 | 仅源码配套更新 TODO 进度/里程碑模板与 DEVLOG 紧凑条目，可选按里程碑分组；同步事件驱动维护规则及检查。既有初始化门槛保留，未安装或 Git 交付。 |
+| 2026-10-28 | 仅源码更新批准的 README 展示模板：Emoji 标题、显式导航、表格/示例、条件性资产及末尾 Star History；同步模板规则与本地检查。未更新安装副本或发布，TODO 重设计仍是单独提议。 |
+| 2026-10-18 | 仅源码实施批准的增量：有效根级 TODO/DEVLOG 作为初始化完成门槛，保留已有记录，明确非 Git 与非初始化路由，有界复用/依赖/能力导航和保留行为的重构检查。验证层次分别跟踪，未安装或发布。 |
+| 2026-10-13 | 实施批准的 r29 职责和十份核心模板；分离已确认需求与愿景，引入逐包收敛、Figma 架构条件和窄范围可选辅助集成。D60 部门负责人本地源码验收通过；发布与安装各有独立交付证据，真实采用仍未验证。 |
+| 2026-08-31 | 澄清普通内容语言解析，以及按语义选图、审查和不预设拓扑的边界。 |
+| 2026-08-31 | 增加可移植项目蓝图基线，新项目默认`docs/blueprint.md`，已有项目复用依据，明确意图生命周期边界，并统一 docs 路径小写 snake_case 命名。 |
+| 2026-08-31 | 根据获准参考的项目实践增加可移植 TODO、DEVLOG、DESIGN 模板契约，限定当前工作历史、采用面向证据的维护条目，明确本地记录边界。 |
+| 2026-08-31 | 增加按条件采用的文档信息架构：简明 DESIGN 入口、可选文档首页、按职责分组、Diátaxis 索引元数据和有界文档整理工作。 |
+| 2026-08-31 | 切换为精简的简体中文规范入口，通过一次明确采用持久绑定项目，后台路由，自动收口里程碑文档，并按档位核对。 |
+| 2026-08-30 | 增加项目内部场景路由、渐进文档档位、语言解析、新鲜度与 Packet 生命周期、适度验证和可复用经验边界。 |

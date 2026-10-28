@@ -1,230 +1,292 @@
-# Agent compatibility
+<a id="agent-compatibility"></a>
 
-## Status
+# Agent 兼容性
 
-- Status: active.
-- Current conclusion: distribute one Agent Skills-compatible package and use host-specific installation commands.
-- Update trigger: recheck this document when Agent Skills paths, invocation syntax, or GitHub CLI support changes.
+<a id="status"></a>
 
-## Package format
+## 状态
 
-The canonical package is `skills/swift-cycle/`. It contains a concise Simplified Chinese `SKILL.md`, references loaded only when their conditions apply, conditional document templates, and Codex-specific UI metadata.
+- 状态：维护中。
+- 当前结论：分发一个兼容 Agent Skills 的安装包，各宿主使用对应的安装命令。
+- 更新触发：Agent Skills 路径、调用语法或 GitHub CLI 支持发生变化时，重新核对本文。
 
-The package follows the open [Agent Skills specification](https://agentskills.io/specification).
+<a id="package-format"></a>
 
-## Supported hosts
+## 安装包格式
 
-| Host | User-scope installation | First-party documented explicit invocation | Notes |
+规范安装包位于`skills/swift-cycle/`，包含简洁的简体中文`SKILL.md`、按条件加载的参考资料、按需使用的文档模板，以及 Codex 专用界面元数据。
+
+安装包遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
+
+<a id="supported-hosts"></a>
+
+## 支持的宿主
+
+| 宿主 | 用户范围安装 | 官方文档记载的显式调用 | 说明 |
 | --- | --- | --- | --- |
-| Codex | PowerShell: `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0` | ChatGPT desktop: select the Skill with `@`; Codex CLI / IDE extension: `$swift-cycle` | Explicit user destination; package-relative `agents/openai.yaml` (repository path `skills/swift-cycle/agents/openai.yaml`) disables implicit invocation. |
-| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user` | `/swift-cycle` | Claude Code supports filesystem-based Agent Skills. |
-| GitHub Copilot | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user` | Copilot CLI: `/swift-cycle`; no shared slash syntax is claimed for other surfaces | Copilot supports Agent Skills across multiple surfaces, but `/swift-cycle` is documented only for Copilot CLI. |
+| Codex | PowerShell：`gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0` | ChatGPT 桌面版：通过 `@` 选择 Skill；Codex CLI／IDE 扩展：`$swift-cycle` | 明确指定用户目标目录；包内的`agents/openai.yaml`（仓库路径为`skills/swift-cycle/agents/openai.yaml`）禁用隐式调用。 |
+| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user` | `/swift-cycle` | Claude Code 支持基于文件系统的 Agent Skills。 |
+| GitHub Copilot | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user` | Copilot CLI：`/swift-cycle`；不宣称其他界面共用该斜杠语法 | Copilot 在多个使用界面支持 Agent Skills，但只有 Copilot CLI 的文档明确记载了`/swift-cycle`。 |
 
-GitHub CLI supports additional agent hosts. Run `gh skill install --help` to inspect the currently supported `--agent` values rather than relying on a static list.
+GitHub CLI 还支持其他 Agent 宿主。运行`gh skill install --help`查看当前可用的`--agent`值，不依赖静态清单。
 
-Invocation syntax is surface-specific. The installation commands install from the same canonical source package for each host; they do not imply byte-identical installed artifacts or one command syntax across every UI.
+调用语法因使用界面而异。上述命令都从同一个规范源码包安装，但不意味着各宿主的安装产物逐字节相同，也不意味着所有界面共用一种命令语法。
 
-The `gh skill install` command form, agent values, and `--scope user` flag were documented by the first-party manual and matched local GitHub CLI 2.96.0 help output on 2026-09-07. On 2026-10-17, local help also confirmed that `--dir` overrides `--agent` and `--scope`; the current Codex command explicitly selects the documented user `.agents/skills` root. For project-only Codex installation, replace that `--dir` argument with `--agent codex --scope project`. The later Codex remote-install check is recorded below; Claude Code and Copilot installations remain **NOT_VERIFIED**. Local authentication state is environment-specific and is not compatibility evidence.
+`gh skill install`命令形式、Agent 值和`--scope user`参数见官方手册，并于 2026-09-07 与本机 GitHub CLI 2.96.0 帮助输出核对一致。2026-10-17 的本机帮助还确认：`--dir`会覆盖`--agent`和`--scope`；当前 Codex 命令明确选择文档记载的用户级`.agents/skills`根目录。仅为项目安装 Codex Skill 时，将`--dir`参数替换为`--agent codex --scope project`。后续 Codex 远程安装检查记录见下文；Claude Code 和 Copilot 安装仍为 **NOT_VERIFIED**。本机认证状态取决于环境，不是兼容性证据。
 
-## Invocation policy
+<a id="invocation-policy"></a>
 
-Swift Cycle uses two explicit layers rather than semantic implicit invocation:
+## 调用策略
 
-- **Host or system selection remains deliberate and explicit.** An unadopted project must not load Swift Cycle merely because a request resembles its workflow. Codex enforces this boundary with `allow_implicit_invocation: false` in package-relative `agents/openai.yaml` (repository path `skills/swift-cycle/agents/openai.yaml`).
-- **Project adoption is one explicit action.** After adoption, the project's `AGENTS.md` may persistently require later project tasks to load the `swift-cycle` Skill. In Codex-facing instructions the identifier is written `$swift-cycle`; this is a repository binding, not a claim that ChatGPT desktop users invoke it with `$`.
-- Claude Code supports direct `/swift-cycle` invocation, and Copilot CLI supports `/swift-cycle`. Other Copilot surfaces support Agent Skills, but this document does not claim that they expose the Copilot CLI slash syntax. Project-instruction, persistent-binding, and automatic-invocation behavior remains host-specific.
+Swift Cycle 采用两层显式机制，不使用语义隐式调用：
 
-The host-specific field above is not included in the canonical package because the OpenAI validator intentionally accepts a narrower portable frontmatter set.
+- **宿主或系统层由用户明确选择。** 未采用 Swift Cycle 的项目，不得仅因请求类似其工作流而加载它。Codex 通过包内`agents/openai.yaml`（仓库路径为`skills/swift-cycle/agents/openai.yaml`）中的`allow_implicit_invocation: false`执行这一边界。
+- **项目采用只需一次显式动作。** 采用后，项目的`AGENTS.md`可以持久要求后续项目任务加载`swift-cycle`。面向 Codex 的指令写作`$swift-cycle`；这是仓库绑定，不表示 ChatGPT 桌面用户通过`$`调用。
+- Claude Code 支持直接使用`/swift-cycle`，Copilot CLI 支持`/swift-cycle`。其他 Copilot 界面支持 Agent Skills，但本文不宣称它们也提供 Copilot CLI 的斜杠语法。项目指令、持久绑定及自动调用行为仍取决于各宿主。
 
-## Manual installation
+上述宿主专用字段不写入规范安装包的 frontmatter；OpenAI 校验器只接受更窄的可移植 frontmatter 字段集合。
 
-If `gh skill` is unavailable, copy the complete `skills/swift-cycle/` directory into the host's supported project or user Skill directory. Do not copy only `SKILL.md`; keep referenced files and metadata together.
+<a id="manual-installation"></a>
 
-For Codex user scope, use one independent real directory at `$HOME/.agents/skills/swift-cycle`, as documented in [Build skills with Codex](https://learn.chatgpt.com/docs/build-skills). An authorized migration of an existing fixed installation copies that installed directory, including its installer metadata, rather than rebuilding it from current source. Validate the new copy before recoverably removing the exact legacy `.codex/skills/swift-cycle` entry; do not leave a duplicate or source Junction, and preserve unrelated backups.
+## 手动安装
 
-## First-party references
+没有`gh skill`时，将完整的`skills/swift-cycle/`目录复制到宿主支持的项目级或用户级 Skill 目录。不能只复制`SKILL.md`，引用文件和元数据应一并保留。
 
-- [Agent Skills specification](https://agentskills.io/specification)
-- [Build skills with Codex](https://learn.chatgpt.com/docs/build-skills)
-- [Extend Claude Code with skills](https://code.claude.com/docs/en/slash-commands)
-- [Add agent skills for GitHub Copilot](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)
-- [GitHub Copilot CLI command reference](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
-- [GitHub CLI `gh skill install` manual](https://cli.github.com/manual/gh_skill_install)
+Codex 用户范围使用`$HOME/.agents/skills/swift-cycle`下的独立真实目录，依据见官方[使用 Codex 构建技能](https://learn.chatgpt.com/docs/build-skills)。经授权迁移已有固定版本安装时，应复制原安装目录及其安装器元数据，而非从当前源码重建。新副本验证通过后，再以可恢复方式移除精确的旧入口`.codex/skills/swift-cycle`；不保留重复入口或指向源码的 Junction，并保留其他备份。
 
-## Local source and optional helper checks (2026-10-13)
+<a id="first-party-references"></a>
 
-The approved [r29 source standard](engineering_standard.md) is implemented and passed D60 local-source acceptance. Publication and installation are tracked separately below. Architecture diagrams conditionally require Figma editable sources and PNG/SVG exports; package validation does not verify Figma access, drawing quality or actual project adoption. No new host support is inferred.
+## 官方参考
 
-Installed Superpowers **6.4.2** was inspected without editing it. An ignored local fixture used Git Bash on Windows to exercise the real task-brief, task-start, sdd-workspace and task-done helpers:
+- [Agent Skills 规范](https://agentskills.io/specification)
+- [使用 Codex 构建技能](https://learn.chatgpt.com/docs/build-skills)
+- [通过技能扩展 Claude Code](https://code.claude.com/docs/en/slash-commands)
+- [为 GitHub Copilot 添加 Agent Skills](https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills)
+- [GitHub Copilot CLI 命令参考](https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference)
+- [GitHub CLI 的`gh skill install`手册](https://cli.github.com/manual/gh_skill_install)
 
-- Four helpers passed Bash syntax checks; this is not Linux target compatibility.
-- Task 1 and Task 10 were extracted independently; headings inside a code fence did not change task boundaries.
-- A W-only table and a missing task returned exit 3 (negative controls).
-- The first brief omitted global constraints; the final brief retained subsequent overall verification/risk/status sections. Execution must read the formal plan and its source requirements, not the brief alone.
-- task-start reported the unchanged HEAD as BASE. A failing check (exit 7) did not record completion; a successful extraction check appended the fixture task result in the ignored workspace. This proves helper handoff only, not a business task or milestone result.
-- Git Bash was blocked by sandbox MSYS initialization, then ran through the approved host channel. A test-harness POSIX-to-Windows path error was corrected; the third-party plugin was not changed.
+<a id="local-source-and-optional-helper-checks-2026-10-13"></a>
 
-The sole formal plan remains the numbered milestone plan. `Task N` technical headings can coexist with Chinese H2 sections, but an ordinary W table is not directly compatible with this parser. See [integration conditions](../skills/swift-cycle/references/superpowers-bridge.md).
+## 本地源码与可选辅助工具检查（2026-10-13）
 
-**NOT_VERIFIED:** full writing-plans/SDD/native execution workflows, worktree and review lifecycle, commit-based completion, resumability across sessions, Figma drawing/export, real cross-project adoption and target-host use. Those optional helper checks did not publish or install the Skill.
+已批准的 [r29 源码规约](engineering_standard.md)已实施，并通过 D60 本地源码验收。发布和安装分别记录于下文。需要架构图时，须交付 Figma 可编辑原稿与 PNG/SVG 导出；安装包校验不证明 Figma 可用、绘图质量或实际项目采用，也不据此推导新增宿主支持。
 
-## Fixed-version delivery
+当时只读检查了已安装的 Superpowers **6.4.2**。本地忽略的隔离样例在 Windows Git Bash 中实际运行了 task-brief、task-start、sdd-workspace 和 task-done：
 
-On 2026-10-13, the separately authorized r29 delivery published [v1.4.0](https://github.com/Solismuchengxue/skill_swift_cycle/releases/tag/v1.4.0), a stable non-draft Release targeting source commit `ef184206977517171649081b55ae1bdce3e002ba`. Git over SSH verified the remote commit and tag. Existing tags, including `v1.3.2`, were not moved. Subsequent delivery-status documentation does not alter the tagged Skill package, whose Git tree is `e0e5a6affa15da61a7a043a79ca295d42d104496`.
+- 四个辅助工具通过 Bash 语法检查；这不代表 Linux 目标环境兼容。
+- Task 1 与 Task 10 分别提取成功；代码围栏内的标题未改变任务边界。
+- 仅有 W 表格和找不到任务的两个反例均返回退出码 3。
+- 首项 brief 缺少全局约束；末项 brief 保留了后续总体验证、风险及状态栏目。执行时必须同时读取正式计划及其需求来源，不能只读 brief。
+- task-start 将未变化的 HEAD 报告为 BASE。失败检查（退出码 7）没有记为完成；提取检查成功后，将隔离任务结果追加到忽略的工作区。这只证明辅助工具衔接，不是业务任务或里程碑结果。
+- Git Bash 曾被沙箱的 MSYS 初始化限制阻止，随后通过已批准的主机通道运行。测试工具的 POSIX 到 Windows 路径错误已修正，未修改第三方插件。
 
-- **Source:** seven focused static check groups, 31 Markdown files / 54 local links, OpenAI quick_validate, `gh skill publish --dry-run` and Git whitespace checks passed. Source-only `engineering_standard.md`, local records and verification helpers are not installed.
-- **Codex installation:** the official installer helper downloaded the fixed tag into an isolated verification directory. `gh skill install` then updated only the existing Codex user-scope `swift-cycle` with `--pin v1.4.0 --force`. The installed copy remains an ordinary directory, not a source Junction. Its 26-file set matches the tag: 25 non-manifest files match byte-for-byte; the Skill body and portable frontmatter match, and installer-only repository/path/tag/tree metadata is correct. The installed validator passed, implicit invocation remains disabled, and no installer metadata entered the source checkout. `gh skill list` reports pinned `v1.4.0`.
-- **Native discovery:** Codex `0.162.0-alpha.17.2`, through a temporary native stdio process using read-only `skills/list` with `forceReload`, found exactly one enabled `swift-cycle` user Skill at the installed path, with the new r29 descriptor and `Swift Cycle / 快速螺旋` display name. The existing daemon proxy could not connect; no daemon or configuration repair was performed. That discovery check did not verify desktop selection or actual task invocation; the separate follow-up is recorded below. No new chat or model task was created by the discovery probe.
-- **Rollback:** before replacement, the old ordinary directory was copied outside discovered Skill roots. Its 20 files, Skill body and pinned `v1.3.2` metadata were verified against the old tag. An isolated restore copy matched all 20 backup file hashes and passed package validation; the active installation was not switched back. The local backup and guarded restore entry remain available. Other users must preserve their own installed copy before replacement; `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user --pin v1.3.2 --force` is the remote fixed-version rollback alternative after checking the destination is an independent real directory.
+唯一正式计划仍是编号里程碑计划。`Task N`技术标题可与中文 H2（二级）栏目共存，但普通 W 表格不能直接适配该解析器，详见[衔接条件](../skills/swift-cycle/references/superpowers-bridge.md)。
 
-The 2026-10-13 desktop explicit-entry and actual read-only invocation trial passed independent D60 acceptance. The user directly confirmed selecting Swift Cycle in the existing owner chat and submitted a real Skill reference bound to the installed v1.4.0 manifest. The owner loaded that installed package and completed the bounded responsibility, status and reference review of `README.zh-CN.md`, `DESIGN.md` and `docs/engineering_standard.md`. All seven before/after file hashes matched; 14 local links and relevant anchors passed. Existing changes were preserved, and no template tree or report was generated. The old `conformance` directory comment was noted, not repaired.
+**NOT_VERIFIED：**完整 writing-plans／SDD／原生执行流程、工作树与审阅生命周期、基于提交的完成判断、跨会话恢复、Figma 绘制导出、真实跨项目采用及目标宿主使用。上述可选工具检查未发布或安装 Skill。
 
-Desktop selection evidence is the user's confirmation, not an automated screenshot or full UI automation test. Read-only app/window enumeration had identified the target as ChatGPT, so the Computer Use automation prohibition remained respected. The agent performed no automated window capture, activation, click or input, and made no restart, reinstall or configuration repair. External links were not individually checked; cross-project adoption, full Superpowers/Figma execution, other hosts and long-term behavior remain **NOT_VERIFIED**. The completed invocation trial wrote no files; subsequent, separately scoped record maintenance updates existing status documents and must not be described as having no writes.
+<a id="fixed-version-delivery"></a>
 
-D60 independent acceptance of the earlier bounded release, installation and rollback delivery passed on 2026-10-13, with no blocking corrections. That earlier acceptance alone did not establish desktop selection or actual invocation; the later limited trial above has its own evidence and acceptance. Neither result establishes real-project or organization-wide adoption, Figma drawing/export, full Superpowers execution, long-term use or other-host installation. Newly installed skills are available on the next turn; if the selector does not refresh, follow the [official Skill guidance](https://learn.chatgpt.com/docs/build-skills) and restart Codex when convenient.
+## 固定版本交付
 
-## Current Codex installation entry (2026-10-17)
+2026-10-13 另获授权的 r29 交付发布了稳定、非草稿的 [v1.4.0](https://github.com/Solismuchengxue/skill_swift_cycle/releases/tag/v1.4.0)，指向源码提交`ef184206977517171649081b55ae1bdce3e002ba`。通过 SSH Git 核对了远端提交与标签。已有标签（包括`v1.3.2`）未移动。之后的交付状态文档不改变该标签下的 Skill 安装包，其 Git 树为`e0e5a6affa15da61a7a043a79ca295d42d104496`。
 
-The existing fixed v1.4.0 installation was copied unchanged from the legacy user root into `$HOME/.agents/skills/swift-cycle`: all 26 files / 58,587 bytes matched by per-file SHA-256, including installer metadata. The package ID, display name, disabled implicit-invocation policy and absent dependency declaration were preserved. OpenAI quick_validate and YAML checks passed. This was an installation-path migration, not a functional upgrade or a new Release.
+- **源码：**七组针对性静态检查、31 份 Markdown／54 处本地链接、OpenAI quick_validate、`gh skill publish --dry-run`及 Git 空白检查通过。仅源码使用的`engineering_standard.md`、本地记录与验证辅助工具不进入安装。
+- **Codex 安装：**官方安装辅助器先将固定标签下载到隔离验证目录，再由`gh skill install`使用`--pin v1.4.0 --force`，只更新已有的 Codex 用户级`swift-cycle`。安装副本仍是普通目录，不是源码 Junction。26 文件集合与标签匹配：25 个非入口文件逐字节一致；Skill 正文与可移植 frontmatter 一致，安装器专用的仓库、路径、标签和树元数据正确。已安装副本通过校验，隐式调用仍禁用，安装器元数据未进入源码。`gh skill list`报告固定`v1.4.0`。
+- **原生发现：**Codex `0.162.0-alpha.17.2`通过临时原生 stdio 进程，以带`forceReload`的只读`skills/list`请求，在安装路径恰好发现一个已启用的用户级`swift-cycle`，描述为新的 r29 描述，显示名为`Swift Cycle / 快速螺旋`。已有守护进程代理未能连接，未修复守护进程或配置。该发现检查不证明桌面选择或实际任务调用，单独的后续试验见下文；发现探针没有创建新聊天或模型任务。
+- **回退：**替换前，将旧普通目录复制到技能发现根目录之外。其 20 个文件、Skill 正文与固定`v1.3.2`元数据均对照旧标签验证。隔离恢复副本的 20 个文件哈希与备份一致，并通过包校验；活动安装未切回。当时保留本地备份与带保护的恢复入口。其他用户替换前须自行保留原安装；确认目标为独立真实目录后，可用`gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent codex --scope user --pin v1.3.2 --force`远程回退固定版本。
 
-Before cleanup, a temporary native Codex `0.163.0-alpha.10.2` stdio process found the new enabled path. After the exact legacy directory was sent to the Windows Recycle Bin, read-only `skills/list` with `forceReload` found exactly one enabled `swift-cycle` at the new path in each of two local project contexts, with no discovery errors. No extra discovery roots or configuration overrides were supplied; both temporary processes closed normally. Other rollback material was retained. The source repository and package were not moved or renamed, and no global configuration was changed. This does not verify a full desktop restart, selector refresh, actual task invocation at the new path, other hosts or long-term behavior.
+2026-10-13 的桌面显式入口及真实只读调用试验通过 D60 独立验收。用户直接确认在已有负责人聊天中选中 Swift Cycle，并提交了绑定已安装 v1.4.0 入口的真实 Skill 引用。负责人加载该安装包，完成了`README.zh-CN.md`、`DESIGN.md`和`docs/engineering_standard.md`的有界职责、状态与引用核对。七份文件的前后哈希均一致，14 处本地链接及相关锚点通过；保留已有改动，未生成模板树或报告。旧`conformance`目录注释仅被指出，未修复。
 
-The dated 2026-10-13 commands above describe that original delivery, not the current installation destination. For a current remote rollback, first preserve the active directory outside discovered roots and verify that the destination is an independent real directory, then use PowerShell:
+桌面选择证据来自用户确认，不是自动截图或完整 UI 自动化测试。只读应用／窗口枚举将目标识别为 ChatGPT，因此遵守了 Computer Use 自动化禁令。Agent 没有自动截屏、激活窗口、点击或输入，也未重启、重装或修复配置。外部链接未逐项核对；跨项目采用、完整 Superpowers／Figma 执行、其他宿主及长期行为仍为 **NOT_VERIFIED**。已完成的调用试验没有写文件；此后另行授权的记录维护会更新现有状态文档，不能描述成整个后续过程都没有写入。
+
+D60 于 2026-10-13 独立验收通过此前有界的发布、安装和回退交付，无阻塞修正。较早验收本身不证明桌面选择或实际调用，后续有限试验有单独证据和验收。两者都不证明真实项目或组织整体采用、Figma 绘制导出、完整 Superpowers 执行、长期使用或其他宿主安装。新安装技能可在下一轮使用；若选择器未刷新，按[官方技能指南](https://learn.chatgpt.com/docs/build-skills)在方便时重启 Codex。
+
+<a id="current-codex-installation-entry-2026-10-17"></a>
+
+## 当前 Codex 安装入口（2026-10-17）
+
+已有固定 v1.4.0 安装从旧用户根原样复制到`$HOME/.agents/skills/swift-cycle`：26 个文件／58,587 字节，包括安装器元数据，逐文件 SHA-256 一致。包标识、显示名、禁用隐式调用的策略及未声明依赖的状态均保留。OpenAI quick_validate 和 YAML 检查通过。这是安装路径迁移，不是功能升级或新 Release。
+
+清理前，临时原生 Codex `0.163.0-alpha.10.2` stdio 进程已发现启用的新路径。将精确的旧目录送入 Windows 回收站后，在两个本地项目上下文分别用带`forceReload`的只读`skills/list`查询，均只发现一个已启用的`swift-cycle`，路径为新入口，发现错误为零。没有额外指定发现根或配置覆盖，两个临时进程均正常关闭。其他回退材料保留，源码仓库与包未移动或重命名，全局配置未变。此结果不证明完整桌面重启、选择器刷新、新路径实际任务调用、其他宿主或长期行为。
+
+上文标注 2026-10-13 的命令描述原交付，不代表当前安装目标。当前远程回退前，应先将活动目录备份到发现根之外，并确认目标是独立真实目录，再使用 PowerShell：
 
 ```powershell
 gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.3.2 --force
 ```
 
-Alternatively restore only a verified backup into `.agents/skills/swift-cycle`; do not recreate the legacy discovery entry. Neither rollback alternative was executed during this path migration.
+也可仅将经过验证的备份恢复到`.agents/skills/swift-cycle`，不重建旧发现入口。本次路径迁移未执行这两种回退方式。
 
-## Source-only initialization and structure revision (2026-10-18)
+<a id="source-only-initialization-and-structure-revision-2026-10-18"></a>
 
-The approved increment makes valid root TODO.md and DEVLOG.md an initialization completion condition, separates initialization from mere adoption/maintenance, and adds bounded reuse, responsibility/dependency, capability navigation and behavior-preserving refactor guidance. At the 2026-10-18 source-only closeout, this was an uncommitted source revision on the r29 baseline, not an installed or published update. Historical r29 acceptance and v1.4.0 delivery above remain historical; the separately approved local installation is recorded below.
+## 仅源码的初始化与结构修订（2026-10-18）
 
-The pre-edit missing-record negative fixture was rejected as expected; this checks the artifact oracle, not an independently replayed old-agent failure. The existing seven static check groups and OpenAI quick_validate passed; the ten core template H2 sequences are unchanged. The checks covered 31 Markdown files and 60 local Markdown links; local anchors were additionally checked. These are static results, not behavior or host compatibility claims.
+已批准的增量将根级 TODO.md、DEVLOG.md 的有效交付设为初始化完成条件，区分正式初始化与仅采用／普通维护，并增加有界复用、职责／依赖、能力导航及行为保留式重构指导。在 2026-10-18 仅源码收口时，它仍是 r29 基线上的未提交修订，不是安装或发布更新。上文 r29 验收及 v1.4.0 交付保持历史性质，之后另获批准的本地安装见下文。
 
-The current agent read the revised source instructions, made case-specific decisions, authored missing records directly and read back the resulting artifacts in 13 owned temporary subscenarios:
+修改前的缺记录反例按预期被拒绝；这只检查产物判定标准，不是独立重放旧 Agent 的失败。已有七组静态检查与 OpenAI quick_validate 通过，十份核心模板的 H2 栏目顺序未变。检查覆盖 31 份 Markdown 与 60 处本地 Markdown 链接，并补查本地锚点；这些是静态结果，不代表行为或宿主兼容。
 
-| Subscenarios | Observed result |
+当时的 Agent 阅读修订后源码指令，在 13 个自有临时子场景中逐例判断、直接填写缺失记录，并读回产物：
+
+| 子场景 | 实际结果 |
 | --- | --- |
-| A: new Git record initialization; B: existing/repeated initialization | Valid root records; A had actual exact ignore and untracked checks. A/B each had two repeat readbacks with identical artifact bytes and no duplicate ignore or date copies. |
-| C: only TODO missing; only DEVLOG missing | Only the missing file was added; the other file's SHA-256 was unchanged. |
-| D: empty file; teaching placeholder | Both were rejected as incomplete; existing bytes were preserved, not overwritten. |
-| E: non-Git record initialization | Valid root records; no `.git` or `.gitignore` was created; Git checks were not applicable. |
-| F: read-only; ordinary maintenance; adoption only | No record creation or ignore changes. Maintenance changed only its intended README text; adoption changed only its binding. |
-| G: confirmed-policy conflict; safe I/O substitute | Both remained incomplete without policy, permission or existing-content changes. The I/O substitute used a directory at the TODO path, not a real ACL modification. |
-| H: bounded fictional structural change | Located the existing parser, caller and tests; added a thin second entry by reuse, documented responsibility/dependency/placement and capability links. Three normal/failure/cross-entry regression tests passed; the original parser and caller behavior were retained. |
+| A：新 Git 项目记录初始化；B：已有／重复初始化 | 根级记录有效；A 实查精确忽略和未跟踪状态。A/B 各重复读回两次，产物字节相同，无重复忽略项或日期副本。 |
+| C：仅缺 TODO；仅缺 DEVLOG | 只补缺失文件，另一份文件的 SHA-256 不变。 |
+| D：空文件；教学占位 | 两例均判初始化未完成，保留已有字节，不覆盖。 |
+| E：非 Git 项目记录初始化 | 根级记录有效，未创建`.git`或`.gitignore`，Git 检查不适用。 |
+| F：只读；普通维护；仅采用 | 不创建记录或改 ignore；维护仅改目标 README 文本，采用仅改绑定。 |
+| G：已确认策略冲突；安全 I/O 替身 | 两例均保持未完成，未改策略、权限或已有内容；I/O 替身是在 TODO 路径放目录，不是真改 ACL。 |
+| H：有界虚构结构变化 | 找到已有解析器、调用者和测试，复用以增加薄入口，说明职责、依赖、落点及能力链接。三组正常／失败／跨入口回归通过，原解析器与调用行为保留。 |
 
-All 13 subscenarios met their expected outcomes, including four expected incomplete cases; no unresolved validation failure or skipped subscenario remained. The missing-record and missing-entry negative controls detected their intended absence. Artifact scripts only inspected results; no template-copy initializer or new persistent helper was added to the package. These results cover isolated local-record initialization and bounded structural guidance, not complete product initialization. They are not independent fresh-agent pressure repetitions or actual Skill invocation through a host.
+13 个子场景均符合预期，包括四个预期未完成场景，无未解决验证失败或跳过项。缺记录和缺入口反例均检测到目标缺失。产物脚本只检查结果，未向包内添加模板复制初始化器或新的持久辅助器。结果覆盖隔离的本地记录初始化与有界结构指导，不是完整产品初始化，也不是独立全新 Agent 压力重复试验或经宿主真实调用 Skill。
 
-Only the owned temporary Git fixture had a successful `git init`; the source repository had no Git writes, staging or commits. The installed 26-file copy was read-only compared before/after and remained unchanged. No host discovery/invocation, install, publish or publish dry-run, global configuration, business service or consumer-project operation was performed. Historical release/installation results above do not validate this unpublished increment.
+仅自有临时 Git 样例成功执行了一次`git init`；源码仓库无 Git 写入、暂存或提交。安装的 26 文件副本经过前后只读比对，保持不变。未执行宿主发现／调用、安装、发布或发布预检、全局配置、业务服务或消费者项目操作。上文历史发布／安装结果不验证这一未发布增量。
 
-## Local accepted-source installation and fresh initialization (2026-10-19)
+<a id="local-accepted-source-installation-and-fresh-initialization-2026-10-19"></a>
 
-The current increment received independent D60 source-only acceptance (`PASS`, no issues), distinct from historical r29 acceptance. A later explicit user authorization covered updating only the existing local Skill and testing a new isolated project; no Git commit, publication or consumer-project change was included.
+## 本地已验收源码安装与全新初始化（2026-10-19）
 
-The existing real directory at `$HOME/.agents/skills/swift-cycle` had 26 files / 58,587 bytes with v1.4.0 metadata and no additional files or local configuration differences. Its exact original bytes were backed up outside discovered roots. A local-only `gh skill install --from-local` probe supplied the normal local-path metadata; the active directory was then updated in place from that verified payload, without deleting or moving the entry. Nine files changed and seventeen, including `agents/openai.yaml`, retained their original bytes. The package remains explicit-only, with no dependency declaration or global configuration change. The retired `.codex` entry was not recreated; historical backups were not cleaned.
+本增量获得 D60 独立的仅源码验收（`PASS`，无问题），与历史 r29 验收区分。之后用户另行明确授权，只更新已有本地 Skill，并测试一个新的隔离项目；未包含 Git 提交、发布或消费者项目变更。
 
-The result contains 26 files / 64,401 bytes. All 25 non-manifest files match the accepted canonical package byte-for-byte. SKILL.md has the same body and portable frontmatter, plus installer-local `metadata.local-path`; GitHub pinned/ref/tree/repository fields were removed rather than misrepresenting this unpublished content as v1.4.0. `gh skill list --dir` reports the local source, `pinned=false`, and an empty version. This is a mutable local-source installation, not a new commit, tag or Release.
+已有真实目录`$HOME/.agents/skills/swift-cycle`包含 26 个文件／58,587 字节，带 v1.4.0 元数据，无额外文件或本地配置差异。原始字节完整备份到发现根之外。本地`gh skill install --from-local`探针得到标准的本地路径元数据；随后用经过验证的安装内容就地更新活动目录，没有删除或移动入口。九个文件变化，十七个文件（含`agents/openai.yaml`）保持原字节。包仍仅显式调用，未声明依赖，也未改全局配置；未重建已退役的`.codex`入口，未清理历史备份。
 
-Content SHA-256 digests of the saved per-file manifest sequences (relative name, byte count, lowercase file SHA-256, tab-delimited with LF; entry order retained in the verification manifests):
+结果为 26 个文件／64,401 字节。25 个非入口文件与已验收规范包逐字节一致。SKILL.md 正文和可移植 frontmatter 相同，另有安装器本地的`metadata.local-path`；GitHub 固定版本、ref、tree 和仓库字段已移除，避免将未发布内容误标为 v1.4.0。`gh skill list --dir`报告本地源码、`pinned=false`及空版本。这是可变本地源码安装，不是新提交、标签或 Release。
 
-| Object | Digest |
+保存的逐文件清单序列内容 SHA-256 如下。序列为相对名称、字节数、小写文件 SHA-256，以制表符分隔、LF 换行，顺序保留在验证清单中：
+
+| 对象 | 摘要 |
 | --- | --- |
-| Original installation and exact backup | `c843a11faebfa6edadc77cad6bb43ab3ad658531940a7c55731b5f75a3adb314` |
-| Accepted canonical package | `6e5bd6275dce94ed923e2e7b22b080ae94709ef8d5e073bfc698c742f7fda7c2` |
-| Updated installation, including local metadata | `f36e79a3b55bd8d3bb0ead99c766c4da5dbec415b9c2123230b40523970378df` |
+| 原安装与精确备份 | `c843a11faebfa6edadc77cad6bb43ab3ad658531940a7c55731b5f75a3adb314` |
+| 已验收规范包 | `6e5bd6275dce94ed923e2e7b22b080ae94709ef8d5e073bfc698c742f7fda7c2` |
+| 更新后安装，含本地元数据 | `f36e79a3b55bd8d3bb0ead99c766c4da5dbec415b9c2123230b40523970378df` |
 
-The agent explicitly loaded the updated installed manifest, relevant references and minimal templates, then authored a fresh, initially empty, non-Git fictional card-ordering documentation project. It created seven actual documents: README, AGENTS, DESIGN, docs/blueprint, docs/requirements, root TODO and DEVLOG. TODO contains the project's real current goal, executable card-check actions, no-blocker statement and next step; DEVLOG records the actual non-Git/manual-first decision and its reason. No old A–H records or template-copy initializer were used. Two repeat readbacks preserved all seven file hashes without resets, appended entries or date copies. Git checks were not applicable and no Git repository was created.
+Agent 显式加载更新后的安装入口、相关参考和最小模板，从空目录亲自编写了一个全新的非 Git 虚构纸卡排序文档项目。共创建七份实际文档：README、AGENTS、DESIGN、docs/blueprint、docs/requirements、根级 TODO 和 DEVLOG。TODO 填写项目真实当前目标、可执行纸卡检查行动、无阻塞说明和下一步；DEVLOG 记录实际的“非 Git／先手工”决定及理由。未使用旧 A–H 记录或模板复制初始化器。两次重复读回保留全部七文件哈希，无重置、追加条目或日期副本；Git 检查不适用，未创建 Git 仓库。
 
-Source and installed OpenAI package validation both passed. Seven existing source-check groups passed (31 Markdown files / 62 local links). Twelve read-only installation/project/boundary tests passed with zero failures or skips, checking the 26-file backup/payload, provenance, preserved configuration, 25 installed Markdown files / 30 local links, seven project Markdown files / 14 local links, headings, meaningful record content, binding and repeat preservation. The temporary PowerShell control script passed the syntax/encoding gate; optional PSScriptAnalyzer was not run in fast mode. An initial temporary installer probe hit sandbox directory access restrictions; the precisely approved host channel completed it without ACL changes.
+源码和安装副本均通过 OpenAI 包校验。已有七组源码检查通过，覆盖 31 份 Markdown／62 处本地链接。十二项只读安装／项目／边界测试无失败、无跳过，核对 26 文件备份与安装内容、来源、配置保留、25 份已安装 Markdown／30 处本地链接、七份项目 Markdown／14 处本地链接、标题、有效记录、绑定及重复保留。临时 PowerShell 控制脚本通过语法／编码检查；快速模式未运行可选 PSScriptAnalyzer。初次临时安装器探针遇到沙箱目录访问限制，之后经精确批准的主机通道完成，未改 ACL。
 
-This demonstrates actual initialization by the existing agent using the updated installed files, plus separate artifact assertions. It does not establish independent fresh-agent behavior, automatic host discovery/selection/invocation, application runtime, actual ACL-failure handling, production or long-term reliability. The exact backup, per-file manifests, guarded restore entry and new project were retained in the owned temporary workspace; actual rollback was not executed. Source instructions/templates, source HEAD and empty staging were preserved. No source Git write, publishing/dry-run, Podcast, browser, service or global-setting operation was performed. Future turns can use the updated files; selector refresh was not tested.
+这证明已有 Agent 实际使用更新后的安装文件初始化项目，并有独立的产物断言；不证明独立全新 Agent 行为、宿主自动发现／选择／调用、应用运行、真实 ACL 失败处理、生产或长期可靠性。精确备份、逐文件清单、带保护的恢复入口和新项目当时保留在自有临时工作区，未执行实际回退。源码指令／模板、源码 HEAD 和空暂存保持。未执行源码 Git 写入、发布／发布预检、Podcast、浏览器、服务或全局设置操作。后续轮次可使用更新文件，未测试选择器刷新。
 
-## README presentation source revision (2026-10-28)
+<a id="readme-presentation-source-revision-2026-10-28"></a>
 
-The user-approved README template now provides Emoji H2/H3 headings, a centered introduction and explicit navigation anchors, tables, command/result examples, and optional previews and folded FAQ. Its six core document responsibilities retain their order; optional public-GitHub Star History stays last. Contribution and disclaimer sections are omitted while actual limitations, unverified scope and licensing remain explicit. Output variables must be resolved and unsupported badges, images or links removed. The other nine core templates, including TODO, retain their original bytes; the proposed TODO redesign remains a separate draft.
+## README 展示模板源码修订（2026-10-28）
 
-Seven existing local contract-check groups and four focused README checks passed. They cover all ten core H2 sequences, comment-aware heading parsing, README-only output-link slots, unique explicit navigation anchors, and two in-memory static instances (public GitHub and non-Git). These instances verify substitution and conditional structure; they do not execute the example commands or demonstrate an agent adopting the template. The local checks remain ignored development aids rather than scripts shipped in the portable Skill. OpenAI `quick_validate.py`, local Markdown target checks and `git diff --check` passed.
+用户批准的 README 模板增加 Emoji H2/H3（二／三级）标题、居中介绍、显式导航锚点、表格、命令／结果示例，以及按需使用的预览和折叠 FAQ。六项核心文档职责保持顺序；公开 GitHub 仓库的可选 Star History 始终最后。不生成贡献或免责声明栏目，真实限制、未验证范围和许可仍须明确。输出变量必须填实，无依据的徽章、图片或链接须删除。其他九份核心模板（包括 TODO）保留原字节，拟议的 TODO 重设计当时仍是独立草稿。
 
-This is an unpublished source revision. The source HEAD and empty staging remain unchanged, and the existing installed 26-file copy is byte-for-byte preserved. No commit, push, Release, publish dry-run, installation update, global configuration change or consumer-project operation was performed. GitHub visual rendering, independent agent behavior and host discovery/invocation were not tested by this revision. Historical acceptance and installation records above retain their dated scope.
+已有七组本地契约检查与四项 README 专项检查通过，覆盖十份核心模板 H2 栏目、忽略教学注释的标题解析、仅 README 可用的输出链接变量、唯一显式导航锚点，以及公开 GitHub／非 Git 两个内存静态实例。静态实例检查变量替换和条件结构，不执行示例命令，也不证明 Agent 实际采用模板。本地检查仍是忽略的开发辅助，不作为脚本随 Skill 分发。OpenAI `quick_validate.py`、本地 Markdown 目标检查和`git diff --check`通过。
 
-## TODO and DEVLOG source revision (2026-10-28)
+该记录描述当时未发布的源码修订。源码 HEAD 与空暂存未变，已有安装副本的 26 文件逐字节保持。未执行提交、推送、Release、发布预检、安装更新、全局配置或消费者项目操作；未测试 GitHub 视觉渲染、独立 Agent 行为或宿主发现／调用。上文历史验收和安装记录保留各自日期范围。
 
-The subsequent user-approved source revision replaces the TODO draft with a progress/milestone template and the DEVLOG draft with compact dated list entries. TODO covers current results and gaps, milestone position, tasks/problems, blockers and the next stage. Existing roadmaps/plans retain their authoritative detail; projects without milestones state that honestly and do not create a roadmap just to fill the template. DEVLOG keeps useful conclusions and reasons, with optional real-milestone grouping when discovery becomes difficult. Neither template uses Emoji or copies the completion history into a second ledger.
+<a id="todo-and-devlog-source-revision-2026-10-28"></a>
 
-The existing required root TODO/DEVLOG initialization gate was already present in both source and the installed Skill. Its three canonical trigger/readback/non-initialization bullets remain byte-identical to the pre-revision source. This revision updates presentation, responsibility summaries and event-driven maintenance guidance; it does not broaden creation authority, reset existing records or change ignore-policy handling. New TODO columns preserve the underlying goal/action/blocker/future-direction information without requiring the old headings literally.
+## TODO 与 DEVLOG 源码修订（2026-10-28）
 
-Three new focused static checks first failed against the old format and then passed after implementation; seven existing package groups and four README checks also passed (14 total). They cover all ten core H2 contracts, TODO-to-standard column alignment, compact DEVLOG entries and conditional grouping, no Emoji, no-milestone guidance, synchronization triggers and the preserved initialization boundary. The package checks covered 31 Markdown files / 82 local links. OpenAI `quick_validate.py` and Git whitespace checks passed; the canonical Skill remains 67 lines with no shipped scripts or dependencies. Helpers and per-path preservation evidence remain ignored local development material.
+后续用户批准的源码修订将 TODO 草稿替换为进度／里程碑模板，将 DEVLOG 草稿替换为紧凑的带日期列表条目。TODO 展示当前结果与差距、里程碑位置、任务／问题、阻塞和下一阶段；已有路线图／计划保留详细正文。未划分里程碑的项目如实说明，不为填模板而创建路线图。DEVLOG 保留有效结论及理由，查找困难时可按真实里程碑分组。两模板不使用 Emoji，也不把完成历史复制成第二套账本。
 
-The preceding README source increment is preserved. Source HEAD/index and empty staging remain unchanged; all 26 installed files, the README template and the DESIGN template retain their pre-revision bytes. No commit/push, publishing/dry-run, installation, global configuration, other-project or NAS operation was performed. DESIGN remains the next proposal. These checks are source assertions, not fresh-agent adoption, initialization-behavior reruns, host invocation or long-term-use evidence; historical initialization acceptance and failures retain their original scope.
+根级 TODO/DEVLOG 的必需初始化完成条件此前已存在于源码和已安装 Skill 中。规范入口的触发、读回及非初始化保护三条规则，与修改前源码逐字节一致。本次仅更新展示、职责摘要和事件触发维护指导，不扩大创建授权、不重置记录或改变忽略策略。新 TODO 栏目保留目标／行动／阻塞／后续方向的信息职责，不要求沿用旧标题字面名称。
 
-## DESIGN overview source revision (2026-10-28)
+三项新增静态检查先在旧格式下失败，实施后通过；已有七组包检查和四项 README 检查也通过，共 14 项。覆盖十份核心 H2 栏目、TODO 与规约栏目一致性、紧凑 DEVLOG、条件分组、无 Emoji、无里程碑用法、同步触发及初始化边界。包检查覆盖 31 份 Markdown／82 处本地链接。OpenAI `quick_validate.py`和 Git 空白检查通过；规范 Skill 保持 67 行，无随包脚本或依赖。辅助器及逐路径保全证据仍为忽略的本地开发材料。
 
-The subsequent user-approved DESIGN template uses seven overview sections: design summary, structure/responsibilities, core functional approach, interfaces/data, code organization, delivery/runtime shape and the detailed-document guide. It replaces the former fixed process/failure, design-tradeoff and verification/limitations sections with the confirmed overview responsibilities, keeping necessary reasoning, behavior-preserving regression and evidence boundaries in the relevant rules and linked sources. It does not restructure this repository's existing design document or a consumer project.
+此前 README 源码增量保留。源码 HEAD/index 与空暂存未变，26 个安装文件、README 模板和 DESIGN 模板保留修改前字节。未执行提交／推送、发布／预检、安装、全局配置、其他项目或 NAS 操作；当时下一提案仍为 DESIGN。这些是源码断言，不是全新 Agent 采用、初始化行为重跑、宿主调用或长期使用证据；历史初始化验收及失败保持原范围。
 
-New or authorized whole-document DESIGN restructuring requires at least one real UML structure diagram; the default component view describes actual modules, interfaces and dependencies. Other sequence/activity, class, state and deployment views remain conditional on actual relationships. Architecture UML retains editable Figma sources plus PNG/SVG exports and an original-source link; missing tools, authority or required drawings remain incomplete. Template instructions and text placeholders are not delivered diagrams. Ordinary small edits preserve effective existing structure; a minimal project does not invent services, classes, storage or detailed-document trees.
+<a id="design-overview-source-revision-2026-10-28"></a>
 
-Three new focused source checks first failed against the old template and then passed. Seven existing package groups, three TODO/DEVLOG checks and four README checks also passed (17 total), covering all ten core H2 contracts, DESIGN-to-standard alignment, UML source/export requirements and conditional views, retained capability navigation/refactor rules, and prior template regressions. Package checks covered 31 Markdown files / 89 local links; OpenAI `quick_validate.py` and Git whitespace checks passed. The canonical Skill remains 67 lines, with no scripts, dependencies or diagram assets added to the portable package; the checks remain ignored local development aids.
+## DESIGN 概要设计源码修订（2026-10-28）
 
-The preceding README/TODO/DEVLOG template bytes are preserved. Source HEAD/index and empty staging remain unchanged, and all 26 installed files retain their pre-revision bytes. No commit/push, publishing/dry-run, installation update, global configuration, other-project or NAS operation was performed. These results establish source/template contracts only, not real Figma drawing/export, visual rendering, independent agent adoption, host invocation, initialization reruns or runtime behavior. Historical evidence above retains its original scope.
+后续用户批准的 DESIGN 模板采用七项概要栏目：设计概要、结构与职责、核心功能思路、接口与数据、代码组织、交付／运行形态及详细文档导读。原固定的流程／失败、设计取舍、验证／限制栏目被确认的概要职责替代；必要判断、行为保留回归和证据边界仍在相关规则及所引用正文中维护。此修订不重整本仓库已有设计文档，也不改消费者项目。
 
-A subsequent same-day user request changes the DESIGN code/directory section from a table to an annotated `text` directory tree, following the presentation in the [damaihelper README](https://github.com/Guyungy/damaihelper/blob/main/README.md#-项目结构), read through the GitHub connector. The template uses branch glyphs and trailing responsibility comments with clearly illustrative paths; actual project layout must replace them, and the tree neither creates directories nor replaces UML. One new source assertion detected the old missing-tree format before the edit, then passed alongside the 17 existing checks (18 total); the package still has 31 Markdown files / 89 local links. Official package and whitespace checks passed. This follow-up changes only the DESIGN template, its standard/profile guidance, repository check rules and this validation note; per-path comparison preserves every other tracked file, source HEAD/index/empty staging and all 26 installed files. The helpers remain ignored; no Git delivery, installation or physical-directory reorganization was performed.
+新建或获准整体重整 DESIGN 时，至少需要一张真实 UML 结构图，默认组件图说明实际模块、接口和依赖。其他时序／活动、类、状态和部署视图按真实关系选用。架构类 UML 保留 Figma 可编辑原稿、PNG/SVG 导出及原图链接；缺工具、授权或必需图示时明确未完成。模板说明和文本占位不算已交付图示。普通小改保留有效既有结构；最小项目不虚构服务、类、存储或详细文档树。
 
-## Unified structure and document reference (2026-10-28)
+三项新增源码检查先在旧模板下失败，随后通过；已有七组包检查、三项 TODO/DEVLOG 和四项 README 检查也通过，共 17 项。覆盖十份核心 H2 栏目、DESIGN 与规约一致性、UML 原稿／导出及条件视图、能力导航／重构规则和先前模板回归。包检查覆盖 31 份 Markdown／89 处本地链接；OpenAI `quick_validate.py`和 Git 空白检查通过。规范 Skill 保持 67 行，未向可移植包加入脚本、依赖或图像资源；校验仍是忽略的本地开发辅助。
 
-The user-approved consolidation keeps `references/document-profiles.md` as the single project-structure/document reference and retires `references/document-information-architecture.md` from canonical source. The merged document has six sections for document responsibilities/selection, templates, naming/navigation, code organization/reuse, local-record initialization preflight, and bounded cleanup/recovery. Related Skill/adoption routes, bilingual entries, source design, standard and repository validation rules now point to the merged document and relevant sections. No redirect stub, duplicate current body or replacement template tree was introduced.
+此前 README/TODO/DEVLOG 模板字节保留，源码 HEAD/index、空暂存及 26 个安装文件保持。未执行提交／推送、发布／预检、安装更新、全局配置、其他项目或 NAS 操作。结果仅证明源码／模板契约，不证明真实 Figma 绘制导出、视觉渲染、独立 Agent 采用、宿主调用、初始化重跑或运行行为；上文历史证据保留原范围。
 
-Three new source checks first failed against the separated files and then passed, together with the 18 existing static checks (21 total). They verify the six-section authority, absence of the retired source file and active Markdown links to it, 10 merged-document fragment targets, and exact preservation of all six initialization-preflight steps, the canonical initialization bullets, naming rules, reuse/refactor paragraphs and recovery boundaries. Package checks covered all ten core template H2 contracts, 30 Markdown files / 91 local links. OpenAI `quick_validate.py` and Git whitespace checks passed. These are source assertions, not agent-execution or initialization-behavior reruns.
+同日后续请求参考经 GitHub 连接器读取的 [damaihelper README](https://github.com/Guyungy/damaihelper/blob/main/README.md#-项目结构)，把 DESIGN 的代码／目录表格改为带注释的`text`目录树。模板采用树枝字符和行尾职责注释，明确路径只是示意，实际应用须替换为真实布局；目录树不创建目录，也不替代 UML。新增源码断言先检测旧格式缺少目录树，修改后与已有 17 项检查共同通过，共 18 项；包仍为 31 份 Markdown／89 处本地链接，官方包与空白检查通过。后续修订仅涉及 DESIGN 模板、对应规约／职责指导、仓库校验规则和本验证说明；逐路径比对确认其他已跟踪文件、源码 HEAD/index、空暂存及 26 个安装文件保留。辅助器保持忽略，未执行 Git 交付、安装或物理目录重组。
 
-The exact retired-file bytes were preserved in ignored local evidence and checked against the pre-change digest. All templates, source HEAD/index/empty staging and the existing installed 26-file copy retain their pre-consolidation bytes. Historical evidence and fixture references were not rewritten. The source package now has one fewer reference file; this does not update an installed copy. No commit/push, publishing/dry-run, installation, global configuration, other-project or NAS operation was performed. Native discovery/invocation, real adoption and runtime effects remain unverified by this consolidation.
+<a id="unified-structure-and-document-reference-2026-10-28"></a>
 
-A subsequent bounded audit follow-up corrects the root DESIGN status summary to distinguish the current unpublished source, fixed Release v1.4.0 and the mutable 2026-10-19 local installation. README now fills `LICENSE_STATUS` independently of the optional license-file badge/link; without a file it keeps truthful status text, including an explicit unknown-status fallback. The Chinese README presentation paragraph delegates to the merged rules instead of repeating them. Related standard and validation guidance follow the same distinction. Three added checks (two audit follow-ups and one no-license-file test with public-GitHub/non-Git cases) bring the current static total to 24; existing template, merge and navigation contracts remain in scope. These remain source/static-instance checks, not executed example commands, visual rendering, legal assessment or actual agent adoption. Other templates, source HEAD/index/empty staging and all 26 installed files remain preserved; no commit/push, publication/dry-run or installation update was performed.
+## 结构与文档参考合并（2026-10-28）
 
-## Professional document names and optional manual (2026-10-28)
+用户批准的合并保留`references/document-profiles.md`为唯一项目结构／文档参考，从规范源码退役`references/document-information-architecture.md`。合并后共六章：文档职责与选择、模板、命名与导航、代码组织与复用、本地记录初始化预检、有界整理与恢复。Skill／采用入口、双语说明、源码设计、规约及仓库验证规则指向合并文档与对应章节；未增加重定向空壳、重复现行正文或替代模板树。
 
-The user-approved source naming revision uses docs/VISION.md for product vision/scope, docs/PRD.md for confirmed product requirements, conditional docs/SAD.md for detailed architecture, docs/ROADMAP.md for stage arrangements, and stable numbered plans such as docs/milestones/M1_PLAN.md and M2_PLAN.md. These fixed filenames are explicit exceptions to ordinary lowercase snake_case docs naming. VISION moved from the former root template into templates/docs so its source location matches its intended target. Existing complete consumer equivalents keep their original paths unless their migration is separately authorized; no consumer document was renamed here. ADR remains an independent decision record rather than a substitute for SAD.
+三项新增源码检查先在分离结构下失败，随后与已有 18 项静态检查共同通过，共 21 项。验证六章单一来源、退役文件及其活动 Markdown 入链不存在、10 个合并文档锚点有效，以及六条初始化预检、规范初始化规则、命名、复用／重构段落和恢复边界精确保留。包检查覆盖十份核心模板 H2 栏目、30 份 Markdown／91 处本地链接。OpenAI `quick_validate.py`和 Git 空白检查通过；这些是源码断言，不是 Agent 执行或初始化行为重跑。
 
-The optional operational template is now docs/MANUAL.md, retaining its operational boundary, startup/shutdown, verification, recovery and troubleshooting responsibilities. The standalone evaluation template and default creation routes were retired; necessary comparisons and trial evidence remain in the appropriate PRD/design/ADR, and required verification/unknowns are preserved. Its exact pre-change bytes were backed up outside the portable package. Historical validation/release records and external frozen example links retain their original names and scope.
+退役文件当时以原字节保存在忽略的本地证据中，并与修改前摘要核对。全部模板、源码 HEAD/index、空暂存和已有安装副本的 26 文件保留合并前字节，历史证据与隔离样例引用未改写。源码包减少一份参考文件，不更新安装副本。未执行提交／推送、发布／预检、安装、全局配置、其他项目或 NAS 操作；合并不证明原生发现／调用、真实采用或运行效果。
 
-Four new source checks first failed against the former names and then passed; together with the 24 prior checks the current static total is 28. Checks cover exact disk filename case, all six template moves, removal of the evaluation template/creation routes, unchanged core H2 responsibilities (with the roadmap's vision label updated), SAD/ADR separation, MANUAL's operational scope, fixed-name exceptions and brownfield preservation. Existing checks cover 29 Markdown files / 91 local links; the naming pass additionally checks active local target filename case. Official quick_validate and Git whitespace checks passed. The local new-file check was corrected to distinguish teaching-table placeholders in templates from empty delivered prose; ordinary document naming/empty-table checks remain enabled. Frozen before snapshots and past results were not rewritten.
+后续有界复核修正根级 DESIGN 状态摘要，区分当前未发布源码、固定 Release v1.4.0 和可变的 2026-10-19 本地安装。README 独立填写`LICENSE_STATUS`，许可文件徽章／链接另按事实保留；无文件时仍有真实许可状态和明确的未知回退写法。中文 README 展示段落改为引用合并规约，避免整段重复；相关标准和验证规则同步。新增三项检查（两项复核修正和一项含公开 GitHub／非 Git 场景的无许可文件检查），当时静态总数达到 24；既有模板、合并及导航契约仍在范围内。它们仍是源码／静态实例检查，不是示例命令执行、视觉渲染、法律判断或实际 Agent 采用。其他模板、源码 HEAD/index、空暂存和 26 安装文件保持；未执行提交／推送、发布／预检或安装更新。
 
-Source HEAD/index and empty staging remain unchanged, and all 26 installed files retain their pre-revision bytes. The ROADMAP filename case is verified on disk; its case-only Git rename must be registered during a later explicitly authorized staging operation, without changing Git configuration. No commit/push, publication/dry-run, installation, global configuration, other-project or NAS operation was performed. These are source/name/contract checks, not fresh-agent adoption, host invocation, actual diagrams, consumer migration or runtime evidence.
+<a id="professional-document-names-and-optional-manual-2026-10-28"></a>
 
-A later user clarification restores docs/BLUEPRINT.md and the Project Blueprint title, covering goals, vision, users, scenarios, core capabilities and boundaries. The template remains under templates/docs; active defaults, links, terminology, standard and filename exceptions now use BLUEPRINT, while the earlier VISION naming record above stays historical. The roadmap's upstream-association heading again refers to the blueprint, and the responsibility table retains directory-depth-first/A–Z order. Existing core content and the blueprint's seven H2 responsibilities remain intact.
+## 专业文档命名与可选手册（2026-10-28）
 
-The two Packet templates were inspected to explain their optional snapshot roles; neither was changed or removed. Review Packet is a frozen review handoff only when such review is needed; Closeout Packet summarizes evidence for an external recipient. These do not become required project documents, ongoing state ledgers or external acceptance/release authority. This clarification does not authorize creating a reviewer or operating another project. Source checks retain their static scope; current naming/template/package regression, local links and whitespace checks passed, with source HEAD/index/empty staging and the installed 26-file copy preserved. Consumer paths, historical evidence and global configuration were not migrated.
+用户批准的源码命名修订当时以 docs/VISION.md 承载产品愿景与范围，docs/PRD.md 承载确认需求，按需 docs/SAD.md 承载详细架构，docs/ROADMAP.md 承载阶段安排，里程碑使用 docs/milestones/M1_PLAN.md、M2_PLAN.md 等稳定编号计划。这些固定文件名是普通 docs 小写 snake_case 规则的明确例外。VISION 从原根级模板移到 templates/docs，使源码落点对应目标位置。已有完整等价消费者文档继续保留原路径，除非其迁移另获授权；本次没有重命名消费者文档。ADR 仍是独立决策记录，不替代 SAD。
 
-## Optional review and closeout template retirement (2026-10-28)
+可选操作模板改为 docs/MANUAL.md，保留操作边界、启动／停止、验证、恢复与排障职责。独立 evaluation 模板及默认创建入口退役，必要比较和试用证据留在相应 PRD／设计／ADR，验证及未知边界保留；修改前精确字节在可移植包之外备份。历史验证／发布记录及外部冻结示例链接保留原名称和范围。
 
-Following separate user approval, review-packet.md and closeout-packet.md were removed from the portable template set through the Windows Recycle Bin. Active template links and specialized creation terminology were retired from document selection, routing, bilingual guidance, source design and maintenance rules. Review/delivery now reuses existing conclusions and evidence; an actual recipient need may justify a bounded snapshot or summary without a fixed template or mandatory report. Delivered snapshots remain frozen and distinct from current truth; no external acceptance, activation, publishing or runtime authorization follows from a summary. Existing consumer documents were not removed or migrated, and historical records above retain their original scope.
+四项新增命名检查先在旧名称下失败，随后与已有 24 项共同通过，共 28 项。覆盖磁盘文件名精确大小写、六组模板迁移、evaluation 模板／创建入口移除、核心 H2 栏目职责不变（路线图中的愿景关联标题已调整）、SAD/ADR 分工、MANUAL 操作范围、固定名称例外及旧项目保留。已有检查覆盖 29 份 Markdown／91 处本地链接，命名检查另核对活动本地目标的文件名大小写。官方 quick_validate 和 Git 空白检查通过。本地新文件检查修正为区分模板中的教学空表与交付正文空表；普通文档命名和空表检查仍启用。冻结的前置快照及过去结果未重写。
 
-The current 28 static checks passed, including updated retirement and merged-reference assertions, all ten core outlines and prior README/TODO/DEVLOG/DESIGN checks. The package/link pass covered 27 Markdown files and 91 local links; exact filename-case checks covered 89 active local targets. Official quick_validate passed. These checks concern source contracts and local references, not fresh-agent adoption, rendering, external review, installation or runtime behavior. Git whitespace and scope/preservation checks are recorded for this increment separately from earlier frozen snapshots; publication dry-run is not required or run because no publication is authorized.
+源码 HEAD/index 与空暂存未变，26 个安装文件保留修订前字节。磁盘 ROADMAP 大小写已验证；仅大小写变化的 Git 重命名当时须等待另行明确授权暂存，不改 Git 配置。未执行提交／推送、发布／预检、安装、全局配置、其他项目或 NAS 操作；这些是源码／命名／契约检查，不是全新 Agent 采用、宿主调用、实际绘图、消费者迁移或运行证据。
 
-Git whitespace and source-scope checks passed. All other templates, earlier compatibility evidence, source HEAD/index, empty staging and the installed 26-file copy were preserved. No commit, push, installation, global configuration, other-project or NAS operation was performed.
+之后用户澄清，默认名称恢复为 docs/BLUEPRINT.md，标题恢复“项目蓝图”，涵盖目标、愿景、用户、场景、核心能力和边界。模板仍在 templates/docs；活动默认值、链接、术语、规约及名称例外使用 BLUEPRINT，上述早先 VISION 命名决定保留为历史。路线图的上游关联标题恢复蓝图称呼，职责表保持目录层级优先、同层 A–Z 顺序；既有核心内容和蓝图七个 H2 栏目未变。
 
-## Document identity and description synchronization (2026-10-28)
+两份 Packet 模板当时只为解释其可选快照职责而接受检查，未修改或删除。Review Packet 仅在确需审查时提供冻结交接快照；Closeout Packet 为外部接收方摘要证据。二者不成为必需文档、持续状态账本或外部验收／发布权限；该澄清不授权创建审阅者或操作其他项目。源码检查保持静态范围，命名／模板／包回归、本地链接及空白检查通过，源码 HEAD/index、空暂存和 26 安装文件保持。消费者路径、历史证据与全局配置未迁移。
 
-The user identified stale document labels and role descriptions in the conditional-content table. Current labels now use exact document filenames, including uppercase ROADMAP, and distinguish BLUEPRINT project intent, PRD confirmed behavior, DESIGN overview/navigation, conditional SAD architecture, optional MANUAL operations and stable numbered milestone plans. Related teaching examples, capability references, terminology, update triggers, Skill routing and affected template prose were synchronized. Both repository entry points and the source-standard responsibility table now include the same eleven document identities in directory-depth-first/A–Z order. The docs-home template distinguishes overview navigation, detailed architecture, decisions and operations without creating new documents.
+<a id="optional-review-and-closeout-template-retirement-2026-10-28"></a>
 
-Existing package checks were extended to compare all ten core outlines directly against the source standard and validate current labels/table ordering; the table check failed against the prior source before correction. Historical compatibility records, frozen snapshots and pinned external example paths remain unchanged. The portable package still has no scripts or runtime dependencies, and the retired review/closeout/evaluation templates remain absent. Installation, fresh-agent adoption, rendering and runtime are separate layers.
+## 可选审查与收尾模板退役（2026-10-28）
 
-The current 30 static checks passed, including two added core-standard/document-table checks; official quick_validate also passed. The package pass covered 27 Markdown files and 92 local links, with 90 active target filenames checked for exact case. An independent pass checked 94 local targets and 37 fragments without missing paths, anchors or case mismatches; active guidance had no obsolete document-label/path matches. All template H2 sequences and the 22-file package inventory remain unchanged. The bounded source diff contains only the intended synchronization/check changes, with earlier compatibility evidence and all 26 installed files preserved. Source HEAD/index, empty staging and whitespace checks remain unchanged/passing; no commit, push, installation, other-project, NAS or global configuration operation was performed. These are source-contract/reference checks and do not establish rendering, adoption or runtime behavior.
+另获用户批准后，review-packet.md 与 closeout-packet.md 从可移植模板集合移入 Windows 回收站。文档选择、路由、双语指导、源码设计和维护规则清理了活动模板链接及专用创建术语。审查／交付改为复用已有结论和证据；实际接收方确有需要时，可整理有界快照或摘要，不预设模板或强制报告。已交付快照保持冻结，与现行正文区分；摘要不产生外部验收、激活、发布或运行权限。已有消费者文档未删除或迁移，上文历史记录保留原范围。
 
-A separately approved follow-up corrects three residual prose/example issues: both READMEs now use PRD/DESIGN/SAD/ADR, the BLUEPRINT naming rule calls its authoritative content a blueprint body, and the standard distinguishes its default M1-not-started teaching baseline from the later M1-complete/M2-in-progress TODO snapshot. The new regression reproduced all three issue categories before correction, and the merged-reference check maps the current term without rewriting its frozen input. The current 31 static checks, official quick_validate, local-link/name-case and Git whitespace checks passed. The Skill entry, all templates, earlier compatibility evidence, source HEAD/index, empty staging and all 26 installed files remain preserved. This follow-up is limited to prose, teaching context and local checks; it does not establish adoption/rendering/runtime behavior or perform Git delivery or installation.
+当时 28 项静态检查通过，包括退役与合并参考断言、十份核心提纲和既有 README/TODO/DEVLOG/DESIGN 检查。包／链接检查覆盖 27 份 Markdown／91 处本地链接，精确大小写检查覆盖 89 个活动本地目标。官方 quick_validate 通过。检查针对源码契约与本地引用，不证明全新 Agent 采用、渲染、外部审查、安装或运行行为。本次增量的 Git 空白、范围及保全检查与旧冻结快照分开记录；未授权发布，因此未要求或运行发布预检。
 
-## Required project root tmp (2026-10-28)
+Git 空白和源码范围检查通过。其他全部模板、早先兼容性证据、源码 HEAD/index、空暂存及已安装副本的 26 文件保持。未执行提交、推送、安装、全局配置、其他项目或 NAS 操作。
 
-The user requires projects using Swift Cycle to establish root tmp/ and reduce avoidable C-drive temporary writes. Writable adoption, initialization and maintenance now require creating/reusing that project-local directory; read-only tasks inspect and report without mutation. Git defaults to an effective /tmp/ ignore, preserving existing content and tracking policy without an empty-directory placeholder; non-Git tasks do not initialize Git. Conflicting files, redirected paths, tracked content and permissions are preserved and reported. Controllable temporary output uses tool arguments or child-process-only temporary settings, with actual system-path exceptions disclosed; global TEMP/TMP, caches, other projects and deletion authority are unchanged. The canonical Skill, adoption/binding guidance, source rules, bilingual entries and relevant AGENTS/DESIGN templates reflect this separate requirement without implicitly creating TODO/DEVLOG during maintenance.
+<a id="document-identity-and-description-synchronization-2026-10-28"></a>
 
-Two added source checks first failed against the previous optional/default-system-path guidance; the current 33 static checks then passed, including prior initialization-record preservation through narrowly scoped current-wording mappings. Official quick_validate passed; the package pass checked 27 Markdown files and 95 local links, exact-case checks covered 93 targets, and 40 Markdown fragment references were valid. The Skill remains 68 lines and the portable 22-file inventory is unchanged. Old frozen input/evidence files were not rewritten.
+## 文档标识与职责描述同步（2026-10-28）
 
-The canonical source checkout now has a real root tmp/ directory and one effective /tmp/ ignore rule; no tmp content is tracked. A Python subprocess probe with command-local TEMP/TMP/TMPDIR selected this F-drive project directory and created its synthetic temporary file there. The probe script/result are retained under ignored tmp/, outside the portable package. This proves the local directory/ignore state and that particular subprocess path, not fresh-agent adoption, all tools' internal temporary behavior or consumer initialization/conflict handling; those agent/consumer scenarios were not executed. Source HEAD/index, empty staging and all 26 installed files were preserved. No global temporary/cache settings, other projects or NAS were changed; no commit, push or installation was performed.
+用户指出条件性内容表的文档标识和职责描述过时。活动标识改为精确文件名（包括大写 ROADMAP），明确 BLUEPRINT 项目意图、PRD 确认行为、DESIGN 概要／导航、按需 SAD 架构、可选 MANUAL 操作及稳定编号里程碑计划的分工。相关教学示例、能力引用、术语、更新触发、Skill 路由及模板正文同步。双语仓库入口与源规约职责表均包含相同十一项文档标识，按目录层级优先、同层 A–Z 排列；当时的 docs 首页模板区分概要导航、详细架构、决策和操作，不为导航创建新文档。
 
-A table-visibility follow-up adds tmp/ to both document-profiles resource tables as a mandatory local directory with no document template. Directory trailing slashes do not add a depth level, and same-level names sort without case sensitivity. The resource overview now has twelve entries, while the standard and bilingual authority tables retain their eleven document identities; temporary storage is not a shared-truth document. The updated table check first failed against the missing row, then all nineteen focused package/naming/merge checks and official quick_validate passed. The new internal directory-rule link is valid. The change preserves source/index and installed-copy boundaries and adds no template or package file.
+已有包检查扩展为直接比较十份核心提纲与源规约，并验证当前标识和表序；表格检查先在修正前源码下失败。历史兼容性记录、冻结快照和固定外部示例路径未改。可移植包仍无脚本或运行依赖，审查／收尾／evaluation 退役模板仍不存在；安装、全新 Agent 采用、渲染和运行分别判断。
 
-## Navigation template retirement (2026-10-28)
+当时 30 项静态检查通过，包括新增的核心规约与文档表两项；官方 quick_validate 也通过。包检查覆盖 27 份 Markdown／92 处本地链接，90 个活动目标文件名通过精确大小写检查。独立检查核对 94 个本地目标与 37 个锚点，无缺失路径、锚点或大小写不符；活动指导无旧文档标识／路径残留。所有模板 H2 栏目及 22 文件包清单未变，有界差异只含预期同步／校验改动，早先兼容性证据和 26 个安装文件保留。源码 HEAD/index、空暂存未变，空白检查通过；未执行提交、推送、安装、其他项目、NAS 或全局配置操作。结果仅为源码契约／引用核对，不证明渲染、采用或运行。
 
-At the user's request, the docs-home and ADR-index README templates are retired. Conditional navigation still uses short descriptions and real links when needed, without a fixed index structure or automatic README creation. The root README presentation template and standalone ADR decision outline remain; necessary ADR adoption and target-file naming guidance now lives in document-profiles.md. The bilingual entry points, source standard and source status reflect this resource retirement. Existing consumer documents, frozen historical evidence and installed copies are preserved.
+另获批准的后续修正处理三处正文／示例残留：双语 README 统一为 PRD/DESIGN/SAD/ADR；BLUEPRINT 命名规则将其权威内容称为“蓝图正文”；源规约区分默认 M1 未开始教学基线和后续 M1 完成／M2 进行中的 TODO 快照。新增回归先复现三类问题，合并参考检查只映射当前术语，不重写冻结输入。当时 31 项静态检查、官方 quick_validate、本地链接／大小写及 Git 空白检查通过。Skill 入口、全部模板、早先兼容性证据、源码 HEAD/index、空暂存和 26 安装文件保持。后续仅涉及措辞、教学时点和本地检查，不证明采用／渲染／运行，也未执行 Git 交付或安装。
 
-The new retirement assertion first failed while the two templates were present, then all 34 static checks passed after removal and guidance synchronization. The official OpenAI validator and gh skill publication dry-run passed. Checks covered 25 Markdown files and 94 local links, 92 exact-case link targets, and an independent scan of 96 local file references and 41 fragments with no broken targets. The portable package now contains 20 files, retains the ten core templates and unchanged standalone ADR outline, and keeps the Skill entry at 68 lines. All 26 installed files remain byte-identical; these static results do not establish actual agent adoption, rendering or runtime behavior. Git delivery is separately authorized and does not authorize an installed-copy update or Release publication.
+<a id="required-project-root-tmp-2026-10-28"></a>
+
+## 强制项目根级 tmp 目录（2026-10-28）
+
+用户要求使用 Swift Cycle 的项目建立根级 tmp/，减少可避免的 C 盘临时写入。可写采用、初始化和维护必须建立或复用项目本地目录；只读任务仅检查并报告，不作修改。Git 默认有效忽略 /tmp/，保留已有内容和跟踪策略，不为跟踪空目录新增占位；非 Git 项目不初始化 Git。同名文件、路径重定向、已有跟踪内容及权限冲突保留并报告。可控输出使用工具参数或仅对子进程生效的临时环境设置，实际系统路径例外如实说明；全局 TEMP/TMP、缓存、其他项目和删除权限不变。规范 Skill、采用／绑定指导、源码规则、双语入口及相关 AGENTS/DESIGN 模板均表达这一独立要求，不因此在普通维护时隐式创建 TODO/DEVLOG。
+
+新增两项源码检查先在旧可选／系统临时目录默认规则下失败，修订后当时 33 项静态检查通过，包括通过局部措辞映射保留先前初始化记录检查。官方 quick_validate 通过；包检查覆盖 27 份 Markdown／95 处本地链接，精确大小写覆盖 93 个目标，40 个 Markdown 锚点有效。Skill 保持 68 行，可移植包仍为 22 文件，旧冻结输入／证据未重写。
+
+规范源码仓库实际建立了根级 tmp/，仅有一条有效 /tmp/ 忽略规则，临时内容未被跟踪。Python 子进程使用命令范围的 TEMP/TMP/TMPDIR，实际选中本 F 盘项目目录，并在其中创建合成临时文件。探针脚本和结果保存在忽略的 tmp/，不进入可移植包。此结果只证明本机目录／忽略状态和该次子进程路径，不证明全新 Agent 采用、所有工具内部临时行为或消费者初始化／冲突处理；这些 Agent／消费者场景未执行。源码 HEAD/index、空暂存和 26 安装文件保持，未改全局临时／缓存设置、其他项目或 NAS，未提交、推送或安装。
+
+后续表格可见性修正将 tmp/ 列入 document-profiles 两张资源表，明确它是无文档模板的必需本地目录。目录末尾斜杠不增加层级，同层名称不区分大小写排序。资源概览为十二项；源规约和双语权威表仍为十一项文档标识，临时存储不是共享正文。更新后的表格检查先检测缺行，再由十九项包／命名／合并专项检查及官方 quick_validate 验证通过；新增内部目录规则链接有效。修订保留源码／索引与安装边界，不增加模板或包文件。
+
+<a id="navigation-template-retirement-2026-10-28"></a>
+
+## 导航模板退役（2026-10-28）
+
+按用户要求退役 docs 首页与 ADR 索引的 README 模板。确需导航时，仍用简短说明和真实链接，不固定索引结构或自动创建 README。根级 README 展示模板与独立 ADR 决策提纲保留；必要的 ADR 采用和目标命名指导移入 document-profiles.md。双语入口、源规约与源码状态同步，已有消费者文档、冻结历史证据和安装副本保留。
+
+新增退役断言先在两份模板仍存在时失败，移除并同步指导后，全部 34 项静态检查通过。官方 OpenAI 校验和 gh skill 发布预检通过。检查覆盖 25 份 Markdown／94 处本地链接、92 个精确大小写目标，以及独立的 96 处本地文件引用和 41 处锚点，均无失效目标。可移植包减为 20 文件，保留十份核心模板及原字节不变的独立 ADR 提纲；Skill 入口保持 68 行。26 个安装文件逐字节不变，静态结果不证明实际 Agent 采用、渲染或运行。Git 交付另有授权，不授权安装更新或 Release 发布。
+
+<a id="reference-readability-revision-2026-10-28"></a>
+
+## 参考文档可读性修订（2026-10-28）
+
+用户批准仅优化现有六份参考的表达：保留文件名、document-profiles.md 六章及两张资源表；密集指令分组，收敛重复细节，普通概念用清楚中文，技术标识保留。文档／格式规则由 document-profiles.md 维护，同步触发由 lifecycle-and-closeout.md 维护，表达和图示操作由 zh-CN.md 维护。先说明新建或获准整体重整 DESIGN 的强制 UML 要求，再说明其他按需图示；普通小改不自动补绘。初始化、根级 tmp、证据、授权及恢复边界不变。Skill 入口、全部模板和安装副本不在编辑范围，此修订不授权 Git 交付或安装。
+
+新增五项源码检查保留既有保护条件，先在旧文本中发现四处表达／检索缺口，之后五项与原 34 项静态检查共同通过。官方 OpenAI 校验通过。检查覆盖 25 份 Markdown／109 处本地链接、107 个精确大小写目标、22 处合并参考锚点；独立扫描 111 处本地文件引用与 56 处锚点，无失效目标。命名检查接受“不预设独立评估文档”的等义当前措辞；历史快照、原段落及初始化保全检查保持完整。
+
+两次独立只读文本检索，分别对旧版和修订后的六份参考提出相同六问。两次都能找到规则；旧文本暴露配图条件歧义和分散检索，新文本能直接找到必需／按需条件及同步位置，六问范围内未报告有材料支持的冲突或关键遗漏。这只是参考文本检索，不是压力行为测试、消费者项目采用、绘制导出、渲染或运行验证。包仍为 20 文件，入口和模板不变；源码 HEAD/index 与 26 安装文件保持。未暂存、提交、推送、发布、安装或改其他项目；此轮没有发布，因此未重跑发布预检。
+
+<a id="legacy-work-directory-retirement-2026-10-28"></a>
+
+## 旧工作目录退役（2026-10-28）
+
+用户明确退役本仓库的 .superpowers/ 和 docs/superpowers/ 两个目录，包含旧辅助器、快照及一份已跟踪的历史 README 设计记录。旧忽略项和保留这些本地工作路径的仓库指令已移除。后续必要临时工作使用根级 tmp/，不重建两目录，也不将旧树改名搬到其他历史位置。上文历史结果与路径仍记录原运行事实，不是当前可用执行入口。可选 Superpowers 衔接参考属于可移植 Skill，不在此次目录退役范围内。
+
+两目录共 29 文件、439,812 字节，整体送入 Windows 回收站；两个可恢复条目中的全部文件 SHA-256 均与原件一致。根级 tmp/ 中现有五项独立参考检查及官方 OpenAI 校验通过，112 处本地文件引用和 57 处锚点有效。旧本地检查随目录退役，未重建或重跑；上文较早 39 项结果只属历史。20 文件可移植包、已有未提交参考修改、源码 HEAD/index 和 26 安装文件保持；一次性回收辅助脚本也已回收。未暂存、提交、推送、发布、安装，未改全局配置、其他项目或 NAS。
+
+后续提交前预检修正了本地参考校验器的章节边界：H3 取段在下一个同级或更高层级标题处停止，保留子章节，避免把后续章节的 UML 标记误算为 DESIGN 内容。新增两项回归，包含五个边界样例及实际校验器的跨节漏报反例；旧实现出现三处预期断言失败，最小修复后七项检查全部通过。十份核心模板与批准栏目直接比对一致，25 份 Markdown 的 112 处本地文件引用（含大小写）及 57 处章节链接有效，官方包校验通过。校验脚本和本地记录保持忽略，不进入安装包；此证据不证明新 Agent 采用、宿主执行或实际绘图，也未重建已退役测试树。

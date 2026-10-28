@@ -1,83 +1,97 @@
 # AGENTS.md
 
-These instructions apply to the `skill_swift_cycle` repository.
+本规则适用于`skill_swift_cycle`仓库。
 
-## Repository purpose
+<a id="repository-purpose"></a>
 
-- Maintain one portable Agent Skill for lightweight project governance.
-- Keep the canonical package under `skills/swift-cycle/`.
-- Do not add scripts, dependencies, generated assets, or vendor-specific copies unless a verified compatibility requirement justifies them.
+## 仓库用途
 
-## Naming
+- 维护一个可移植的 Agent Skill，用于轻量项目治理。
+- 规范包保存在`skills/swift-cycle/`。
+- 除非经过验证的兼容性需求确有必要，否则不新增脚本、依赖、生成资产或特定厂商副本。
 
-- Separate words in project, repository, and project-root names with `_`; do not impose a letter-case rule beyond the chosen project name.
-- Keep the standards-defined Skill identifier, package directory, and invocation as `swift-cycle`; Agent Skills names do not permit underscores.
-- Treat external syntax constraints as explicit exceptions rather than changing the repository naming rule.
-- Fixed professional document names are explicit file-name exceptions: docs/PRD.md, docs/SAD.md, docs/BLUEPRINT.md, docs/ROADMAP.md, docs/MANUAL.md and docs/milestones/M{N}_PLAN.md with stable positive N. Other ordinary docs files and multiword directories keep lowercase snake_case; preserve existing complete equivalents unless migration is authorized.
+<a id="naming"></a>
 
-## Change rules
+## 命名规则
 
-- Read `README.md`, `DESIGN.md`, the canonical `SKILL.md`, and relevant compatibility documentation before editing.
-- Preserve user changes and keep each modification traceable to the current request.
-- Prefer a small shared-core change over duplicated agent-specific implementations.
-- Keep the Skill body concise, imperative, and below 500 lines.
-- Keep knowledge-promotion and state-separation guidance project-agnostic and lightweight; do not encode project-specific workflows, mandatory state fields, or fixed status schemas.
-- Keep scenario routes and document profiles progressive: `minimal` must remain usable without `standard` or `runtime_integration` artifacts.
-- Keep Swift Cycle inside one project's engineering loop. Do not add portfolio routing, reviewer creation, capacity management, organizational acceptance, external registries, or cross-project runtime authorization.
-- Treat templates as optional structures whose prose is adapted to the resolved file language. Do not create duplicate language-specific template trees.
-- Keep the BLUEPRINT as one shared tracked project-intent authority: new projects default to `docs/BLUEPRINT.md`, root-level BLUEPRINT files are forbidden by default, and complete brownfield equivalents are mapped rather than copied.
-- Keep any requested review snapshot frozen and date- or milestone-bound; it must not become a mutable current-truth document.
-- Writable project tasks require a local root tmp/ directory and an effective /tmp/ ignore rule. Put new controllable temporary work there; retain existing ignored validation/history paths. Read-only tasks only inspect. Use tool arguments or child-process temporary settings to reduce extra C-drive writes, without changing global environment/cache settings or treating tmp contents as automatically disposable.
-- Do not add unsupported host claims; verify current behavior against first-party documentation.
+- 项目名、仓库名和项目根目录名中的单词使用`_`分隔；除所选项目名自身的大小写外，不另加强制大小写规则。
+- 标准规定的 Skill 标识、包目录和调用名保持为`swift-cycle`；Agent Skills 名称不允许下划线。
+- 外部语法限制作为明确例外处理，不因此改变仓库命名规则。
+- 固定专业文档名属于明确的文件名例外：docs/PRD.md、docs/SAD.md、docs/BLUEPRINT.md、docs/ROADMAP.md、docs/MANUAL.md，以及采用稳定正整数 N 的 docs/milestones/M{N}_PLAN.md。其他普通 docs 文件及多词目录保持小写 snake_case；未获迁移授权时，保留已有完整等价来源。
 
-## Project governance
+<a id="change-rules"></a>
 
-- Keep one project owner (`L1`) for this project; the former fixed reviewer is retired.
-- Establish an independent reviewer only when the user, the department lead, or current project rules explicitly require one.
-- This role adjustment does not grant Git push, publishing, deployment, runtime, credential, cost, or deletion authority.
+## 修改规则
 
-## Language synchronization
+- 编辑前读取`README.md`、`DESIGN.md`、规范`SKILL.md`及相关兼容性文档。
+- 保留用户修改，每一项变更都应能追溯到当前请求。
+- 优先对共享核心做小范围修改，避免复制面向不同 Agent 的实现。
+- Skill 正文保持精简、使用指令式表述，并少于 500 行。
+- 知识沉淀与状态分离指引应轻量且不绑定具体项目；不写入项目专属流程、强制状态字段或固定状态结构。
+- 场景路由与文档档位保持渐进：`minimal`不依赖`standard`或`runtime_integration`产物也能使用。
+- Swift Cycle 只负责单个项目的工程循环。不加入跨项目统筹路由、审查者创建、容量管理、组织验收、外部注册表或跨项目运行授权。
+- 模板是可选结构，正文按已解析的文件语言调整。不创建按语言重复的模板树。
+- BLUEPRINT 是唯一共享、受 Git 跟踪的项目意图依据：新项目默认使用`docs/BLUEPRINT.md`，默认禁止根级 BLUEPRINT 文件；已有项目的完整等价来源只映射，不复制。
+- 按要求生成的审查快照必须冻结并绑定日期或里程碑，不能变成可持续改写的当前事实文档。
+- 可写项目任务必须有本地根级 tmp/ 目录及生效的 /tmp/ 忽略规则。必要且可控的新临时工作放在其中。用户已退役本仓库的 .superpowers/ 与 docs/superpowers/ 目录；不得重建，也不得将原辅助程序或快照树迁到别处。历史引用只记录过去事实，不是当前执行路径。只读任务仅检查。通过工具参数或子进程临时设置减少额外的 C 盘写入，不修改全局环境或缓存设置，也不把 tmp 内容视为可自动丢弃。
+- 不添加缺乏依据的宿主支持声明；当前行为须对照第一方文档验证。
 
-- `README.md` is the English user entry point.
-- `README.zh-CN.md` is the Simplified Chinese user entry point.
-- Update both when installation, invocation, features, or repository layout changes.
-- Update `skills/swift-cycle/references/zh-CN.md` when Chinese terminology or document responsibility changes.
-- Do not duplicate the complete canonical Skill body into localized files.
-- Do not define English as the only valid target-document language. Preserve the existing bilingual repository entry points while keeping conversation and file-language resolution in the canonical Skill.
+<a id="project-governance"></a>
 
-## Validation
+## 项目治理
 
-- Run the official OpenAI `quick_validate.py` against `skills/swift-cycle/`.
-- Run `gh skill publish --dry-run` before publishing.
-- Check Markdown links and `git diff --check`.
-- Check the canonical Skill remains below 500 lines and each added template has one level-one heading.
-- Check all ten core templates against the approved H2 sequences in `docs/engineering_standard.md`; professional outlines remain candidates. Assert vision/confirmed-requirements separation, the new-project BLUEPRINT path, brownfield reuse, tracked-asset boundary, and separation from current plans, runtime state, review snapshots, and Registry.
-- For README presentation changes, validate Emoji H2/H3, unique explicit navigation anchors, the six core responsibilities plus optional last Star History, and absence of contribution/disclaimer sections. Ignore teaching headings inside HTML comments; only README output URL slots may defer local target resolution. Check public-GitHub and non-Git static instances, including licensed/no-license-file bodies with truthful status and no unsupported badge/file link, without weakening real-link checks or altering the other nine core templates.
-- For TODO/DEVLOG presentation changes, check the four progress/milestone TODO H2 sections against the standard, problem/blocker/exit-condition coverage, and honest no-milestone use without forcing a ROADMAP document. Check compact DEVLOG list entries, optional real-milestone H3 grouping, no per-entry headings or Emoji, event-driven TODO synchronization, and the existing initialization/record-preservation boundaries. Keep source assertions separate from actual agent behavior.
-- For DESIGN template changes, check the approved overview H2 sequence against the standard, the required real UML structure diagram for new/authorized whole-document restructuring, editable architecture sources plus PNG/SVG, and conditional UML views. Check an annotated text-code-block directory tree using actual paths, without forcing physical layout or replacing UML. Preserve small-edit/brownfield boundaries, concise interfaces/data/delivery summaries, capability navigation and refactor regression rules. Template placeholders and source assertions do not prove actual drawing/export, rendering or adoption.
-- For reference consolidation, check the single document-profiles.md authority and approved six-section structure, repaired routes/fragment links, absence of active references to the retired file, and preservation of initialization preflight, naming, reuse/refactor and recovery rules. Preserve historical evidence and installed copies; source assertions do not prove agent adoption or runtime behavior.
-- Check requirements-change routing, one numbered formal milestone plan, TODO scope, per-package convergence, and Figma editable-source/export/layout conditions with proportional scenario tests; distinguish static assertions, simulations, helper execution, and real adoption.
-- Check fixed professional filenames and stable M-numbered plan exceptions exactly, including disk filename case. Other new docs Markdown files and multiword directories use lowercase snake_case; BLUEPRINT defaults to `docs/BLUEPRINT.md`, and legacy renames require an approved documentation-hygiene package. Keep SAD architecture and independent ADR decisions distinct; MANUAL remains optional operational guidance, and no default evaluation template/creation route remains.
-- Check scenario/profile coverage, ordinary-content language precedence, exact technical-identifier preservation, semantic visualization choice and review, document-freshness triggers, review-snapshot lifecycle, proportional evidence, and organizational boundary terms with focused assertions.
-- For template retirement, check removed files and active links/creation routes are absent, preserve historical evidence, and retain proportional review/delivery evidence without introducing replacement templates or mandatory reports. Keep docs-home and ADR-index templates retired while retaining conditional navigation, the standalone ADR decision template and its adoption/naming boundaries.
-- For document-identity synchronization, compare all ten core H2 sequences directly with the source standard; check current filenames and depth-first/A–Z order across responsibility/conditional tables and bilingual entry points. Reject obsolete document labels in active guidance, while preserving generic domain terms, historical records and fixed external example paths.
-- For root-tmp changes, check writable/adoption/initialization enforcement, read-only non-mutation, Git ignore and non-Git handling, existing-content/tracking/path conflicts, child-process-only redirection, uncontrollable-path disclosure and retention boundaries. Distinguish static guidance assertions, actual local directory/ignore/tool probes and fresh-agent/consumer execution.
-- Confirm local `TODO.md`, `DEVLOG.md`, and `METHODOLOGY.md` remain ignored.
-- For initialization-rule changes, check valid root TODO/DEVLOG delivery, exact new-Git ignore, repeat/partial preservation, empty/placeholder rejection, non-Git and non-initialization routes, and safe policy/I/O conflicts in owned isolated fixtures. Artifact checks do not replace actual agent execution; report those layers separately.
-- For structure-governance changes, use bounded fictional reuse, responsibility/dependency/placement and behavior-preservation scenarios; do not refactor a consumer project or create a parallel capability ledger.
-- Report checks that were not run and do not claim unsupported compatibility.
+- 本项目保留一名项目负责人（`L1`）；原固定审查者已退役。
+- 仅当用户、部门负责人或当前项目规则明确要求时，才设立独立审查者。
+- 该角色调整不授予 Git 推送、发布、部署、运行、凭据、费用或删除权限。
 
-## Source and deployment boundaries
+<a id="language-synchronization"></a>
 
-- Treat `F:\60_Infrastructure_and_Operations\02_Skills\skill_swift_cycle` as the canonical
-  source checkout. The previous source-path migration is complete, and retired
-  migration-control paths are not current authority for this repository.
-- Treat host-installed Skill copies and `gh skill` source metadata as external
-  deployment state. Source changes do not authorize reinstalling, updating,
-  relinking, or deleting an installed copy.
+## 语言同步
 
-## Publishing
+- `README.md`是英文用户入口。
+- `README.zh-CN.md`是简体中文用户入口。
+- 安装、调用、功能或仓库布局变化时，同步更新两个入口。
+- 中文术语或文档职责变化时，更新`skills/swift-cycle/references/zh-CN.md`。
+- 不把完整规范 Skill 正文复制到本地化文件中。
+- 不把英语定义为目标文档唯一有效的语言。保留仓库现有双语入口，由规范 Skill 统一解析会话语言和文件语言。
 
-- Keep the default branch as `main`.
-- Review the final diff before committing.
-- Do not publish releases, change repository visibility, or add a license without explicit authorization.
+<a id="validation"></a>
+
+## 校验要求
+
+- 对`skills/swift-cycle/`运行 OpenAI 官方`quick_validate.py`。
+- 发布前运行`gh skill publish --dry-run`。
+- 检查 Markdown 链接及`git diff --check`。
+- 确认规范 Skill 少于 500 行，每个新增模板恰有一个一级标题。
+- 将全部十份核心模板与`docs/engineering_standard.md`中批准的 H2 顺序比对；专业提纲仍为候选。断言愿景与已确认需求分离、新项目 BLUEPRINT 路径、已有项目复用、受跟踪资产边界，以及与当前计划、运行状态、审查快照和 Registry 的分离。
+- README 展示调整需校验：H2/H3 使用 Emoji、显式导航锚点唯一、六项核心职责、可选且置于末尾的 Star History，以及不含贡献或免责声明章节。忽略 HTML 注释内的教学标题；仅 README 输出 URL 槽位可延后解析本地目标。检查公开 GitHub 与非 Git 静态实例，涵盖有许可证和无许可证文件的正文；状态真实，不使用无依据的徽章或文件链接，不削弱真实链接检查，也不改动其他九份核心模板。
+- TODO/DEVLOG 展示调整需将 TODO 的四个进度/里程碑 H2 章节与规约比对，检查问题、阻塞、退出条件覆盖，以及无里程碑时如实记录且不强制创建 ROADMAP。检查 DEVLOG 紧凑列表条目、可选的真实里程碑 H3 分组、无逐条标题或 Emoji、事件驱动的 TODO 同步，以及既有初始化和记录保留边界。源码断言与实际 Agent 行为分开报告。
+- DESIGN 模板调整需比对批准的概要设计 H2 顺序，检查新建或获准整篇重构时必需的真实 UML 结构图、可编辑架构源稿与 PNG/SVG，以及按条件采用的 UML 视图。检查基于真实路径、附职责注释的 text 代码块目录树，不强制实体布局，也不用它替代 UML。保留小修/已有项目边界、简明接口/数据/交付摘要、能力导航及重构回归规则。模板占位和源码断言不能证明实际绘图、导出、渲染或采用。
+- 参考文档合并需检查：document-profiles.md 作为唯一职责依据、批准的六章结构、路由及片段链接修复、无指向退役文件的活动引用，以及初始化预检、命名、复用/重构和回收规则仍被保留。历史证据与安装副本保持不动；源码断言不能证明 Agent 采用或运行行为。
+- 参考文档可读性调整需保留六个文件名、document-profiles.md 的六个 H2 章节及两张按层级优先/A–Z 排序的资源表。文档与格式规则集中在该文件，同步触发集中在 lifecycle-and-closeout.md，可视化操作集中在 zh-CN.md；保留结合上下文的简短安全提醒并修复链接。分别检查 DESIGN 必需 UML 与普通按需图示，保留初始化/tmp/授权/回收保护及全部模板，并区分源码断言、文本检索与实际采用。
+- 使用适度场景测试检查需求变更路由、唯一编号正式里程碑计划、TODO 范围、逐包收敛及 Figma 可编辑源稿/导出/布局条件；区分静态断言、模拟、辅助程序执行与真实采用。
+- 精确检查固定专业文件名和稳定 M 编号计划例外，包括磁盘文件名大小写。其他新增 docs Markdown 文件与多词目录使用小写 snake_case；BLUEPRINT 默认是`docs/BLUEPRINT.md`，旧文件改名须有已批准的文档整理包。区分 SAD 架构与独立 ADR 决策；MANUAL 仍为可选操作指引，不保留默认 evaluation 模板或创建路由。
+- 用针对性断言检查场景/档位覆盖、普通内容的语言优先级、技术标识原样保留、按语义选图及审查、文档新鲜度触发、审查快照生命周期、适度证据和组织边界术语。
+- 模板退役需确认文件已移除，活动链接及创建路由不存在；保留历史证据和适度审查/交付证据，不引入替代模板或强制报告。文档首页与 ADR 索引模板保持退役，同时保留按需导航、独立 ADR 决策模板及其采用/命名边界。
+- 文档标识同步需将全部十份核心 H2 顺序直接与源规约比对；检查职责表、条件表及双语入口中的当前文件名和层级优先/A–Z 顺序。活动指引不允许过时文档标签，同时保留通用领域术语、历史记录和固定外部示例路径。
+- 根级 tmp 调整需检查可写/采用/初始化时的强制规则、只读不写入、Git 忽略与非 Git 处理、既有内容/跟踪/路径冲突、仅子进程重定向、不可控路径披露及保留边界。区分静态指引断言、实际本地目录/忽略/工具探针与新 Agent 或消费者执行。
+- 本地工作目录退役需确认两个根目录仍不存在，活动执行路由无依赖，既有源码及包修改保持。旧本地测试集和快照退役后只作历史证据；如实报告当前可用且实际运行的检查，不为重跑历史测试集而重建目录树。
+- 确认本地`TODO.md`、`DEVLOG.md`、`METHODOLOGY.md`仍被忽略。
+- 初始化规则调整需在自有隔离样例中检查有效根级 TODO/DEVLOG 交付、新 Git 精确忽略、重复/部分记录保留、拒绝空文件或占位内容、非 Git 与非初始化路由，以及安全的策略/I/O 冲突。产物检查不能代替真实 Agent 执行；这些层次分开报告。
+- 结构治理调整使用有界虚构场景检查复用、职责/依赖/落点和行为保留；不重构消费者项目，也不创建平行能力台账。
+- 报告未运行的检查，不宣称无证据支持的兼容性。
+
+<a id="source-and-deployment-boundaries"></a>
+
+## 源码与部署边界
+
+- `F:\60_Infrastructure_and_Operations\02_Skills\skill_swift_cycle`是规范源码检出目录。此前源码路径迁移已完成，退役的迁移控制路径不再是本仓库当前依据。
+- 宿主已安装 Skill 副本及`gh skill`来源元数据属于外部部署状态。源码变更不授权重新安装、更新、重新链接或删除已安装副本。
+
+<a id="publishing"></a>
+
+## 发布规则
+
+- 默认分支保持为`main`。
+- 提交前审查最终差异。
+- 未获明确授权时，不发布 Release、不改变仓库可见性、不添加许可证。
