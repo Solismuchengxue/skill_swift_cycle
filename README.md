@@ -14,7 +14,7 @@ Connect project intent, confirmed requirements, implementation, verification and
 
 </div>
 
-> **Version note:** this page describes the current source. The fixed installation command below selects released v1.4.0, which does not include later initialization, template, reference or tmp/ revisions. Source, releases and installed copies are separate; see [delivery and verification records](docs/compatibility.md#fixed-version-delivery).
+> **Version note:** the commands below pin v1.5.0, which includes this initialization, template, reference and tmp/ revision. Source, releases and installed copies remain separate; see [acceptance and fixed-version delivery](docs/compatibility.md#release-v1-5-0-and-local-installation-2026-10-28).
 
 ---
 
@@ -84,7 +84,7 @@ The Skill itself adds no runtime scripts or dependency packages. Local reading a
 **Working directory:** anywhere gh is available. **Shell:** Windows PowerShell 7.
 
 ```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.5.0
 ```
 
 **Success check:** the complete Skill is under the user .agents/skills/swift-cycle directory, with its source visible in `gh skill list`. In ChatGPT desktop, type `@` and choose **Swift Cycle / 快速螺旋**. In Codex CLI/IDE, use `$swift-cycle`.
@@ -95,8 +95,8 @@ Before replacing an existing installation, preserve its directory for rollback a
 
 | Scenario | Route |
 | :--- | :--- |
-| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.4.0`; invoke /swift-cycle |
-| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.4.0`; invoke /swift-cycle, without assuming that syntax in other interfaces |
+| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.5.0`; invoke /swift-cycle |
+| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.5.0`; invoke /swift-cycle, without assuming that syntax in other interfaces |
 | Codex project-only installation | Replace --dir and its value in the Codex command with --agent codex --scope project |
 | Manually install current source | Copy the entire skills/swift-cycle/ package to the host's supported Skill directory, including references, templates and metadata; first resolve backup and version selection for an existing installation |
 | Maintain this repository | Follow [AGENTS.md](AGENTS.md#swift-cycle) and read the in-repository canonical entry; documentation editing does not require replacing the user's installed Skill |

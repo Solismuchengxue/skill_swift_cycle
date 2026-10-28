@@ -14,7 +14,7 @@
 
 </div>
 
-> **版本说明：**本文介绍当前源码。下方固定安装命令使用已发布的 v1.4.0，不包含之后的初始化、模板、参考及 tmp/ 修订。源码、Release 和已安装副本分别管理，详见[版本与验证记录](docs/compatibility.md#fixed-version-delivery)。
+> **版本说明：**下方命令固定选择 v1.5.0，包含本轮初始化、模板、参考及 tmp/ 修订。源码、Release 和已安装副本分别管理，详见[本轮验收与固定版本交付](docs/compatibility.md#release-v1-5-0-and-local-installation-2026-10-28)。
 
 ---
 
@@ -85,7 +85,7 @@ Skill 本身没有运行脚本或依赖包。仅做本地阅读和维护不要�
 **执行位置：**任意可运行 gh 的目录。**执行环境：**Windows PowerShell 7。
 
 ```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
+gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.5.0
 ```
 
 **成功判断：**完整 Skill 位于用户级 .agents/skills/swift-cycle，并可在 `gh skill list` 中核对来源。ChatGPT 桌面版输入 `@`选择 **Swift Cycle / 快速螺旋**；Codex CLI/IDE 使用 `$swift-cycle`。
@@ -96,8 +96,8 @@ gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERP
 
 | 场景 | 方式 |
 | :--- | :--- |
-| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.4.0`；调用 /swift-cycle |
-| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.4.0`；调用 /swift-cycle，不外推其他界面 |
+| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.5.0`；调用 /swift-cycle |
+| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.5.0`；调用 /swift-cycle，不外推其他界面 |
 | Codex 仅项目安装 | 将上述 Codex 命令的 --dir 及其值替换为 --agent codex --scope project |
 | 手动安装当前源码 | 复制完整 skills/swift-cycle/ 到宿主支持的 Skill 目录，保留参考、模板和元数据；先处理已有安装的备份与版本选择 |
 | 维护本仓库源码 | 按[AGENTS.md](AGENTS.md#swift-cycle)读取仓库内规范入口；无需为了编辑文档先覆盖用户已安装 Skill |
