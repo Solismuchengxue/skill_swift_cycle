@@ -48,11 +48,13 @@ The product model expands the loop; the execution rhythm stays intentionally sho
 | --- | --- |
 | **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
 | **Required initialization records** | Authorized project creation or formal initialization requires valid root TODO.md and DEVLOG.md; existing valid files are preserved, while adoption alone or ordinary maintenance does not trigger creation. |
+| **Required project temporary directory** | Writable Swift Cycle tasks create or reuse root tmp/ and keep it Git-ignored. Controllable temporary work stays there to reduce extra C-drive writes; read-only work only checks, and tool-imposed exceptions are disclosed without global environment/cache changes. |
 | **Lightweight structure governance** | Important capability or responsibility/dependency changes and refactors trigger bounded reuse checks, explicit ownership/dependencies, capability navigation and behavior-preserving regression checks. |
 | **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
 | **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
-| **Vision and confirmed requirements** | Separates long-term Blueprint intent from effective requirements and acceptance criteria; designs and schedules selected confirmed needs, not every idea. |
+| **Blueprint and confirmed requirements** | Separates long-term BLUEPRINT intent from effective requirements and acceptance criteria; designs and schedules selected confirmed needs, not every idea. |
 | **Conditional documents** | Reuses existing authorities and selects the smallest useful profile; ten fixed core templates do not become a mandatory document tree or conformance ledger. |
+| **Visual README template** | Supplies Emoji section headings, centered introduction/navigation, tables, examples and optional previews/FAQ; optional public-GitHub Star History stays last. No contribution or disclaimer sections; real limitations and licensing remain explicit. |
 | **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
 | **Language adaptation** | Uses the caller, project, and file language for ordinary prose while preserving exact technical identifiers, standard statuses, and brand names. |
 | **Semantic visualization** | Uses Figma editable sources plus PNG/SVG exports for architecture diagrams; other diagram types follow their semantics. Layout is project-driven, not a fixed container hierarchy. |
@@ -120,19 +122,31 @@ Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI
 
 | Authority | Responsibility |
 | --- | --- |
-| `docs/blueprint.md` or complete equivalent | Long-term vision, users, scenarios and product boundaries; not a promise to implement every idea. |
-| `docs/requirements.md` or equivalent | Confirmed effective behavior, constraints and acceptance; implemented requirements remain effective. |
-| `README.md` / `AGENTS.md` | User onboarding and help / project execution and authorization rules. |
-| `DESIGN.md` and conditional `docs/architecture.md` | Overall solution and explanatory document guide / detailed architecture only when necessary. |
-| Conditional `docs/roadmap.md` | Stage outcomes, dependencies and exit judgments that need independent maintenance. |
-| `docs/milestones/milestone_N_plan.md` | One current formal implementation plan per complex milestone, with finite work packages. |
-| Local `TODO.md` / `DEVLOG.md` | Current actions and next step / useful maintenance conclusions and reasons, not a copied completion history. |
+| `AGENTS.md` | Project execution and authorization rules. |
+| `DESIGN.md` | Overview design, UML structure, functional/interface/data and delivery summaries, plus a guide to detailed documents. |
+| Local `DEVLOG.md` | Compact dated conclusions and reasons, grouped by real milestone when useful. |
+| `README.md` | User onboarding, first use and help. |
+| Local `TODO.md` | Current progress, milestone position, tasks/problems, blockers and the next stage. |
+| `docs/BLUEPRINT.md` or complete equivalent | Project goals, vision, users, scenarios, core capabilities and product boundaries; not a promise to implement every idea. |
+| Optional `docs/MANUAL.md` | Operational prerequisites, start/stop, verification, rollback and troubleshooting when independently maintained; instructions do not grant runtime authority. |
+| `docs/PRD.md` or equivalent | Confirmed effective behavior, constraints and acceptance; implemented requirements remain effective. |
+| Conditional `docs/ROADMAP.md` | Stage outcomes, dependencies and exit judgments that need independent maintenance. |
+| Conditional `docs/SAD.md` | Detailed architecture and mechanisms only when DESIGN cannot remain concise. |
+| `docs/milestones/M{N}_PLAN.md` | One current formal implementation plan per complex milestone, with finite work packages. |
 
-Use one maintained body per fact; summaries link to it. Cross-session or cross-machine work alone does not justify a roadmap. TODO points to the active package rather than duplicating the plan.
+Use one maintained body per fact; summaries link to it. Cross-session or cross-machine work alone does not justify creating ROADMAP. TODO points to the active package rather than duplicating the plan.
 
-Profiles (`minimal`, `standard`, `runtime_integration`) are internal starting points, not required trees or conformance tables. The ten core templates in [document responsibilities](skills/swift-cycle/references/document-profiles.md) preserve the approved Chinese heading order for new or approved whole-document restructuring, while ordinary edits preserve effective existing structure and prose language. Professional outlines remain optional candidates.
+The paired [TODO](skills/swift-cycle/templates/TODO.md) and [DEVLOG](skills/swift-cycle/templates/DEVLOG.md) templates use no Emoji. Update TODO at substantive progress/problem/blocker transitions; keep useful conclusions in compact DEVLOG entries, grouped by actual milestone only when records become hard to find. Projects without milestones state that honestly and do not require ROADMAP. The existing required-initialization gate is unchanged; see [this source revision](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28). No installed copy is updated by these source edits.
 
-New ordinary docs paths use lowercase `snake_case`, with standard entry and index exceptions. Keep stable brownfield paths; rename only within an approved hygiene scope. Add a docs home only when discovery requires it. See [document organization](skills/swift-cycle/references/document-information-architecture.md).
+The [DESIGN overview template](skills/swift-cycle/templates/DESIGN.md) has seven sections ending in the detailed-document guide. New or authorized whole-document restructuring requires at least one real UML structure diagram; additional views are conditional. Architecture UML retains editable Figma sources plus PNG/SVG exports. Small edits preserve existing effective structure, and this source revision does not draw project diagrams or update installed copies; see [validation boundaries](docs/compatibility.md#design-overview-source-revision-2026-10-28).
+
+Profiles (`minimal`, `standard`, `runtime_integration`) are internal starting points, not required trees or conformance tables. The ten core templates in [project structure and document rules](skills/swift-cycle/references/document-profiles.md#文档职责与按需选择) preserve the approved Chinese heading order for new or approved whole-document restructuring, while ordinary edits preserve effective existing structure and prose language. Professional outlines remain optional candidates.
+
+The [README presentation template](skills/swift-cycle/templates/README.md) retains six semantic responsibilities with Emoji headings and optional presentation blocks; other templates do not inherit that icon style. Fill output variables and omit unsupported badges, images or links. This 2026-10-28 source revision does not update released or installed copies; see [validation boundaries](docs/compatibility.md#readme-presentation-source-revision-2026-10-28).
+
+New ordinary docs paths use lowercase `snake_case`, with standard entry and index exceptions. Keep stable brownfield paths; rename only within an approved hygiene scope. Add a docs home only when discovery requires it; docs-home and ADR-index templates are not supplied, and any needed navigation uses actual content and links. Naming, navigation, reuse, local records and bounded cleanup share one reference; read the relevant section of [project structure and document rules](skills/swift-cycle/references/document-profiles.md#路径命名与导航).
+
+Fixed-name exceptions are `docs/BLUEPRINT.md`, `docs/PRD.md`, conditional `docs/SAD.md` and `docs/ROADMAP.md`, optional `docs/MANUAL.md`, and stable numbered plans such as `docs/milestones/M1_PLAN.md`. ADRs remain independent decision records under `docs/adr/`; SAD describes architecture, while MANUAL contains operational procedures. There is no default standalone evaluation template: keep necessary comparisons, trial evidence and decisions in the relevant PRD/DESIGN/SAD/ADR. These are defaults for new documents; complete existing equivalents retain their paths unless migration is authorized.
 
 ### Governance boundaries
 
@@ -143,7 +157,7 @@ Swift Cycle activates governance only when repository evidence requires it:
 - **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence; check local records for existence and Git-ignore status before treating them as private.
 - **Commit Boundary Planning:** plan coherent commit scopes before staging when changes have mixed purposes, ordered dependencies, or multiple reviewable increments.
 - **Source/Runtime Boundary:** verify source, artifact, runtime, and active-consumer claims at their own layers; evidence and authorization do not transfer between them.
-- **Documentation freshness:** reconcile status, decisions, plans, identities, and frozen Review Packets when real milestones or boundaries change.
+- **Documentation freshness:** reconcile status, decisions, plans and identities when real milestones or boundaries change; keep any delivered review snapshot frozen and distinct from current truth.
 
 These capabilities are trigger-based. Simple, local, explicit changes continue to use the short loop without extra governance artifacts.
 
@@ -186,21 +200,20 @@ skill_swift_cycle/
 │  ├─ agents/openai.yaml
 │  ├─ references/
 │  │  ├─ adoption-and-routing.md
-│  │  ├─ document-information-architecture.md
-│  │  ├─ document-profiles.md
+│  │  ├─ document-profiles.md  # Unified structure and document rules
 │  │  ├─ governance-boundaries.md
 │  │  ├─ lifecycle-and-closeout.md
 │  │  ├─ superpowers-bridge.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # Optional profile-aligned starting points
 │     ├─ README.md / AGENTS.md
-│     ├─ BLUEPRINT.md            # Renders to docs/blueprint.md
-│     ├─ docs/                   # requirements, architecture, roadmap, numbered plan and optional references
+│     ├─ docs/                   # BLUEPRINT, PRD, SAD, ROADMAP, MANUAL, numbered plans and optional references
 │     ├─ DESIGN.md
 │     ├─ DEVLOG.md
 │     └─ TODO.md
 ├─ docs/engineering_standard.md # Approved source specification; not part of the Skill
 ├─ docs/compatibility.md
+├─ tmp/                        # Created locally for writable tasks; ignored, not shipped
 ├─ README.md
 ├─ README.zh-CN.md
 ├─ DESIGN.md

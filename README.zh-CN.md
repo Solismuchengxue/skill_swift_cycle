@@ -48,11 +48,13 @@ flowchart LR
 | --- | --- |
 | **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
 | **初始化双文件必需** | 获准创建项目或正式初始化必须有效交付根级 TODO.md、DEVLOG.md；已有有效文件保留，仅采用或普通维护不自动补建。 |
+| **项目临时目录必需** | Swift Cycle 可写任务必须建立/复用根级 tmp/，Git 默认忽略；可控临时材料集中于此，尽量减少额外 C 盘写入。只读任务只核对，工具受限位置说明例外，不改全局临时环境或缓存。 |
 | **轻量结构治理** | 新增重要能力、职责/依赖变化或重构时，有界核对复用、职责依赖、落点与能力定位，并用相关回归保护保留行为。 |
 | **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
 | **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
-| **愿景与确认需求** | 蓝图说明长期愿景，需求说明承载有效行为与验收；按所选确认需求设计和安排，不把全部设想变成承诺。 |
+| **蓝图与确认需求** | 蓝图说明项目目标和整体构想，需求说明承载有效行为与验收；按所选确认需求设计和安排，不把全部设想变成承诺。 |
 | **按需文档** | 先复用现有权威，再选择最小职责；十份固定核心模板不意味着生成整套文档或裁剪账本。 |
+| **README 展示模板** | 提供 Emoji 小标题、居中介绍与导航、表格、示例和按需预览/FAQ；公开仓库可选 Star History 始终最后。不生成贡献或免责声明栏目，保留真实限制与许可。 |
 | **文档信息架构** | 保持 DESIGN 简洁，只在可发现性确有需要时增加 docs home，并按真实职责而非固定树组织长期文档。 |
 | **语言自动适配** | 普通内容服从调用者、项目和文件语言，同时保持技术标识、标准状态和品牌名的准确原文。 |
 | **语义化图示** | 架构图使用 Figma 可编辑原稿及 PNG/SVG，其他图按关系语义选型；布局由项目决定，不强制容器层级。 |
@@ -120,19 +122,31 @@ Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如�
 
 | 权威 | 职责 |
 | --- | --- |
-| `docs/blueprint.md` 或完整等价来源 | 长期愿景、用户、场景与产品边界，不承诺实现全部设想。 |
-| `docs/requirements.md` 或等价来源 | 已确认有效行为、约束与验收；已实现且仍有效的需求继续保留。 |
-| `README.md` / `AGENTS.md` | 用户上手与求助 / 项目执行和授权规则。 |
-| `DESIGN.md` 与按需的 `docs/architecture.md` | 总体办法及详细文档导读 / 简洁设计不足以承载时才独立架构。 |
-| 按需的 `docs/roadmap.md` | 需要独立维护的阶段结果、依赖和退出判断。 |
-| `docs/milestones/milestone_N_plan.md` | 一个复杂里程碑的一份现行正式实施计划及有限工作包。 |
-| 本地 `TODO.md` / `DEVLOG.md` | 当前行动与下一步 / 有效维护结论与理由，不复制完成历史。 |
+| `AGENTS.md` | 项目执行和授权规则。 |
+| `DESIGN.md` | 概要方案、UML 结构、功能/接口/数据与交付形态及详细文档导读。 |
+| 本地 `DEVLOG.md` | 紧凑的有用结论和理由，记录多时按真实里程碑分组。 |
+| `README.md` | 用户上手、首次使用与求助。 |
+| 本地 `TODO.md` | 当前进度、里程碑位置、待办/问题、阻塞与下一阶段。 |
+| `docs/BLUEPRINT.md` 或完整等价来源 | 项目目标、愿景、用户、场景、核心能力与产品边界，不承诺实现全部设想。 |
+| 可选的 `docs/MANUAL.md` | 操作说明需独立维护时，承载前提、启动/停止、验证、回滚与排障；说明不授予运行权限。 |
+| `docs/PRD.md` 或等价来源 | 已确认有效行为、约束与验收；已实现且仍有效的需求继续保留。 |
+| 按需的 `docs/ROADMAP.md` | 需要独立维护的阶段结果、依赖和退出判断。 |
+| 按需的 `docs/SAD.md` | 简洁 DESIGN 无法承载时独立维护的详细架构与机制。 |
+| `docs/milestones/M{N}_PLAN.md` | 一个复杂里程碑的一份现行正式实施计划及有限工作包。 |
 
 一事一处，其他位置摘要并链接。跨会话或跨机器本身不要求路线图。TODO 指向当前包，不复制整份计划。
 
-文档档位（`minimal`、`standard`、`runtime_integration`）只是内部起点，不要求文档树或裁剪表。[文档职责](skills/swift-cycle/references/document-profiles.md) 中的十份核心模板保留已确认中文栏目顺序；新建或获准整体重整时使用，小改动保留有效等价结构和文件语言。专业提纲仍是按需候选。
+配套的 [TODO](skills/swift-cycle/templates/TODO.md) 和 [DEVLOG](skills/swift-cycle/templates/DEVLOG.md) 模板不使用 Emoji。实质进展、发现问题及阻塞变化及时更新 TODO；有用结论用 DEVLOG 紧凑条目保留，查找困难才按真实里程碑分组。无里程碑如实说明，不强制路线图。既有初始化双文件完成门不变，详见[本次源码验证](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28)；本次源码编辑不更新已安装副本。
 
-新普通 docs 路径用小写 `snake_case`，生态入口和索引保留例外。已有稳定路径不自动改名，迁移须在获准整理范围内进行；查找困难时才加 docs 首页。详见[文档组织](skills/swift-cycle/references/document-information-architecture.md)。
+[DESIGN 概要模板](skills/swift-cycle/templates/DESIGN.md)按七栏目组织，详细文档导读放最后。新建或获准整体重整须至少一张真实 UML 结构图，其他视图按需加入；架构类图保留 Figma 可编辑原稿和 PNG/SVG 导出。小改动保护既有有效结构，本次源码修订不绘制项目图或更新安装，详见[验证边界](docs/compatibility.md#design-overview-source-revision-2026-10-28)。
+
+文档档位（`minimal`、`standard`、`runtime_integration`）只是内部起点，不要求文档树或裁剪表。[项目结构与文档规约](skills/swift-cycle/references/document-profiles.md#文档职责与按需选择) 中的十份核心模板保留已确认中文栏目顺序；新建或获准整体重整时使用，小改动保留有效等价结构和文件语言。专业提纲仍是按需候选。
+
+[README 展示模板](skills/swift-cycle/templates/README.md)以 Emoji 标题保留六项职责，按事实选用展示块；其他模板不沿用图标风格。应用时填实变量、删除无依据的徽章/图片/链接。2026-10-28 这项源码更新不更新已发布或已安装副本，详见[验证边界](docs/compatibility.md#readme-presentation-source-revision-2026-10-28)。
+
+新普通 docs 路径用小写 `snake_case`，生态入口和索引保留例外。已有稳定路径不自动改名，迁移须在获准整理范围内进行；查找困难时才加 docs 首页，不提供固定的 docs 首页或 ADR 索引模板，确需导航时按实际内容与链接撰写。命名、导航、复用、本地记录与有界整理统一在[项目结构与文档规约](skills/swift-cycle/references/document-profiles.md#路径命名与导航)，按任务读取对应章节。
+
+固定专业文档名例外为 `docs/BLUEPRINT.md`、`docs/PRD.md`、按需的 `docs/SAD.md` 和 `docs/ROADMAP.md`、可选 `docs/MANUAL.md`，里程碑计划按 `docs/milestones/M1_PLAN.md` 等稳定编号。ADR 继续在 `docs/adr/` 独立记录重要决策；SAD 描述详细架构，MANUAL 承载操作与运维。不再预设独立评估模板，必要比较、试用证据及决定保留在对应 PRD/DESIGN/SAD/ADR。新名称用于新建默认值，已有完整等价来源保留原路径，迁移须另有授权。
 
 ### 治理边界
 
@@ -143,7 +157,7 @@ Swift Cycle 只在仓库证据要求时启用相应治理能力：
 - **状态拆分：**只有一个状态同时代表多个关闭证据不同的生命周期问题时，才拆分独立状态；把本地记录视为私有状态前，先核对存在与 Git 忽略状态。
 - **提交边界规划：**修改包含混合目的、顺序依赖或多个可审查增量时，在暂存前规划一致的提交范围。
 - **源码/运行态边界：**分别验证源码、制品、运行态和活动消费者；证据与授权不能跨层传递。
-- **文档新鲜度：**真实里程碑或边界变化时，对齐状态、决策、计划、身份和冻结的 Review Packet。
+- **文档新鲜度：**真实里程碑或边界变化时，对齐状态、决策、计划和身份；已交付的审查快照保持冻结，与现行事实分开。
 
 这些能力均由实际触发条件启用。简单、局部且明确的修改仍使用短循环，不增加额外治理产物。
 
@@ -186,21 +200,20 @@ skill_swift_cycle/
 │  ├─ agents/openai.yaml
 │  ├─ references/
 │  │  ├─ adoption-and-routing.md
-│  │  ├─ document-information-architecture.md
-│  │  ├─ document-profiles.md
+│  │  ├─ document-profiles.md  # 统一的项目结构与文档规约
 │  │  ├─ governance-boundaries.md
 │  │  ├─ lifecycle-and-closeout.md
 │  │  ├─ superpowers-bridge.md
 │  │  └─ zh-CN.md
 │  └─ templates/                 # 按需使用的文档配置起点
 │     ├─ README.md / AGENTS.md
-│     ├─ BLUEPRINT.md            # 应用为 docs/blueprint.md
-│     ├─ docs/                   # 需求、架构、路线图、编号计划和可选说明
+│     ├─ docs/                   # BLUEPRINT、PRD、SAD、ROADMAP、MANUAL、编号计划和可选说明
 │     ├─ DESIGN.md
 │     ├─ DEVLOG.md
 │     └─ TODO.md
 ├─ docs/engineering_standard.md # 已批准源码规格，不随 Skill 安装
 ├─ docs/compatibility.md
+├─ tmp/                        # 可写任务在本地建立；忽略，不随仓库交付
 ├─ README.md
 ├─ README.zh-CN.md
 ├─ DESIGN.md
