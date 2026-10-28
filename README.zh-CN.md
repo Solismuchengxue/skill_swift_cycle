@@ -1,228 +1,187 @@
 <div align="center">
 
-<p><strong>AI SKILL · LOOP ENGINEERING · VERIFIED DELIVERY</strong></p>
-
 # Swift Cycle（快速螺旋）
 
-**把模糊需求转化为经过验证的 AI 交付循环。**
+**一次采用，持续维护单个项目的轻量工程循环。**
 
-一个可移植的 Agent Skill：把持续变化的需求转化为轻量项目结构、可独立审查的交付增量和有证据支撑的结果，同时避免引入笨重流程。
+把项目意图、已确认需求、实施、验证和经验连接起来，让每次修改都有清楚的结果与下一步。
 
-<p>
-  <a href="https://agentskills.io/specification"><img alt="Agent Skill" src="https://img.shields.io/badge/Agent_Skill-portable-111827?style=flat-square"></a>
-  <a href="https://github.com/Solismuchengxue/skill_swift_cycle/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Solismuchengxue/skill_swift_cycle?style=flat-square&color=2563eb"></a>
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/Solismuchengxue/skill_swift_cycle?style=flat-square&color=16a34a"></a>
-  <img alt="Explicit invocation" src="https://img.shields.io/badge/invocation-explicit_only-7c3aed?style=flat-square">
-</p>
+[![Release](https://img.shields.io/github/v/release/Solismuchengxue/skill_swift_cycle?style=flat-square)](https://github.com/Solismuchengxue/skill_swift_cycle/releases)
+[![License](https://img.shields.io/github/license/Solismuchengxue/skill_swift_cycle?style=flat-square)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-portable-2563eb?style=flat-square)](https://agentskills.io/specification)
 
-[English](README.md)
+[English](README.md) · [✨ 功能介绍](#features) · [🚀 快速开始](#quick-start) · [🎬 使用示例](#first-use) · [❓ 常见问题](#help)
 
 </div>
 
-## 为什么需要 Swift Cycle
+> **版本说明：**本文介绍当前源码。下方固定安装命令使用已发布的 v1.4.0，不包含之后的初始化、模板、参考及 tmp/ 修订。源码、Release 和已安装副本分别管理，详见[版本与验证记录](docs/compatibility.md#fixed-version-delivery)。
 
-AI 辅助交付最容易在衔接处失真：需求持续变化，仓库真实状态偏离计划，本地执行记录被误当成长期共享事实，而“完成”缺少最新验证证据。
+---
 
-Swift Cycle 把这些衔接重新接成一个短循环，同时不把小项目升级为治理工程。它先检查真实状态，再选择与任务规模相称的流程，交付最小可审查增量，并同步本轮学到的事实。
+<a id="features"></a>
+<a id="为什么需要-swift-cycle"></a>
+<a id="loop-engineering"></a>
+<a id="ai-skill-能力"></a>
+<a id="项目体现的工程能力"></a>
+<a id="工作方式"></a>
+<a id="共享事实与本地执行"></a>
+<a id="治理边界"></a>
+<a id="与任务规模相称的交付方式"></a>
 
-## Loop Engineering
+## ✨ 用途与适用范围
 
-**Loop Engineering 是让意图、执行、证据与学习始终连接在一个短小、可重复反馈循环中的工程纪律。**
+Swift Cycle 是一个遵循 Agent Skills 规范的文档型 Skill。它先读取真实项目，再按任务规模选择最小改动、验证和文档同步，不为简单任务生成整套流程。
+
+| 核心能力 | 能帮助你完成什么 |
+| :--- | :--- |
+| **项目采用与持续推进** | 明确采用一次后，在项目 AGENTS.md 绑定，后续直接提出项目任务 |
+| **意图与需求分开** | BLUEPRINT 保留目标与构想，PRD 保留已确认行为与验收，不把所有设想变成承诺 |
+| **进度与经验可读** | TODO 展示进度、里程碑位置、问题和下一阶段；DEVLOG 留有效结论与理由 |
+| **按需文档模板** | 提供十份核心结构及可选 MANUAL/ADR；README 使用图标导航，DESIGN 使用概要结构与 UML |
+| **逐包收敛** | 每个工作包完成实现、相称验证和受影响说明同步；发现新需求时调整后续安排 |
+| **复用与轻量治理** | 先找已有能力，按真实职责组织代码；需要时才检查跨层身份、提交边界和文档新鲜度 |
+| **临时材料集中存放** | 可写任务使用根级 tmp/ 并按 Git 策略忽略，减少可控的额外 C 盘临时写入 |
+| **可移植与语言适配** | 共用一个规范包，正文按文件/项目语言处理，命令、路径和标准标识保持原文 |
+
+**适合：**个人项目、小团队仓库、持续维护和边界明确的工程任务。
+
+**范围之外：**组织级路由、容量管理、跨项目运行授权，以及未经批准的发布、安装、部署或删除。
+
+### 🔁 短循环
 
 ```mermaid
 flowchart LR
-    A["SCAN<br/>真实状态"] --> B["SHAPE<br/>共享事实"]
-    B --> C["SHIP<br/>最小可审查增量"]
-    C --> D["VERIFY<br/>最新证据"]
-    D --> E["LEARN<br/>同步或回退"]
+    A[读取真实状态] --> B[选择最小有效改动]
+    B --> C[实施并同步说明]
+    C --> D[立即验证]
+    D --> E[继续或修正]
     E --> A
 ```
 
-产品模型展开了循环，但执行节奏仍刻意保持简短：
+这就是循环工程（Loop Engineering）：让意图、执行、证据和经验在同一个短循环中保持一致。简单工作用普通 TODO，复杂阶段才用一份稳定编号的正式计划。
 
-> 快速扫描 → 最小变更 → 立即验证 → 继续或回退。
+## 🧰 准备条件
 
-## AI Skill 能力
+| 项目 | 要求 |
+| :--- | :--- |
+| Agent 环境 | 支持 Agent Skills 的宿主；各宿主的调用语法和验证范围见[兼容说明](docs/compatibility.md) |
+| 安装工具 | 使用安装命令时需要提供 gh skill 的 GitHub CLI；先运行 `gh skill install --help` 核对本机支持 |
+| 项目材料 | 当前项目目录、已有执行规则、需求、设计和 Git 状态；缺失或未知内容如实说明 |
+| 写入权限 | 维护时仅写获准项目；只读任务不创建目录、改忽略规则或写入记录 |
+| 图示工具 | 新建或整篇重整 DESIGN 的架构图需要 Figma 可编辑源稿与 PNG/SVG；普通文字维护不因此要求 Figma |
 
-| 能力 | Swift Cycle 的做法 |
-| --- | --- |
-| **项目塑形** | 行动前先读取仓库，只建立真正有用的项目结构，并明确边界。 |
-| **初始化双文件必需** | 获准创建项目或正式初始化必须有效交付根级 TODO.md、DEVLOG.md；已有有效文件保留，仅采用或普通维护不自动补建。 |
-| **项目临时目录必需** | Swift Cycle 可写任务必须建立/复用根级 tmp/，Git 默认忽略；可控临时材料集中于此，尽量减少额外 C 盘写入。只读任务只核对，工具受限位置说明例外，不改全局临时环境或缓存。 |
-| **轻量结构治理** | 新增重要能力、职责/依赖变化或重构时，有界核对复用、职责依赖、落点与能力定位，并用相关回归保护保留行为。 |
-| **持久采用** | 只需一次显式采用，即在项目 `AGENTS.md` 建立绑定；后续任务通过项目合同加载，无需重复输入。 |
-| **后台路由** | 自动识别首次采用、普通推进、重大结构变化或里程碑关闭，不向用户展示模式菜单。 |
-| **蓝图与确认需求** | 蓝图说明项目目标和整体构想，需求说明承载有效行为与验收；按所选确认需求设计和安排，不把全部设想变成承诺。 |
-| **按需文档** | 先复用现有权威，再选择最小职责；十份固定核心模板不意味着生成整套文档或裁剪账本。 |
-| **README 展示模板** | 提供 Emoji 小标题、居中介绍与导航、表格、示例和按需预览/FAQ；公开仓库可选 Star History 始终最后。不生成贡献或免责声明栏目，保留真实限制与许可。 |
-| **文档信息架构** | 保持 DESIGN 简洁，只在可发现性确有需要时增加 docs home，并按真实职责而非固定树组织长期文档。 |
-| **语言自动适配** | 普通内容服从调用者、项目和文件语言，同时保持技术标识、标准状态和品牌名的准确原文。 |
-| **语义化图示** | 架构图使用 Figma 可编辑原稿及 PNG/SVG，其他图按关系语义选型；布局由项目决定，不强制容器层级。 |
-| **治理基线（Governance Baseline）** | 非简单治理需要跨权威或交付边界可靠比较时，记录与任务规模相称的变更前状态。 |
-| **知识晋升（Knowledge Promotion）** | 把长期承诺、决策、约束和可复用证据从本地记录晋升到职责匹配的共享资产。 |
-| **状态拆分（State Separation）** | 只拆分项目实际跟踪的独立生命周期问题，在把本地记录视为私有状态前核对存在与忽略状态，不引入固定状态 Schema。 |
-| **提交边界规划（Commit Boundary Planning）** | 在暂存混合目的、有顺序依赖或多提交修改前，定义一致且可独立审查的提交范围。 |
-| **源码/运行态边界（Source/Runtime Boundary）** | 让源码、制品、运行态和消费者结论分别拥有自己的证据与授权。 |
-| **新鲜度与学习闭环** | 识别过期状态，冻结审查快照，安全退役旧文档，并晋升已确认的失败防线。 |
-| **自适应执行** | 小任务使用 TODO，复杂阶段才用编号计划；新确认需求按影响前瞻调整，不无故推翻已完成阶段。 |
-| **证据驱动交付** | 让每个增量都可审查、可验证、可回退，再根据最新证据继续或修正。 |
-| **可移植包** | 一份共享 Skill 不新增运行脚本或依赖；需要架构图时使用 Figma，Superpowers 只按已核对条件衔接。 |
+Skill 本身没有运行脚本或依赖包。仅做本地阅读和维护不要求新增云端账户；外部工具与权限按实际任务决定。
 
-## 快速开始
+<a id="quick-start"></a>
+<a id="快速开始"></a>
+<a id="codex"></a>
+<a id="claude-code"></a>
+<a id="github-copilot"></a>
 
-GitHub CLI 2.90 或更高版本可以把同一份 Skill 安装给多个 Agent。
+## 🚀 安装或接入
 
-### Codex
+### 💻 Codex 固定版本安装
+
+**执行位置：**任意可运行 gh 的目录。**执行环境：**Windows PowerShell 7。
 
 ```powershell
 gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
 ```
 
-在 ChatGPT 桌面端，输入 `@` 并选择 **Swift Cycle / 快速螺旋**；在 Codex CLI 或 IDE 扩展中，使用 `$swift-cycle` 调用。
+**成功判断：**完整 Skill 位于用户级 .agents/skills/swift-cycle，并可在 `gh skill list` 中核对来源。ChatGPT 桌面版输入 `@`选择 **Swift Cycle / 快速螺旋**；Codex CLI/IDE 使用 `$swift-cycle`。
 
-首次初始化或接管项目时调用一次。采用后，Swift Cycle 会在项目 `AGENTS.md` 写入持久绑定；后续项目任务通过该仓库合同加载 Skill，不要求用户重复选择模式或重复显式选择/输入 Skill。
+已有安装先保留原目录作为回退，再决定是否覆盖；只保留一个独立真实入口，避免旧 .codex/skills 副本或指向源码的 Junction 造成重复发现。更换版本和本仓库源码编辑不会自动更新安装。
 
-### Claude Code
+### 📦 其他接入方式
 
-```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user
-```
+| 场景 | 方式 |
+| :--- | :--- |
+| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.4.0`；调用 /swift-cycle |
+| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.4.0`；调用 /swift-cycle，不外推其他界面 |
+| Codex 仅项目安装 | 将上述 Codex 命令的 --dir 及其值替换为 --agent codex --scope project |
+| 手动安装当前源码 | 复制完整 skills/swift-cycle/ 到宿主支持的 Skill 目录，保留参考、模板和元数据；先处理已有安装的备份与版本选择 |
+| 维护本仓库源码 | 按[AGENTS.md](AGENTS.md#swift-cycle)读取仓库内规范入口；无需为了编辑文档先覆盖用户已安装 Skill |
 
-使用 `/swift-cycle` 调用。
+手动安装路径、已安装来源与回退边界详见[兼容说明](docs/compatibility.md#manual-installation)。
 
-### GitHub Copilot
+<a id="first-use"></a>
+<a id="交付循环示例"></a>
 
-```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user
-```
+## 🎬 第一次使用
 
-使用 `/swift-cycle` 调用。
+### 📥 1. 准备输入
 
-Codex 仅在当前项目安装时，把 `--dir "$env:USERPROFILE\.agents\skills"` 替换为 `--agent codex --scope project`；上述其他宿主则把 `--scope user` 改为 `--scope project`。不同平台的行为和手动安装路径见[兼容性说明](docs/compatibility.md)。
+打开一个已有项目，明确本次范围。第一次可从只读核对开始，不必先初始化文档树。
 
-上述 Codex 命令将固定 `v1.4.0` 显式安装到用户级 `.agents/skills/swift-cycle`。只保留一份独立真实目录，不保留旧 `.codex/skills/swift-cycle` 重复入口或指向源码的 Junction。更新已有安装前，先把这一份技能目录备份到发现入口之外，再使用同一命令加 `--force`；回退只恢复该目录到同一 `.agents` 目标，或保留相同 `--dir` 重新安装旧固定标签。安装元数据不得写入源码仓库。
+### ▶️ 2. 选择 Skill 并提出任务
 
-2026-10-19 另获授权的本机验证安装使用已验收、未发布的本地源码，不是上述固定标签；元数据如实标记可变本地路径，不再自称 v1.4.0。实际结果见[本地安装与全新初始化证据](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19)。上述远程命令仍用于可复现的已发布版本安装。
-
-## 项目体现的工程能力
-
-Swift Cycle 同时也是一个工程作品集项目：这个仓库展示了如何把紧凑的 AI 能力塑形、产品化、划定边界，并用真实验证支持交付。
-
-| FDE 能力 | 仓库证据 |
-| --- | --- |
-| **方案塑形** | 把模糊的维护请求转化为明确范围、文档职责和交付合同。 |
-| **AI Skill 产品化** | 把工作方法封装为可移植 Agent Skill，并维护双语指引与宿主专属元数据。 |
-| **交付编排** | 小任务采用轻量执行，大任务拆成依赖明确、PR 大小的交付增量。 |
-| **证据优先执行** | 连接实施、验证、回退与共享状态同步，不把输出本身当作完成证据。 |
-| **跨语境沟通** | 为技术与业务读者维护语义一致的中英文产品叙事。 |
-
-## 工作方式
-
-### 共享事实与本地执行
-
-| 权威 | 职责 |
-| --- | --- |
-| `AGENTS.md` | 项目执行和授权规则。 |
-| `DESIGN.md` | 概要方案、UML 结构、功能/接口/数据与交付形态及详细文档导读。 |
-| 本地 `DEVLOG.md` | 紧凑的有用结论和理由，记录多时按真实里程碑分组。 |
-| `README.md` | 用户上手、首次使用与求助。 |
-| 本地 `TODO.md` | 当前进度、里程碑位置、待办/问题、阻塞与下一阶段。 |
-| `docs/BLUEPRINT.md` 或完整等价来源 | 项目目标、愿景、用户、场景、核心能力与产品边界，不承诺实现全部设想。 |
-| 可选的 `docs/MANUAL.md` | 操作说明需独立维护时，承载前提、启动/停止、验证、回滚与排障；说明不授予运行权限。 |
-| `docs/PRD.md` 或等价来源 | 已确认有效行为、约束与验收；已实现且仍有效的需求继续保留。 |
-| 按需的 `docs/ROADMAP.md` | 需要独立维护的阶段结果、依赖和退出判断。 |
-| 按需的 `docs/SAD.md` | 简洁 DESIGN 无法承载时独立维护的详细架构与机制。 |
-| `docs/milestones/M{N}_PLAN.md` | 一个复杂里程碑的一份现行正式实施计划及有限工作包。 |
-
-一事一处，其他位置摘要并链接。跨会话或跨机器本身不要求路线图。TODO 指向当前包，不复制整份计划。
-
-配套的 [TODO](skills/swift-cycle/templates/TODO.md) 和 [DEVLOG](skills/swift-cycle/templates/DEVLOG.md) 模板不使用 Emoji。实质进展、发现问题及阻塞变化及时更新 TODO；有用结论用 DEVLOG 紧凑条目保留，查找困难才按真实里程碑分组。无里程碑如实说明，不强制路线图。既有初始化双文件完成门不变，详见[本次源码验证](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28)；本次源码编辑不更新已安装副本。
-
-[DESIGN 概要模板](skills/swift-cycle/templates/DESIGN.md)按七栏目组织，详细文档导读放最后。新建或获准整体重整须至少一张真实 UML 结构图，其他视图按需加入；架构类图保留 Figma 可编辑原稿和 PNG/SVG 导出。小改动保护既有有效结构，本次源码修订不绘制项目图或更新安装，详见[验证边界](docs/compatibility.md#design-overview-source-revision-2026-10-28)。
-
-文档档位（`minimal`、`standard`、`runtime_integration`）只是内部起点，不要求文档树或裁剪表。[项目结构与文档规约](skills/swift-cycle/references/document-profiles.md#文档职责与按需选择) 中的十份核心模板保留已确认中文栏目顺序；新建或获准整体重整时使用，小改动保留有效等价结构和文件语言。专业提纲仍是按需候选。
-
-[README 展示模板](skills/swift-cycle/templates/README.md)以 Emoji 标题保留六项职责，按事实选用展示块；其他模板不沿用图标风格。应用时填实变量、删除无依据的徽章/图片/链接。2026-10-28 这项源码更新不更新已发布或已安装副本，详见[验证边界](docs/compatibility.md#readme-presentation-source-revision-2026-10-28)。
-
-新普通 docs 路径用小写 `snake_case`，生态入口和索引保留例外。已有稳定路径不自动改名，迁移须在获准整理范围内进行；查找困难时才加 docs 首页，不提供固定的 docs 首页或 ADR 索引模板，确需导航时按实际内容与链接撰写。命名、导航、复用、本地记录与有界整理统一在[项目结构与文档规约](skills/swift-cycle/references/document-profiles.md#路径命名与导航)，按任务读取对应章节。
-
-固定专业文档名例外为 `docs/BLUEPRINT.md`、`docs/PRD.md`、按需的 `docs/SAD.md` 和 `docs/ROADMAP.md`、可选 `docs/MANUAL.md`，里程碑计划按 `docs/milestones/M1_PLAN.md` 等稳定编号。ADR 继续在 `docs/adr/` 独立记录重要决策；SAD 描述详细架构，MANUAL 承载操作与运维。不再预设独立评估模板，必要比较、试用证据及决定保留在对应 PRD/DESIGN/SAD/ADR。新名称用于新建默认值，已有完整等价来源保留原路径，迁移须另有授权。
-
-### 治理边界
-
-Swift Cycle 只在仓库证据要求时启用相应治理能力：
-
-- **治理基线：**在非简单治理、迁移、替换或跨边界工作前记录已观察状态，并与目标结果分开。
-- **知识晋升：**把长期承诺、决策、约束和已验证证据晋升到共享资产；短期行动和单次失败继续留在本地。
-- **状态拆分：**只有一个状态同时代表多个关闭证据不同的生命周期问题时，才拆分独立状态；把本地记录视为私有状态前，先核对存在与 Git 忽略状态。
-- **提交边界规划：**修改包含混合目的、顺序依赖或多个可审查增量时，在暂存前规划一致的提交范围。
-- **源码/运行态边界：**分别验证源码、制品、运行态和活动消费者；证据与授权不能跨层传递。
-- **文档新鲜度：**真实里程碑或边界变化时，对齐状态、决策、计划和身份；已交付的审查快照保持冻结，与现行事实分开。
-
-这些能力均由实际触发条件启用。简单、局部且明确的修改仍使用短循环，不增加额外治理产物。
-
-### 与任务规模相称的交付方式
-
-小改动保持简单。复杂阶段按依赖分包，每包包含实现、必要验证和受影响说明同步。每包都收敛，不等项目末尾；TODO 不设固定历史条数，旧完成项不整批搬入 DEVLOG。
-
-新需求先明确问题、验收和影响，再决定加入、替换或后移。先更新确认需求，再同步相关设计、阶段安排和行动。已完成阶段之后的新需求安排后续工作，不无故把原阶段改成未完成。
-
-里程碑须满足总体结果与必要人工确认，不以任务全勾选代替。发布、安装、部署及真实采用仍是不同授权与证据层。
-
-r29 基线曾由 D60 部长验收本地源码。[工程规约](docs/engineering_standard.md) 现另纳入已批准的 2026-10-18 双文件/结构治理源码增量，实际证据与限制见[本轮源码验证](docs/compatibility.md#source-only-initialization-and-structure-revision-2026-10-18)，不继承历史验收；上述固定 v1.4.0 安装不含该未发布增量。发布和安装在[交付状态](docs/compatibility.md#fixed-version-delivery)分别核对。[Superpowers 衔接条件](skills/swift-cycle/references/superpowers-bridge.md) 仅说明已核对的最小接口；完整执行、Figma 实际绘制导出与真实项目采用仍未验证。
-
-## 交付循环示例
-
-Codex CLI / IDE 示例：
+在 ChatGPT 桌面版通过 `@`选择 Skill，再发送：
 
 ```text
-$swift-cycle 接管当前仓库，并在 AGENTS.md 中绑定持续的轻量维护。
+只读检查当前项目的 README、DESIGN 和已有需求说明。
+报告当前进度、发现的问题及下一步，不修改文件，不提交推送。
 ```
 
-采用后直接发送普通项目任务。Agent 在后台判断阶段、档位、受影响权威和收敛工作；不提供 bootstrap、milestone 或 closeout 子命令。
+Codex CLI/IDE 可在同一请求前加 `$swift-cycle`。一次性检查不建立持久采用；需要持续维护时，再明确要求“采用 Swift Cycle，并在本项目 AGENTS.md 中绑定”。
 
-请根据所用 Agent 调整调用语法。
+### ✅ 3. 检查结果
 
-## 兼容性与边界
+应得到与实际文件对应的状态、问题、未验证范围和下一步，而不是声称创建了未授权的文档。此处是请求示例，不是新的宿主执行测试结果。
 
-- Swift Cycle 在系统层保持 explicit-only。项目只需一次显式采用，之后由已提交的 `AGENTS.md` 绑定要求后续项目任务加载该 Skill。
-- Codex、Claude Code 与 GitHub Copilot 使用同一份规范包；宿主差异见[兼容性说明](docs/compatibility.md)。
-- canonical Skill 正文和默认提示使用简体中文。仓库继续维护双语产品入口，以及 [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md) 中的精简术语；目标项目文件仍沿用其既有语言。
-- 该包遵循开放的 [Agent Skills 规范](https://agentskills.io/specification)。
-- 核心包不新增脚本或运行时依赖。Figma 是架构图指定工具，按需衔接依赖实际可用工具及相应权限。
+采用后直接发送普通项目任务；获准创建或正式初始化时，才要求有效交付根级 TODO.md 与 DEVLOG.md。已有有效记录保留，普通维护只同步受影响内容。
 
-## 仓库结构
+<a id="help"></a>
+<a id="仓库结构"></a>
 
-```text
-skill_swift_cycle/
-├─ skills/swift-cycle/
-│  ├─ SKILL.md
-│  ├─ agents/openai.yaml
-│  ├─ references/
-│  │  ├─ adoption-and-routing.md
-│  │  ├─ document-profiles.md  # 统一的项目结构与文档规约
-│  │  ├─ governance-boundaries.md
-│  │  ├─ lifecycle-and-closeout.md
-│  │  ├─ superpowers-bridge.md
-│  │  └─ zh-CN.md
-│  └─ templates/                 # 按需使用的文档配置起点
-│     ├─ README.md / AGENTS.md
-│     ├─ docs/                   # BLUEPRINT、PRD、SAD、ROADMAP、MANUAL、编号计划和可选说明
-│     ├─ DESIGN.md
-│     ├─ DEVLOG.md
-│     └─ TODO.md
-├─ docs/engineering_standard.md # 已批准源码规格，不随 Skill 安装
-├─ docs/compatibility.md
-├─ tmp/                        # 可写任务在本地建立；忽略，不随仓库交付
-├─ README.md
-├─ README.zh-CN.md
-├─ DESIGN.md
-├─ AGENTS.md
-└─ LICENSE
-```
+## 🛠️ 日常使用与求助
 
-仓库名中的多个单词使用 `_` 连接。Skill 名继续使用 `swift-cycle`，因为 Agent Skills 名称只允许小写字母、数字和连字符。
+### 📋 常用操作与文档入口
 
-## 许可证
+| 想做什么 | 操作或入口 |
+| :--- | :--- |
+| 推进现有任务 | 说明目标、范围和保留项；先核对当前 TODO，再完成最小工作包及验证 |
+| 接收新需求 | 先确认行为、验收和影响；完成阶段后的新增需求安排后续，不改写原完成范围 |
+| 查看整体设计、目录树与 UML | [项目概要设计](DESIGN.md) |
+| 选择文档、命名或记录策略 | [项目结构与文档规约](skills/swift-cycle/references/document-profiles.md) |
+| 查同步时机与收口条件 | [需求与持续收敛](skills/swift-cycle/references/lifecycle-and-closeout.md) |
+| 查看安装、版本和实际验证范围 | [兼容性与证据](docs/compatibility.md) |
+| 维护此 Skill | [执行规则](AGENTS.md)、[源规约](docs/engineering_standard.md)、[规范入口](skills/swift-cycle/SKILL.md) |
 
-Swift Cycle 使用 [MIT License](LICENSE) 发布。
+### ❓ 常见问题
+
+<details>
+<summary>为什么装了 v1.4.0，却没有当前源码的新模板？</summary>
+
+固定标签不会随 main 更新。按[交付记录](docs/compatibility.md#fixed-version-delivery)区分版本，需要新源码时明确选择来源并保留回退，不把编辑源码当作安装完成。
+
+</details>
+
+<details>
+<summary>会为所有项目创建 ROADMAP、MANUAL 和整套模板吗？</summary>
+
+不会。复用完整等价来源，只补真实职责。没有里程碑就如实说明；MANUAL、详细 SAD 和编号计划均按实际需要使用。
+
+</details>
+
+<details>
+<summary>tmp/ 可以直接清空吗？</summary>
+
+集中存放不授予删除权限。已有材料、受跟踪文件、用户数据和恢复点先核用途与授权；只读任务不创建或清理 tmp/。
+
+</details>
+
+仍有问题，请通过 [GitHub Issues](https://github.com/Solismuchengxue/skill_swift_cycle/issues)反馈宿主、Skill 来源/版本、复现步骤和脱敏错误，不附凭据或私人材料。
+
+<a id="兼容性与边界"></a>
+<a id="许可证"></a>
+
+## 📄 限制与许可
+
+- **验证范围：**包校验、源码断言、隔离样例、宿主发现及真实调用是不同证据层，具体日期和范围见[兼容记录](docs/compatibility.md)。本仓库自用绘图不证明其他项目、全新 Agent 或其他宿主都已采用。
+- **外部工具：**架构图使用 Figma；完整 Superpowers 执行、其他宿主及长期行为不能由本地静态检查推导。
+- **权限边界：**Skill 不授予发布、安装、部署、凭据、费用、删除或消费者切换权限；本地记录是否私有取决于实际 Git 策略。
+- **许可证：**[MIT License](LICENSE)。安装器来源元数据属于安装副本，不写回规范源码。
+
+## ⭐ Star History
+
+[![Star History](https://api.star-history.com/svg?repos=Solismuchengxue/skill_swift_cycle&type=Date)](https://github.com/Solismuchengxue/skill_swift_cycle/stargazers)

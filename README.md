@@ -1,228 +1,187 @@
 <div align="center">
 
-<p><strong>AI SKILL · LOOP ENGINEERING · VERIFIED DELIVERY</strong></p>
-
 # Swift Cycle
 
-**From ambiguous requirements to verified AI delivery loops.**
+**Adopt once. Keep one project coherent through a lightweight engineering loop.**
 
-A portable Agent Skill that turns evolving requirements into lightweight project structure, reviewable delivery increments, and evidence-backed outcomes—without importing heavyweight process.
+Connect project intent, confirmed requirements, implementation, verification and learning, with a clear result and next step for every change.
 
-<p>
-  <a href="https://agentskills.io/specification"><img alt="Agent Skill" src="https://img.shields.io/badge/Agent_Skill-portable-111827?style=flat-square"></a>
-  <a href="https://github.com/Solismuchengxue/skill_swift_cycle/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Solismuchengxue/skill_swift_cycle?style=flat-square&color=2563eb"></a>
-  <a href="LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/Solismuchengxue/skill_swift_cycle?style=flat-square&color=16a34a"></a>
-  <img alt="Explicit invocation" src="https://img.shields.io/badge/invocation-explicit_only-7c3aed?style=flat-square">
-</p>
+[![Release](https://img.shields.io/github/v/release/Solismuchengxue/skill_swift_cycle?style=flat-square)](https://github.com/Solismuchengxue/skill_swift_cycle/releases)
+[![License](https://img.shields.io/github/license/Solismuchengxue/skill_swift_cycle?style=flat-square)](LICENSE)
+[![Agent Skills](https://img.shields.io/badge/Agent_Skills-portable-2563eb?style=flat-square)](https://agentskills.io/specification)
 
-[简体中文](README.zh-CN.md)
+[简体中文](README.zh-CN.md) · [✨ Features](#features) · [🚀 Quick start](#quick-start) · [🎬 First use](#first-use) · [❓ Help](#help)
 
 </div>
 
-## Why Swift Cycle
+> **Version note:** this page describes the current source. The fixed installation command below selects released v1.4.0, which does not include later initialization, template, reference or tmp/ revisions. Source, releases and installed copies are separate; see [delivery and verification records](docs/compatibility.md#fixed-version-delivery).
 
-AI-assisted delivery often breaks at the handoffs: requirements evolve, repository reality diverges from the plan, local execution notes become mistaken for shared truth, and “done” is declared without fresh evidence.
+---
 
-Swift Cycle reconnects those handoffs without turning a small project into a governance program. It inspects the real state, chooses process proportional to the task, ships the smallest reviewable increment, and synchronizes what was learned.
+<a id="features"></a>
+<a id="why-swift-cycle"></a>
+<a id="loop-engineering"></a>
+<a id="ai-skill-capabilities"></a>
+<a id="what-this-project-demonstrates"></a>
+<a id="how-it-works"></a>
+<a id="shared-truth-and-local-execution"></a>
+<a id="governance-boundaries"></a>
+<a id="proportional-delivery"></a>
 
-## Loop Engineering
+## ✨ Purpose and scope
 
-**Loop Engineering is the discipline of keeping intent, execution, evidence, and learning connected in one short, repeatable feedback loop.**
+Swift Cycle is a document-based Skill following the Agent Skills specification. It reads the real project first, then selects the smallest useful change, verification and documentation work for the task. Simple work stays simple.
+
+| Core capability | What it helps you do |
+| :--- | :--- |
+| **Adoption and ongoing work** | Bind the Skill in the project's AGENTS.md after one explicit adoption, then send normal project requests |
+| **Separate intent from requirements** | Keep goals and ideas in BLUEPRINT, confirmed behavior and acceptance in PRD, without promising every idea |
+| **Readable progress and learning** | Use TODO for progress, milestone position, problems and the next stage; keep useful conclusions and reasons in DEVLOG |
+| **Conditional document templates** | Reuse ten core outlines plus optional MANUAL/ADR; README has visual navigation, DESIGN has an overview and UML |
+| **Converge after each package** | Complete implementation, proportional verification and affected guidance together; schedule new requirements prospectively |
+| **Reuse and lightweight governance** | Find existing capabilities, organize by real responsibility, and check identities, commit boundaries or freshness when needed |
+| **Local temporary workspace** | Keep controllable temporary work in root tmp/ under the applicable Git-ignore policy, reducing extra C-drive writes |
+| **Portability and language adaptation** | Share one canonical package; respect file/project prose languages while preserving commands, paths and standard identifiers |
+
+**Suitable for:** personal projects, small team repositories, ongoing maintenance and bounded engineering tasks.
+
+**Outside its scope:** organizational routing, capacity management, cross-project runtime authority, and publication, installation, deployment or deletion without authorization.
+
+### 🔁 The short loop
 
 ```mermaid
 flowchart LR
-    A["SCAN<br/>real state"] --> B["SHAPE<br/>shared truth"]
-    B --> C["SHIP<br/>smallest reviewable increment"]
-    C --> D["VERIFY<br/>fresh evidence"]
-    D --> E["LEARN<br/>synchronize or revert"]
+    A[Read real state] --> B[Choose the smallest useful change]
+    B --> C[Implement and synchronize]
+    C --> D[Verify immediately]
+    D --> E[Continue or correct]
     E --> A
 ```
 
-The product model expands the loop; the execution rhythm stays intentionally short:
+Loop Engineering keeps intent, execution, evidence and learning connected in this short cycle. Ordinary work uses a normal TODO; complex stages use one stable numbered formal plan when needed.
 
-> Scan quickly → make the smallest useful change → verify immediately → continue or revert.
+## 🧰 Prerequisites
 
-## AI Skill capabilities
+| Item | Requirement |
+| :--- | :--- |
+| Agent environment | An Agent Skills host; invocation syntax and verification scope are documented in [compatibility](docs/compatibility.md) |
+| Installation tooling | For the commands below, GitHub CLI with gh skill; check local support with `gh skill install --help` |
+| Project material | The current directory, existing instructions, requirements, design and Git state; report gaps and unknowns honestly |
+| Write access | Modify only the authorized project; read-only tasks create no directories, ignore rules or records |
+| Diagram tooling | New or whole-document DESIGN restructuring requires editable Figma architecture sources and PNG/SVG; ordinary prose edits do not require Figma |
 
-| Capability | What Swift Cycle does |
-| --- | --- |
-| **Project shaping** | Reads the repository before acting, establishes only the useful project structure, and makes boundaries explicit. |
-| **Required initialization records** | Authorized project creation or formal initialization requires valid root TODO.md and DEVLOG.md; existing valid files are preserved, while adoption alone or ordinary maintenance does not trigger creation. |
-| **Required project temporary directory** | Writable Swift Cycle tasks create or reuse root tmp/ and keep it Git-ignored. Controllable temporary work stays there to reduce extra C-drive writes; read-only work only checks, and tool-imposed exceptions are disclosed without global environment/cache changes. |
-| **Lightweight structure governance** | Important capability or responsibility/dependency changes and refactors trigger bounded reuse checks, explicit ownership/dependencies, capability navigation and behavior-preserving regression checks. |
-| **Persistent adoption** | Uses one explicit adoption to bind Swift Cycle in the project's `AGENTS.md`; later tasks load it through the project contract without repeated user commands. |
-| **Background routing** | Detects adoption, ordinary progress, material structural change, or milestone closeout without showing a mode menu. |
-| **Blueprint and confirmed requirements** | Separates long-term BLUEPRINT intent from effective requirements and acceptance criteria; designs and schedules selected confirmed needs, not every idea. |
-| **Conditional documents** | Reuses existing authorities and selects the smallest useful profile; ten fixed core templates do not become a mandatory document tree or conformance ledger. |
-| **Visual README template** | Supplies Emoji section headings, centered introduction/navigation, tables, examples and optional previews/FAQ; optional public-GitHub Star History stays last. No contribution or disclaimer sections; real limitations and licensing remain explicit. |
-| **Document information architecture** | Keeps DESIGN concise, adds a docs home only when discoverability needs it, and organizes durable documents by real responsibility rather than a mandatory tree. |
-| **Language adaptation** | Uses the caller, project, and file language for ordinary prose while preserving exact technical identifiers, standard statuses, and brand names. |
-| **Semantic visualization** | Uses Figma editable sources plus PNG/SVG exports for architecture diagrams; other diagram types follow their semantics. Layout is project-driven, not a fixed container hierarchy. |
-| **Governance Baseline** | Captures a proportional before-state when non-trivial governance needs reliable comparison across authority or delivery boundaries. |
-| **Knowledge Promotion** | Moves durable commitments, decisions, constraints, and reusable evidence from local capture into responsibility-appropriate shared assets. |
-| **State Separation** | Splits composite labels into only the independent lifecycle concerns a project actually tracks, checks local-record existence and Git-ignore state before treating them as private, and does not impose a fixed schema. |
-| **Commit Boundary Planning** | Defines coherent, independently reviewable commit scopes before staging mixed, ordered, or multi-commit changes. |
-| **Source/Runtime Boundary** | Keeps source, artifact, runtime, and consumer claims independently evidenced and authorized. |
-| **Freshness and learning** | Detects stale status, freezes review snapshots, retires obsolete documents safely, and promotes confirmed failure guards. |
-| **Adaptive execution** | Keeps small work in TODO, uses numbered milestone plans only when needed, and handles confirmed new requirements by adjusting future work. |
-| **Evidence-backed delivery** | Keeps each increment reviewable, verifiable, and reversible, then continues or corrects based on fresh evidence. |
-| **Portable package** | Ships one shared Skill without runtime scripts or dependencies; Figma is required when an architecture diagram is needed. Superpowers integration is conditional. |
+The Skill itself adds no runtime scripts or dependency packages. Local reading and maintenance do not require a new cloud account; external tools and permissions depend on the actual task.
 
-## Quick Start
+<a id="quick-start"></a>
+<a id="codex"></a>
+<a id="claude-code"></a>
+<a id="github-copilot"></a>
 
-GitHub CLI 2.90 or later can install the same Skill for multiple agent hosts.
+## 🚀 Install or connect
 
-### Codex
+### 💻 Install a fixed version for Codex
+
+**Working directory:** anywhere gh is available. **Shell:** Windows PowerShell 7.
 
 ```powershell
 gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --dir "$env:USERPROFILE\.agents\skills" --pin v1.4.0
 ```
 
-In ChatGPT desktop, type `@` and select **Swift Cycle / 快速螺旋**. In Codex CLI or the IDE extension, invoke it with `$swift-cycle`.
+**Success check:** the complete Skill is under the user .agents/skills/swift-cycle directory, with its source visible in `gh skill list`. In ChatGPT desktop, type `@` and choose **Swift Cycle / 快速螺旋**. In Codex CLI/IDE, use `$swift-cycle`.
 
-Invoke it once to adopt or take over a project. After adoption, Swift Cycle records a persistent binding in the project's `AGENTS.md`; later project tasks load the Skill through that repository contract and do not require repeated mode selection or repeated explicit Skill selection/input.
+Before replacing an existing installation, preserve its directory for rollback and explicitly choose the replacement. Keep one independent real entry; avoid a duplicate legacy .codex/skills copy or a Junction into source. Selecting another version and editing this repository do not update an installed copy automatically.
 
-### Claude Code
+### 📦 Other ways to connect
 
-```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user
-```
+| Scenario | Route |
+| :--- | :--- |
+| Claude Code | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent claude-code --scope user --pin v1.4.0`; invoke /swift-cycle |
+| GitHub Copilot CLI | `gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user --pin v1.4.0`; invoke /swift-cycle, without assuming that syntax in other interfaces |
+| Codex project-only installation | Replace --dir and its value in the Codex command with --agent codex --scope project |
+| Manually install current source | Copy the entire skills/swift-cycle/ package to the host's supported Skill directory, including references, templates and metadata; first resolve backup and version selection for an existing installation |
+| Maintain this repository | Follow [AGENTS.md](AGENTS.md#swift-cycle) and read the in-repository canonical entry; documentation editing does not require replacing the user's installed Skill |
 
-Invoke with `/swift-cycle`.
+Manual paths, installed sources and rollback boundaries are covered in [compatibility](docs/compatibility.md#manual-installation).
 
-### GitHub Copilot
+<a id="first-use"></a>
+<a id="example-delivery-loops"></a>
 
-```powershell
-gh skill install Solismuchengxue/skill_swift_cycle swift-cycle --agent github-copilot --scope user
-```
+## 🎬 First use
 
-Invoke with `/swift-cycle`.
+### 📥 1. Prepare the input
 
-For Codex project-only installation, replace `--dir "$env:USERPROFILE\.agents\skills"` with `--agent codex --scope project`. For the other hosts above, replace `--scope user` with `--scope project`. See [agent compatibility](docs/compatibility.md) for platform behavior and manual installation paths.
+Open an existing project and define the task's scope. A first read-only check does not need a new document tree.
 
-The Codex command explicitly installs fixed `v1.4.0` into the user `.agents/skills/swift-cycle` directory. Keep one independent real directory, not a duplicate legacy `.codex/skills/swift-cycle` entry or a Junction to the source. Before replacing an existing installation, preserve that Skill directory outside discovered Skill roots; then use the same command with `--force`. Restore only that directory to the same `.agents` destination to roll back, or reinstall the previous fixed tag with the same `--dir`. Installation metadata must never be written into the source checkout.
+### ▶️ 2. Select the Skill and request a task
 
-The separately authorized local validation installation on 2026-10-19 uses the accepted, unpublished local source instead of that fixed tag. Its metadata reports a mutable local path, not v1.4.0; see [local installation and fresh initialization evidence](docs/compatibility.md#local-accepted-source-installation-and-fresh-initialization-2026-10-19). The remote command above remains the reproducible released-version option.
-
-## What this project demonstrates
-
-Swift Cycle is also an engineering portfolio artifact: it shows how a compact AI capability can be shaped, packaged, bounded, and verified for real delivery work.
-
-| FDE capability | Repository evidence |
-| --- | --- |
-| **Solution shaping** | Turns ambiguous maintenance requests into explicit scope, document responsibilities, and delivery contracts. |
-| **AI Skill productization** | Packages a working methodology as a portable Agent Skill with bilingual guidance and host-specific metadata. |
-| **Delivery orchestration** | Selects lightweight execution for small work and dependency-aware, PR-sized increments for larger work. |
-| **Evidence-first execution** | Connects implementation, validation, rollback, and shared-state synchronization instead of treating output as proof. |
-| **Cross-context communication** | Maintains equivalent English and Chinese product narratives for technical and business-facing readers. |
-
-## How it works
-
-### Shared truth and local execution
-
-| Authority | Responsibility |
-| --- | --- |
-| `AGENTS.md` | Project execution and authorization rules. |
-| `DESIGN.md` | Overview design, UML structure, functional/interface/data and delivery summaries, plus a guide to detailed documents. |
-| Local `DEVLOG.md` | Compact dated conclusions and reasons, grouped by real milestone when useful. |
-| `README.md` | User onboarding, first use and help. |
-| Local `TODO.md` | Current progress, milestone position, tasks/problems, blockers and the next stage. |
-| `docs/BLUEPRINT.md` or complete equivalent | Project goals, vision, users, scenarios, core capabilities and product boundaries; not a promise to implement every idea. |
-| Optional `docs/MANUAL.md` | Operational prerequisites, start/stop, verification, rollback and troubleshooting when independently maintained; instructions do not grant runtime authority. |
-| `docs/PRD.md` or equivalent | Confirmed effective behavior, constraints and acceptance; implemented requirements remain effective. |
-| Conditional `docs/ROADMAP.md` | Stage outcomes, dependencies and exit judgments that need independent maintenance. |
-| Conditional `docs/SAD.md` | Detailed architecture and mechanisms only when DESIGN cannot remain concise. |
-| `docs/milestones/M{N}_PLAN.md` | One current formal implementation plan per complex milestone, with finite work packages. |
-
-Use one maintained body per fact; summaries link to it. Cross-session or cross-machine work alone does not justify creating ROADMAP. TODO points to the active package rather than duplicating the plan.
-
-The paired [TODO](skills/swift-cycle/templates/TODO.md) and [DEVLOG](skills/swift-cycle/templates/DEVLOG.md) templates use no Emoji. Update TODO at substantive progress/problem/blocker transitions; keep useful conclusions in compact DEVLOG entries, grouped by actual milestone only when records become hard to find. Projects without milestones state that honestly and do not require ROADMAP. The existing required-initialization gate is unchanged; see [this source revision](docs/compatibility.md#todo-and-devlog-source-revision-2026-10-28). No installed copy is updated by these source edits.
-
-The [DESIGN overview template](skills/swift-cycle/templates/DESIGN.md) has seven sections ending in the detailed-document guide. New or authorized whole-document restructuring requires at least one real UML structure diagram; additional views are conditional. Architecture UML retains editable Figma sources plus PNG/SVG exports. Small edits preserve existing effective structure, and this source revision does not draw project diagrams or update installed copies; see [validation boundaries](docs/compatibility.md#design-overview-source-revision-2026-10-28).
-
-Profiles (`minimal`, `standard`, `runtime_integration`) are internal starting points, not required trees or conformance tables. The ten core templates in [project structure and document rules](skills/swift-cycle/references/document-profiles.md#文档职责与按需选择) preserve the approved Chinese heading order for new or approved whole-document restructuring, while ordinary edits preserve effective existing structure and prose language. Professional outlines remain optional candidates.
-
-The [README presentation template](skills/swift-cycle/templates/README.md) retains six semantic responsibilities with Emoji headings and optional presentation blocks; other templates do not inherit that icon style. Fill output variables and omit unsupported badges, images or links. This 2026-10-28 source revision does not update released or installed copies; see [validation boundaries](docs/compatibility.md#readme-presentation-source-revision-2026-10-28).
-
-New ordinary docs paths use lowercase `snake_case`, with standard entry and index exceptions. Keep stable brownfield paths; rename only within an approved hygiene scope. Add a docs home only when discovery requires it; docs-home and ADR-index templates are not supplied, and any needed navigation uses actual content and links. Naming, navigation, reuse, local records and bounded cleanup share one reference; read the relevant section of [project structure and document rules](skills/swift-cycle/references/document-profiles.md#路径命名与导航).
-
-Fixed-name exceptions are `docs/BLUEPRINT.md`, `docs/PRD.md`, conditional `docs/SAD.md` and `docs/ROADMAP.md`, optional `docs/MANUAL.md`, and stable numbered plans such as `docs/milestones/M1_PLAN.md`. ADRs remain independent decision records under `docs/adr/`; SAD describes architecture, while MANUAL contains operational procedures. There is no default standalone evaluation template: keep necessary comparisons, trial evidence and decisions in the relevant PRD/DESIGN/SAD/ADR. These are defaults for new documents; complete existing equivalents retain their paths unless migration is authorized.
-
-### Governance boundaries
-
-Swift Cycle activates governance only when repository evidence requires it:
-
-- **Governance Baseline:** record the observed state before non-trivial governance, migration, replacement, or cross-boundary work; keep it separate from the intended outcome.
-- **Knowledge Promotion:** promote durable commitments, decisions, constraints, and verified evidence into shared assets; keep short-term actions and one-off failures local.
-- **State Separation:** separate a composite status only when it represents independent lifecycle questions with different closure evidence; check local records for existence and Git-ignore status before treating them as private.
-- **Commit Boundary Planning:** plan coherent commit scopes before staging when changes have mixed purposes, ordered dependencies, or multiple reviewable increments.
-- **Source/Runtime Boundary:** verify source, artifact, runtime, and active-consumer claims at their own layers; evidence and authorization do not transfer between them.
-- **Documentation freshness:** reconcile status, decisions, plans and identities when real milestones or boundaries change; keep any delivered review snapshot frozen and distinct from current truth.
-
-These capabilities are trigger-based. Simple, local, explicit changes continue to use the short loop without extra governance artifacts.
-
-### Proportional delivery
-
-Small edits stay small. More complex stages use dependency-ordered packages, each containing implementation, necessary verification and affected documentation updates. Synchronize and converge after every package, not only at the end of the project. There are no fixed TODO history counts and no bulk transfer into DEVLOG.
-
-New requirements are clarified and checked for impact before they enter current work. Update confirmed requirements first, then affected design, stage arrangements and actions. A new requirement after a completed stage belongs to future work; it does not automatically invalidate that stage's original completion.
-
-A milestone must satisfy its overall outcome and necessary human confirmation, not merely checked tasks. Publishing, installation, deployment and real adoption remain separate permissions and evidence layers.
-
-The r29 baseline passed D60 department-lead local-source acceptance. The [source standard](docs/engineering_standard.md) now also includes the separately approved 2026-10-18 initialization/structure revision; its evidence and limits are recorded in [source-only validation](docs/compatibility.md#source-only-initialization-and-structure-revision-2026-10-18), not inherited from the historical acceptance. The fixed v1.4.0 installation above does not include that unpublished revision. Publication and installation remain separate in [delivery status](docs/compatibility.md#fixed-version-delivery). [Superpowers handoff conditions](skills/swift-cycle/references/superpowers-bridge.md) document the narrow optional integration; full execution, actual Figma drawing/export and real project adoption remain unverified.
-
-## Example delivery loops
-
-Codex CLI / IDE example:
+In ChatGPT desktop, select the Skill through `@`, then send:
 
 ```text
-$swift-cycle Adopt this repository and bind lightweight ongoing maintenance in AGENTS.md.
+Read this project's README, DESIGN and existing requirements.
+Report current progress, observed problems and the next step.
+Do not modify files, commit or push.
 ```
 
-After adoption, send normal project requests. The Agent detects the phase, profile, affected authorities, and closeout work in the background; there are no bootstrap, milestone, or closeout subcommands.
+In Codex CLI/IDE, prefix the same request with `$swift-cycle`. A one-off review does not create persistent adoption. For ongoing use, explicitly request: “Adopt Swift Cycle and bind it in this project's AGENTS.md.”
 
-Use the invocation syntax supported by your agent host.
+### ✅ 3. Check the result
 
-## Compatibility and boundaries
+Expect a file-backed status, findings, unverified scope and next step, without claims of unauthorized document creation. This is an example request, not a new host-execution test result.
 
-- Swift Cycle remains explicit-only at the Skill-system layer. A project uses one explicit adoption, then its committed `AGENTS.md` binding requires the Skill for later project tasks.
-- Codex, Claude Code, and GitHub Copilot use the same canonical package with host-specific behavior documented in [agent compatibility](docs/compatibility.md).
-- The canonical Skill body and default prompt are Simplified Chinese. The repository keeps bilingual product entry points and a concise terminology reference in [`references/zh-CN.md`](skills/swift-cycle/references/zh-CN.md); target project files still preserve their established language.
-- The package follows the open [Agent Skills specification](https://agentskills.io/specification).
-- The core package adds no scripts or runtime dependencies. Figma is the designated tool for architecture diagrams; optional integrations require their own available tools and permissions.
+After adoption, send normal project tasks. Valid root TODO.md and DEVLOG.md become required only for authorized project creation or formal initialization. Existing valid records are preserved; ordinary maintenance synchronizes affected content.
 
-## Repository layout
+<a id="help"></a>
+<a id="repository-layout"></a>
 
-```text
-skill_swift_cycle/
-├─ skills/swift-cycle/
-│  ├─ SKILL.md
-│  ├─ agents/openai.yaml
-│  ├─ references/
-│  │  ├─ adoption-and-routing.md
-│  │  ├─ document-profiles.md  # Unified structure and document rules
-│  │  ├─ governance-boundaries.md
-│  │  ├─ lifecycle-and-closeout.md
-│  │  ├─ superpowers-bridge.md
-│  │  └─ zh-CN.md
-│  └─ templates/                 # Optional profile-aligned starting points
-│     ├─ README.md / AGENTS.md
-│     ├─ docs/                   # BLUEPRINT, PRD, SAD, ROADMAP, MANUAL, numbered plans and optional references
-│     ├─ DESIGN.md
-│     ├─ DEVLOG.md
-│     └─ TODO.md
-├─ docs/engineering_standard.md # Approved source specification; not part of the Skill
-├─ docs/compatibility.md
-├─ tmp/                        # Created locally for writable tasks; ignored, not shipped
-├─ README.md
-├─ README.zh-CN.md
-├─ DESIGN.md
-├─ AGENTS.md
-└─ LICENSE
-```
+## 🛠️ Everyday use and help
 
-Words in the repository name are separated with `_`. The standards-defined Skill name remains `swift-cycle` because Agent Skills names permit lowercase letters, digits, and hyphens.
+### 📋 Common tasks and document entry points
 
-## License
+| Goal | Action or entry point |
+| :--- | :--- |
+| Advance existing work | State the goal, scope and preserved items; reconcile the current TODO, then complete the smallest work package and its verification |
+| Receive a new requirement | Confirm behavior, acceptance and impact first; schedule additions after completed stages without rewriting the original completion scope |
+| Read the design, directory tree and UML | [Project overview design](DESIGN.md) |
+| Choose documents, names or record policy | [Project structure and document rules](skills/swift-cycle/references/document-profiles.md) |
+| Find synchronization and closeout triggers | [Requirements and continuous convergence](skills/swift-cycle/references/lifecycle-and-closeout.md) |
+| Check installation, versions and actual evidence | [Compatibility and evidence](docs/compatibility.md) |
+| Maintain this Skill | [Execution rules](AGENTS.md), [source standard](docs/engineering_standard.md), [canonical entry](skills/swift-cycle/SKILL.md) |
 
-Swift Cycle is released under the [MIT License](LICENSE).
+### ❓ Frequently asked questions
+
+<details>
+<summary>Why does v1.4.0 lack the templates in current source?</summary>
+
+A fixed tag does not follow main. Use the [delivery record](docs/compatibility.md#fixed-version-delivery) to distinguish versions; explicitly choose a new source and preserve rollback before updating. Editing source is not an installation.
+
+</details>
+
+<details>
+<summary>Will every project get ROADMAP, MANUAL and all templates?</summary>
+
+No. Reuse complete equivalents and fill only real responsibilities. State honestly when no milestones exist. MANUAL, detailed SAD and numbered plans are conditional.
+
+</details>
+
+<details>
+<summary>Can tmp/ be emptied automatically?</summary>
+
+Central storage does not grant deletion authority. Check the purpose and authorization for existing material, tracked files, user data and recovery points. Read-only tasks neither create nor clean tmp/.
+
+</details>
+
+For unresolved problems, use [GitHub Issues](https://github.com/Solismuchengxue/skill_swift_cycle/issues) with the host, Skill source/version, reproduction steps and sanitized errors. Do not attach credentials or private material.
+
+<a id="compatibility-and-boundaries"></a>
+<a id="license"></a>
+
+## 📄 Limits and license
+
+- **Evidence scope:** package validation, source assertions, isolated fixtures, host discovery and actual invocation are separate layers. See [dated compatibility records](docs/compatibility.md). Drawing for this repository does not prove adoption by other projects, fresh agents or other hosts.
+- **External tools:** architecture diagrams use Figma. Local static checks do not establish full Superpowers execution, other hosts or long-term behavior.
+- **Authority:** the Skill grants no publication, installation, deployment, credential, cost, deletion or consumer-switching permission. Local-record privacy depends on the actual Git policy.
+- **License:** [MIT License](LICENSE). Installer-added source metadata belongs to installed copies and must not enter canonical source.
+
+## ⭐ Star History
+
+[![Star History](https://api.star-history.com/svg?repos=Solismuchengxue/skill_swift_cycle&type=Date)](https://github.com/Solismuchengxue/skill_swift_cycle/stargazers)

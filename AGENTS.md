@@ -2,6 +2,12 @@
 
 本规则适用于`skill_swift_cycle`仓库。
 
+## Swift Cycle
+
+- 本仓库持续采用 Swift Cycle；维护时读取仓库内的[规范入口](skills/swift-cycle/SKILL.md)，按任务加载参考，不依赖已安装副本代表当前源码。
+- 复用 README.zh-CN.md 的用途、用户、能力与边界作为既有项目意图；已确认工程要求及栏目依据在 docs/engineering_standard.md，不为本次自用新增重复 BLUEPRINT、PRD 或计划。
+- 每包同步受影响的用户说明、设计及既有 TODO；有效经验用 DEVLOG 紧凑条目保留。保留已有事实、记录和授权边界，不自动更新安装或发布版本。
+
 <a id="repository-purpose"></a>
 
 ## 仓库用途
